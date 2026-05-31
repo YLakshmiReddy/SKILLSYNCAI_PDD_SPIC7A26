@@ -1,0 +1,939 @@
+[
+  {
+    "slug": "ai-engineer\\nmastery-path",
+    "title": "AI Engineer\\nMastery Path",
+    "subtitle": "AI Engineer\\nMastery Path",
+    "description": "Navigate the stratified landscape of modern intelligence. From core LLM mechanics to advanced autonomous agent architectures.",
+    "sections": []
+  },
+  {
+    "slug": "android-developer",
+    "title": "Android Developer",
+    "subtitle": "Android Developer",
+    "description": "",
+    "sections": []
+  },
+  {
+    "slug": "mastering\\nangular",
+    "title": "Mastering\\nAngular",
+    "subtitle": "Mastering\\nAngular",
+    "description": "A comprehensive architectural path for building enterprise-grade web applications. Track your progress across 7 core mastery phases.",
+    "sections": []
+  },
+  {
+    "slug": "api-developer\\nroadmap",
+    "title": "API Developer\\nRoadmap",
+    "subtitle": "API Developer\\nRoadmap",
+    "description": "Master the journey from HTTP fundamentals to governing complex microservice architectures. Your path to becoming a Senior API Architect starts here.",
+    "sections": [
+      {
+        "title": "1. Learn the Basics",
+        "items": [
+          "Core Concepts",
+          "What are APIs? Understanding the interface between software components.",
+          "HTTP Fundamentals"
+        ]
+      },
+      {
+        "title": "2. Styles",
+        "items": [
+          "RESTful APIs",
+          "JSON-RPC",
+          "GraphQL APIs",
+          "gRPC & SOAP"
+        ]
+      },
+      {
+        "title": "3. Building & Integrating APIs",
+        "items": [
+          "Design Patterns",
+          "Versioning, Pagination, Filtering, and Error Handling strategies.",
+          "Integration Patterns",
+          "Webhooks, Polling, and Event-Driven Architectures.",
+          "Microservices Architecture",
+          "Orchestrating services using API Gateways and Service Meshes."
+        ]
+      },
+      {
+        "title": "4. Auth & Management",
+        "items": [
+          "OAuth 2.0 & JWT Tokens",
+          "RBAC / ABAC Permissions",
+          "Secret Management"
+        ]
+      },
+      {
+        "title": "5. Performance & Security",
+        "items": [
+          "Load Balancing & Retries",
+          "OWASP API Top 10",
+          "Profiling & Monitoring"
+        ]
+      },
+      {
+        "title": "6. Lifecycle & Management",
+        "items": [
+          "OpenAPI / Swagger",
+          "Documentation and standardisation.",
+          "Contract Testing",
+          "Consumer-driven contracts.",
+          "Governance",
+          "Policies and compliance.",
+          "Web Sockets",
+          "Real-time bi-directional communication."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "asp.net-core\\nmastery-path",
+    "title": "ASP.NET Core\\nMastery Path",
+    "subtitle": "ASP.NET Core\\nMastery Path",
+    "description": "Master the powerful, cross-platform framework for building modern, cloud-based, Internet-connected applications.",
+    "sections": []
+  },
+  {
+    "slug": "aws\\ndeveloper\\nroadmap",
+    "title": "AWS\\nDeveloper\\nRoadmap",
+    "subtitle": "AWS\\nDeveloper\\nRoadmap",
+    "description": "Master the world's leading cloud platform. Track your progress across core services, infrastructure, and serverless design patterns.",
+    "sections": []
+  },
+  {
+    "slug": "microsoft-azure\\ndeveloper\\nroadmap",
+    "title": "Microsoft Azure\\nDeveloper\\nRoadmap",
+    "subtitle": "Microsoft Azure\\nDeveloper\\nRoadmap",
+    "description": "Become a cloud expert with Microsoft Azure. Track your progress across core services, identity, security, and enterprise solutions.",
+    "sections": []
+  },
+  {
+    "slug": "backend",
+    "title": "Backend Roadmap",
+    "subtitle": "Backend\\nDeveloper.",
+    "description": "A definitive guide to mastering the server-side components of apps, databases, routing, and infrastructure.",
+    "sections": [
+      {
+        "title": "Internet",
+        "items": [
+          "How does the internet work?",
+          "What is HTTP?",
+          "Browsers and how they work",
+          "DNS and how it works",
+          "What is Domain Name?",
+          "What is hosting?"
+        ]
+      },
+      {
+        "title": "Pick a Language",
+        "items": [
+          "Java",
+          "Python",
+          "Go",
+          "Rust",
+          "Node.js",
+          "C#",
+          "PHP"
+        ]
+      },
+      {
+        "title": "VCS & Deployment",
+        "items": [
+          "Git basics",
+          "GitHub / GitLab",
+          "SSH",
+          "Docker"
+        ]
+      },
+      {
+        "title": "Data Management Strategy",
+        "items": []
+      },
+      {
+        "title": "Logic, ACID & Security",
+        "items": []
+      },
+      {
+        "title": "APIs & Messaging",
+        "items": [
+          "RESTful APIs",
+          "GraphQL",
+          "gRPC"
+        ]
+      },
+      {
+        "title": "Architectural Patterns",
+        "items": [
+          "Monolithic Architecture",
+          "Microservices",
+          "Serverless",
+          "Event Driven",
+          "Clean Architecture"
+        ]
+      },
+      {
+        "title": "Infrastructure",
+        "items": []
+      }
+    ]
+  },
+  {
+    "slug": "bi-analyst",
+    "title": "BI Analyst Roadmap",
+    "subtitle": "BI Analyst Roadmap",
+    "description": "A comprehensive curriculum designed to take you from foundational business concepts to advanced data architectures and professional AI-driven analytics.",
+    "sections": []
+  },
+  {
+    "slug": "mastering-the-edge",
+    "title": "Mastering the Edge",
+    "subtitle": "Mastering the Edge",
+    "description": "A professional curriculum designed for full-stack developers to harness the power of Cloudflare's global network and serverless ecosystem.",
+    "sections": []
+  },
+  {
+    "slug": "the-quality\\nroadmap",
+    "title": "The Quality\\nRoadmap",
+    "subtitle": "The Quality\\nRoadmap",
+    "description": "Master the code review process from foundational semantics to visual consistency. Follow the hierarchy for maximum impact.",
+    "sections": [
+      {
+        "title": "Code Styles (The Peak)",
+        "items": [
+          "Formatting",
+          "Naming Conventions",
+          "Review Strategy"
+        ]
+      },
+      {
+        "title": "Tests",
+        "items": [
+          "Coverage",
+          "Test Quality",
+          "Regression"
+        ]
+      },
+      {
+        "title": "Documentation",
+        "items": [
+          "Readability",
+          "API Documentation",
+          "Impact Analysis"
+        ]
+      },
+      {
+        "title": "Implementation Semantics",
+        "items": [
+          "Logic Errors",
+          "Performance",
+          "Security"
+        ]
+      },
+      {
+        "title": "API Semantics (The Foundation)",
+        "items": [
+          "Breaking Changes",
+          "Consistency",
+          "Clarity"
+        ]
+      },
+      {
+        "title": "Automation & Tooling",
+        "items": [
+          "Linters & Static Analysis",
+          "CI/CD Integration",
+          "Pre-commit Hooks",
+          "Automated Security Scanning"
+        ]
+      },
+      {
+        "title": "Soft Skills & Communication",
+        "items": [
+          "Constructive Feedback",
+          "Empathy & Tone",
+          "Timeliness & Respect",
+          "Collaborative Problem Solving"
+        ]
+      },
+      {
+        "title": "Review Process & Workflow",
+        "items": [
+          "Manageable PR Sizes",
+          "Review Iteration Cycles",
+          "Approval & Merger Criteria",
+          "Knowledge Sharing Protocols"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "computer-science\\nroadmap",
+    "title": "Computer Science\\nRoadmap",
+    "subtitle": "Computer Science\\nRoadmap",
+    "description": "",
+    "sections": []
+  },
+  {
+    "slug": "c++-developer\\nroadmap",
+    "title": "C++ Developer\\nRoadmap",
+    "subtitle": "C++ Developer\\nRoadmap",
+    "description": "Master the world's most powerful programming language with this comprehensive 7 phase curriculum. Track your progress from foundations to professional ecosystem tools.",
+    "sections": []
+  },
+  {
+    "slug": "master-the-art-of\\nstyling",
+    "title": "Master the Art of\\nStyling",
+    "subtitle": "Master the Art of\\nStyling",
+    "description": "A structured path from foundational selectors to advanced fluid layouts and modern CSS logic.",
+    "sections": []
+  },
+  {
+    "slug": "cyber-security\\nmastery",
+    "title": "Cyber Security\\nMastery Roadmap",
+    "subtitle": "Cyber Security\\nMastery Roadmap",
+    "description": "Follow the 7-phase sequence to build your expertise in digital defense. Track your progress across every module.",
+    "sections": []
+  },
+  {
+    "slug": "dataanalystscreen",
+    "title": "DataAnalystScreen",
+    "subtitle": "DataAnalystScreen",
+    "description": "Master the art of storytelling through data. From Excel foundations to advanced Machine Learning architectures.",
+    "sections": [
+      {
+        "title": "Introduction to Analytics",
+        "items": [
+          "What is Data Analytics?"
+        ]
+      },
+      {
+        "title": "Analysis & Reporting (Excel)",
+        "items": [
+          "Functions: VLOOKUP, IF, SUM, CONCAT, TRIM",
+          "Features: Pivot Tables, Dynamic Charting"
+        ]
+      },
+      {
+        "title": "Programming (Python or R)",
+        "items": []
+      },
+      {
+        "title": "Collection & Database",
+        "items": [
+          "SQL for querying, APIs, Web Scraping",
+          "Databases"
+        ]
+      },
+      {
+        "title": "Statistical Analysis",
+        "items": [
+          "Hypothesis Testing, Correlation, Regression"
+        ]
+      },
+      {
+        "title": "Data Visualisation (BI)",
+        "items": [
+          "Tableau",
+          "Power BI"
+        ]
+      },
+      {
+        "title": "Machine Learning (ML)",
+        "items": [
+          "Supervised, Unsupervised, KNN, K-Means",
+          "Logistic Regression"
+        ]
+      },
+      {
+        "title": "Deep Learning (Optional)",
+        "items": []
+      }
+    ]
+  },
+  {
+    "slug": "dataengineerscreen",
+    "title": "DataEngineerScreen",
+    "subtitle": "DataEngineerScreen",
+    "description": "A structured engineering curriculum designed for the depth of big data systems. Follow this path through 7 strategic layers of mastery.",
+    "sections": []
+  },
+  {
+    "slug": "ai-&-data\\nscientist-path.",
+    "title": "AI & Data\\nScientist Path.",
+    "subtitle": "AI & Data\\nScientist Path.",
+    "description": "",
+    "sections": []
+  },
+  {
+    "slug": "design-system\\narchitecture\\nroadmap",
+    "title": "Design System\\nArchitecture\\nRoadmap",
+    "subtitle": "Design System\\nArchitecture\\nRoadmap",
+    "description": "The stratified guide to building, scaling, and maintaining professional digital languages within the SkillSync AI ecosystem.",
+    "sections": []
+  },
+  {
+    "slug": "devops\\nroadmap",
+    "title": "DevOps\\nRoadmap",
+    "subtitle": "DevOps\\nRoadmap",
+    "description": "Your path to mastering modern infrastructure and automation. Strategically architected for engineers who demand depth.",
+    "sections": []
+  },
+  {
+    "slug": "developer\\nrelations\\nmastery-path",
+    "title": "Developer\\nRelations\\nMastery Path",
+    "subtitle": "Developer\\nRelations\\nMastery Path",
+    "description": "A stratified guide to becoming a world-class Developer Advocate. From core technical proficiency to strategic community building and high-impact content creation.",
+    "sections": []
+  },
+  {
+    "slug": "devsecops\\nroadmap",
+    "title": "DevSecOps\\nRoadmap",
+    "subtitle": "DevSecOps\\nRoadmap",
+    "description": "Master the integration of security into the modern DevOps lifecycle with our stratified learning path.",
+    "sections": []
+  },
+  {
+    "slug": "docker\\ndeveloper\\nroadmap",
+    "title": "Docker\\nDeveloper\\nRoadmap",
+    "subtitle": "Docker\\nDeveloper\\nRoadmap",
+    "description": "From basic containerization to cloud-native orchestration. Master the industry standard for modern application deployment.",
+    "sections": []
+  },
+  {
+    "slug": "data-structures-&\\nalgorithms\\nroadmap",
+    "title": "Data Structures &\\nAlgorithms\\nRoadmap",
+    "subtitle": "Data Structures &\\nAlgorithms\\nRoadmap",
+    "description": "A comprehensive step-by-step guide to\\nmastering core CS foundations.",
+    "sections": []
+  },
+  {
+    "slug": "master-the\\nflutter\\necosystem",
+    "title": "Master the\\nFlutter\\nEcosystem",
+    "subtitle": "Master the\\nFlutter\\nEcosystem",
+    "description": "A definitive structural guide from immersion basics to high-level deployment. Watch your progress as you evolve from a Developer to an ARCHITECT.",
+    "sections": []
+  },
+  {
+    "slug": "frontend",
+    "title": "Frontend Roadmap",
+    "subtitle": "FrontEnd",
+    "description": "The front end is the user interface of a website or app, where visitors to the site interact with the product.",
+    "sections": [
+      {
+        "title": "Internet",
+        "items": [
+          "How does the internet work?",
+          "What is HTTP?",
+          "Browsers and how they work",
+          "DNS and how it works",
+          "What is Domain Name?",
+          "What is hosting?"
+        ]
+      },
+      {
+        "title": "HTML",
+        "items": [
+          "Learn the basics",
+          "Writing Semantic HTML",
+          "Forms and Validations",
+          "Conventions and Best Practices",
+          "SEO Basics"
+        ]
+      },
+      {
+        "title": "CSS",
+        "items": [
+          "Learn the basics",
+          "Making Layouts",
+          "Flexbox",
+          "CSS Grid",
+          "Responsive Design"
+        ]
+      },
+      {
+        "title": "JavaScript",
+        "items": [
+          "Syntax and Basic Construct",
+          "DOM Manipulation",
+          "Fetch API / Ajax",
+          "ES6+ and modular JS",
+          "Hoisting, Closure, Prototype"
+        ]
+      },
+      {
+        "title": "Version Control Systems",
+        "items": [
+          "Basic Usage of Git",
+          "GitHub / GitLab"
+        ]
+      },
+      {
+        "title": "Web Security",
+        "items": [
+          "HTTPS",
+          "CORS",
+          "Content Security Policy",
+          "OWASP Risks"
+        ]
+      },
+      {
+        "title": "Package Managers",
+        "items": [
+          "npm",
+          "yarn"
+        ]
+      },
+      {
+        "title": "Pick a Framework",
+        "items": [
+          "React.js",
+          "Vue.js",
+          "Angular",
+          "Svelte"
+        ]
+      },
+      {
+        "title": "CSS Frameworks",
+        "items": [
+          "Tailwind CSS",
+          "Bootstrap",
+          "Material UI"
+        ]
+      },
+      {
+        "title": "Testing",
+        "items": [
+          "Unit Testing",
+          "Integration Testing",
+          "E2E Testing"
+        ]
+      },
+      {
+        "title": "Type Checkers",
+        "items": [
+          "TypeScript"
+        ]
+      },
+      {
+        "title": "SSR & SSG",
+        "items": [
+          "Next.js",
+          "Nuxt.js",
+          "Gatsby"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "full-stack",
+    "title": "Full Stack Roadmap",
+    "subtitle": "Full Stack\\nDeveloper.",
+    "description": "The complete path to mastering both client-side and server-side development. Build entire applications from scratch.",
+    "sections": [
+      {
+        "title": "Client Side",
+        "items": [
+          "HTML & Semantic UI",
+          "CSS & Responsive Design"
+        ]
+      },
+      {
+        "title": "Server Side",
+        "items": [
+          "Node.js / Python / Java",
+          "Express / Django / Spring Boot",
+          "RESTful API Design",
+          "GraphQL / gRPC"
+        ]
+      },
+      {
+        "title": "Databases",
+        "items": []
+      },
+      {
+        "title": "Mobile Platforms",
+        "items": [
+          "React Native",
+          "Flutter",
+          "Kotlin Multiplatform",
+          "iOS / Android Native Basics"
+        ]
+      },
+      {
+        "title": "Infrastructure",
+        "items": [
+          "Git & Collaboration",
+          "Docker & Containers",
+          "CI/CD Pipelines",
+          "AWS / Azure / GCP"
+        ]
+      },
+      {
+        "title": "Testing",
+        "items": []
+      },
+      {
+        "title": "Design Patterns",
+        "items": [
+          "SOLID Principles",
+          "Microservices",
+          "Serverless Architecture",
+          "System Design",
+          "Scalability Patterns"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "game\\ndeveloper\\nroadmap-2024",
+    "title": "Game\\nDeveloper\\nRoadmap 2024",
+    "subtitle": "Game\\nDeveloper\\nRoadmap 2024",
+    "description": "Master the core engineering principles of modern game development, from low-level mathematics to high-performance AI systems.",
+    "sections": []
+  },
+  {
+    "slug": "cloud-architect\\nroadmap",
+    "title": "Cloud Architect\\nRoadmap",
+    "subtitle": "Cloud Architect\\nRoadmap",
+    "description": "Master the infrastructure, platform, and data services of Google Cloud. Track your journey from fundamentals to professional architecture.",
+    "sections": []
+  },
+  {
+    "slug": "git-&-github\\nmastery\\nroadmap",
+    "title": "Git & GitHub\\nMastery\\nRoadmap",
+    "subtitle": "Git & GitHub\\nMastery\\nRoadmap",
+    "description": "Master the world's most popular version control system. Track your progress from basic commits to complex branching strategies.",
+    "sections": []
+  },
+  {
+    "slug": "go-developer\\nroadmap",
+    "title": "Go Developer\\nRoadmap",
+    "subtitle": "Go Developer\\nRoadmap",
+    "description": "Mastering Google's Go language: from syntax basics to high-concurrency systems and cloud-native architecture.",
+    "sections": []
+  },
+  {
+    "slug": "graphql-developer\\nroadmap",
+    "title": "GraphQL Developer\\nRoadmap",
+    "subtitle": "GraphQL Developer\\nRoadmap",
+    "description": "Master the world's most powerful query language for APIs. From core concepts to advanced real-time implementations and server-side logic.",
+    "sections": [
+      {
+        "title": "Introduction to GraphQL",
+        "items": [
+          "Core Concepts",
+          "Platform Overview"
+        ]
+      },
+      {
+        "title": "GraphQL Queries & Mutations",
+        "items": [
+          "Queries",
+          "Mutations"
+        ]
+      },
+      {
+        "title": "Subscriptions & Real-time Data",
+        "items": [
+          "Subscriptions",
+          "Advanced Directives"
+        ]
+      },
+      {
+        "title": "Schema & Type System",
+        "items": [
+          "Defining the Data Model",
+          "Logic & Execution"
+        ]
+      },
+      {
+        "title": "Serving GraphQL over the Internet",
+        "items": [
+          "Transport Protocols",
+          "Real-time Transport",
+          "Pagination"
+        ]
+      },
+      {
+        "title": "Implementations & Servers",
+        "items": [
+          "Language-Specific Implementations",
+          "Client-Side Tools"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "html-developer",
+    "title": "HTML Developer",
+    "subtitle": "HTML Developer",
+    "description": "Master the structural foundation of the modern web through this 7-phase atmospheric learning path.",
+    "sections": []
+  },
+  {
+    "slug": "skillsync-ai\\nios-developer",
+    "title": "SkillSync AI\\niOS Developer",
+    "subtitle": "SkillSync AI\\niOS Developer",
+    "description": "Master the Apple ecosystem through our stratified learning path. From Swift fundamentals to advanced ARKit and App Store distribution.",
+    "sections": []
+  },
+  {
+    "slug": "development\\nroadmap",
+    "title": "Development\\nRoadmap",
+    "subtitle": "Development\\nRoadmap",
+    "description": "Master the journey from fundamentals to enterprise architecture. A structured path for modern Java Engineers.",
+    "sections": []
+  },
+  {
+    "slug": "javascript\\nroadmap",
+    "title": "JavaScript\\nRoadmap",
+    "subtitle": "JavaScript\\nRoadmap",
+    "description": "Master the world's most versatile language through a structured 7-phase curriculum. Track your progress from fundamentals to advanced engine mechanics.",
+    "sections": [
+      {
+        "title": "Introduction & Variable Fundamentals",
+        "items": [
+          "Basics",
+          "Variables",
+          "Scopes"
+        ]
+      },
+      {
+        "title": "Data Types & Structures",
+        "items": [
+          "Primitive Types",
+          "Objects & Prototypes",
+          "Data Structures",
+          "Type Casting"
+        ]
+      },
+      {
+        "title": "Logic & Control Flow",
+        "items": [
+          "Expressions & Operators",
+          "Equality",
+          "Control Flow",
+          "Exception Handling"
+        ]
+      },
+      {
+        "title": "Functions & Functional Concepts",
+        "items": [
+          "Power of Functions",
+          "Scope & Stack"
+        ]
+      },
+      {
+        "title": "Advanced Context & Objects",
+        "items": [
+          "This Keyword",
+          "Function Borrowing",
+          "Modern JS Features"
+        ]
+      },
+      {
+        "title": "Asynchronous JavaScript & APIs",
+        "items": [
+          "Event Loop",
+          "Asynchrony",
+          "Working with APIs"
+        ]
+      },
+      {
+        "title": "Memory & Tooling",
+        "items": [
+          "Memory Management",
+          "Browser DevTools"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "master-modern\\ndevelopment",
+    "title": "Master Modern\\nDevelopment",
+    "subtitle": "Master Modern\\nDevelopment",
+    "description": "A comprehensive journey through the Kotlin ecosystem, from syntax fundamentals to multiplatform cloud-native architecture.",
+    "sections": []
+  },
+  {
+    "slug": "kubernetes\\nroadmap",
+    "title": "Kubernetes\\nRoadmap",
+    "subtitle": "Kubernetes\\nRoadmap",
+    "description": "Master the container orchestration ecosystem from core concepts to advanced cluster operations.",
+    "sections": []
+  },
+  {
+    "slug": "linux-developer\\nroadmap",
+    "title": "Linux Developer\\nRoadmap",
+    "subtitle": "Linux Developer\\nRoadmap",
+    "description": "Master the open-source operating system. From command-line foundations to advanced system administration and kernel concepts.",
+    "sections": []
+  },
+  {
+    "slug": "machinelearningscreen",
+    "title": "MachineLearningScreen",
+    "subtitle": "MachineLearningScreen",
+    "description": "Master the art of Machine Learning through a structured path.",
+    "sections": []
+  },
+  {
+    "slug": "mongodb\\ndeveloper\\nmastery",
+    "title": "MongoDB\\nDeveloper\\nMastery Roadmap",
+    "subtitle": "MongoDB\\nDeveloper\\nMastery Roadmap",
+    "description": "",
+    "sections": []
+  },
+  {
+    "slug": "mastering-the\\nmodern-web",
+    "title": "Mastering the\\nModern Web",
+    "subtitle": "Mastering the\\nModern Web",
+    "description": "Follow this curated curriculum to transition from React fundamentals to advanced Next.js architecture.",
+    "sections": []
+  },
+  {
+    "slug": "mastering-the\\nserver-side",
+    "title": "Mastering the\\nServer-Side",
+    "subtitle": "Mastering the\\nServer-Side",
+    "description": "From basic runtime environment to advanced operations. Track your progress through the 6 core phases of Node.js mastery.",
+    "sections": []
+  },
+  {
+    "slug": "nosql-systems\\nmastery",
+    "title": "NoSQL Systems\\nMastery Roadmap",
+    "subtitle": "NoSQL Systems\\nMastery Roadmap",
+    "description": "Master non-relational database architectures. From document and key-value stores to wide-column and graph databases.",
+    "sections": []
+  },
+  {
+    "slug": "mastering-the\\nmodern-php\\nstack",
+    "title": "Mastering the\\nModern PHP\\nStack",
+    "subtitle": "Mastering the\\nModern PHP\\nStack",
+    "description": "A stratified journey through PHP development, from foundational syntax to high-performance enterprise architecture. Use the checklists below to track your progress through each module.",
+    "sections": []
+  },
+  {
+    "slug": "mastering-the\\ncanyon-of\\npostgresql",
+    "title": "Mastering the\\nCanyon of\\nPostgreSQL",
+    "subtitle": "Mastering the\\nCanyon of\\nPostgreSQL",
+    "description": "A structured, stratified journey from relational fundamentals to low-level internal optimization. Designed for architects and database engineers.",
+    "sections": []
+  },
+  {
+    "slug": "productmanagementscreen",
+    "title": "ProductManagementScreen",
+    "subtitle": "ProductManagementScreen",
+    "description": "Your guided trajectory from foundational concepts to strategic leadership in modern product ecosystems.",
+    "sections": []
+  },
+  {
+    "slug": "prompt\\nengineering\\nroadmap",
+    "title": "Prompt\\nEngineering\\nRoadmap",
+    "subtitle": "Prompt\\nEngineering\\nRoadmap",
+    "description": "Master the art of communicating with Large Language Models. From core concepts to advanced reasoning patterns, track your journey through the strata of AI expertise.",
+    "sections": []
+  },
+  {
+    "slug": "python\\ndeveloper",
+    "title": "Python\\nDeveloper",
+    "subtitle": "Python\\nDeveloper",
+    "description": "A stratified journey from core syntax to high performance asynchronous systems. Master the language that powers AI, Data Science, and broader Web.",
+    "sections": []
+  },
+  {
+    "slug": "qa-engineer\\nevolutionary\\npath",
+    "title": "QA Engineer\\nEvolutionary\\nPath",
+    "subtitle": "QA Engineer\\nEvolutionary\\nPath",
+    "description": "Master the spectrum of Quality Assurance from foundational core concepts to advanced automated infrastructure and CI/CD monitoring.",
+    "sections": []
+  },
+  {
+    "slug": "react-native\\nroadmap",
+    "title": "React Native\\nRoadmap",
+    "subtitle": "React Native\\nRoadmap",
+    "description": "Master high-performance native apps for iOS and Android",
+    "sections": []
+  },
+  {
+    "slug": "master-the\\nmodern-react\\necosystem",
+    "title": "Master the\\nModern React\\nEcosystem",
+    "subtitle": "Master the\\nModern React\\nEcosystem",
+    "description": "Master the structural foundation of the modern web through this 7-phase atmospheric learning path.",
+    "sections": []
+  },
+  {
+    "slug": "redisroadmapscreen",
+    "title": "RedisRoadmapScreen",
+    "subtitle": "RedisRoadmapScreen",
+    "description": "Master Redis from core concepts to production-grade architecture.",
+    "sections": []
+  },
+  {
+    "slug": "master-the-iron\\nlanguage",
+    "title": "Master the Iron\\nLanguage",
+    "subtitle": "Master the Iron\\nLanguage",
+    "description": "A structured, 8-phase journey from binary basics to high-performance systems engineering.",
+    "sections": []
+  },
+  {
+    "slug": "server-side-game\\ndeveloper-mastery",
+    "title": "Server-Side Game\\nDeveloper Mastery",
+    "subtitle": "Server-Side Game\\nDeveloper Mastery",
+    "description": "Your definitive path to mastering the complex backend systems that power multiplayer games, distributed architecture, and data synchronization.",
+    "sections": []
+  },
+  {
+    "slug": "software\\narchitect\\nroadmap",
+    "title": "Software\\nArchitect\\nRoadmap",
+    "subtitle": "Software\\nArchitect\\nRoadmap",
+    "description": "This roadmap details the journey from technical expert to strategic leader and designer of high-level structures of software systems.",
+    "sections": []
+  },
+  {
+    "slug": "software-design-&\\narchitecture\\nroadmap",
+    "title": "Software Design &\\nArchitecture\\nRoadmap",
+    "subtitle": "Software Design &\\nArchitecture\\nRoadmap",
+    "description": "Master the art of building scalable, maintainable, and robust systems. From code to cloud, a structured path for the modern engineer.",
+    "sections": []
+  },
+  {
+    "slug": "spring-boot\\nmastery-path",
+    "title": "Spring Boot\\nMastery Path",
+    "subtitle": "Spring Boot\\nMastery Path",
+    "description": "A 6-phase curriculum engineered for SkillSync AI. Transcend standard development and master the architectural stratosphere.",
+    "sections": []
+  },
+  {
+    "slug": "master-the\\nlanguage\\nof-data",
+    "title": "Master the\\nLanguage\\nof Data",
+    "subtitle": "Master the\\nLanguage\\nof Data",
+    "description": "A structured, 6-stage curriculum designed for the stratified professional. Track your progress across the SQL landscape from foundational core concepts to complex analytical logic.",
+    "sections": []
+  },
+  {
+    "slug": "master-the\\nart-of\\ntechnical-clarity.",
+    "title": "Master the\\nArt of\\nTechnical Clarity.",
+    "subtitle": "Master the\\nArt of\\nTechnical Clarity.",
+    "description": "This roadmap details the journey from being a writer to a professional technical writer. Learn how to communicate complex technical concepts with ease.",
+    "sections": []
+  },
+  {
+    "slug": "typescript\\nroadmap",
+    "title": "TypeScript\\nRoadmap",
+    "subtitle": "TypeScript\\nRoadmap",
+    "description": "Master the world's most popular superset of JavaScript through a structured, step-by-step path from core concepts to advanced meta-programming.",
+    "sections": []
+  },
+  {
+    "slug": "ux-design\\nlearning",
+    "title": "UX Design\\nLearning Roadmap",
+    "subtitle": "UX Design\\nLearning Roadmap",
+    "description": "A strategic journey from human psychology to measurable business impact. Track your progress across multiple core modules.",
+    "sections": []
+  },
+  {
+    "slug": "vue.js\\ndeveloper\\nroadmap",
+    "title": "Vue.js\\nDeveloper\\nRoadmap",
+    "subtitle": "Vue.js\\nDeveloper\\nRoadmap",
+    "description": "This roadmap tracks the journey from core JavaScript proficiency to mastering the Vue.js ecosystem. Follow the strata of development to become a senior engineer.",
+    "sections": []
+  }
+]

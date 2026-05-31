@@ -1,0 +1,59 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    <!-- Dark Background Card -->
+    <path
+        android:pathData="M40,40h220a20,20 0,0 1,20 20v220a20,20 0,0 1,-20 20h-220a20,20 0,0 1,-20 -20v-220a20,20 0,0 1,20 -20z"
+        android:fillColor="#081B33"/>
+
+    <!-- Outer HUD Ring -->
+    <path
+        android:pathData="M150,150m-100,0a100,100 0,1 1,200 0a100,100 0,1 1,-200 0"
+        android:strokeWidth="2"
+        android:strokeColor="#3B82F6"
+        android:strokeAlpha="0.3"/>
+
+    <!-- Inner HUD Ring -->
+    <path
+        android:pathData="M150,150m-80,0a80,80 0,1 1,160 0a80,80 0,1 1,-160 0"
+        android:strokeWidth="4"
+        android:strokeColor="#3B82F6"
+        android:strokeAlpha="0.5"
+        android:strokeLineCap="round"/>
+
+    <!-- Central AI Core Glow -->
+    <path
+        android:pathData="M150,150m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="150"
+                android:centerY="150"
+                android:gradientRadius="40"
+                android:type="radial">
+                <item android:offset="0" android:color="#FF60A5FA"/>
+                <item android:offset="1" android:color="#003B82F6"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Hud Decorations -->
+    <path
+        android:pathData="M110,240h80"
+        android:strokeWidth="12"
+        android:strokeColor="#3B82F6"
+        android:strokeAlpha="0.2"
+        android:strokeLineCap="round"/>
+
+    <path
+        android:pathData="M90,240m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+        android:fillColor="#3B82F6"
+        android:fillAlpha="0.4"/>
+
+    <path
+        android:pathData="M210,240m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+        android:fillColor="#3B82F6"
+        android:fillAlpha="0.4"/>
+</vector>
