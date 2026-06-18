@@ -1,8 +1,39 @@
-﻿Endpoint,Method,Role,Status,Expected Status,Finding Detected,Severity,Response Time (ms),Category,Note,Timestamp
-/,GET,anonymous,200,200,No,Info,1228,AuthN Enforcement,Public home route responded successfully.,2026-06-18T18:24:25.413844Z
-/analyze,POST,anonymous,422,401,Yes,Medium,720,AuthN Enforcement,The endpoint accepts requests without authentication headers. Sensitive operations like resume analysis should require valid JWT authentication.,2026-06-18T18:24:26.134743Z
-/login,POST,anonymous,400,400,No,Info,1602,SQL Injection,Payload '' OR '1'='1' was correctly handled or rejected.,2026-06-18T18:24:27.736851Z
-/login,POST,anonymous,400,400,No,Info,2171,SQL Injection,Payload 'admin' --' was correctly handled or rejected.,2026-06-18T18:24:29.908234Z
-/login,POST,anonymous,400,400,No,Info,1392,SQL Injection,Payload '' UNION SELECT NULL--' was correctly handled or rejected.,2026-06-18T18:24:31.301172Z
-/,GET,anonymous,200,429,Yes,Low,14317,Rate Limiting,Server did not enforce rate limits during rapid burst of requests. Rate limiting is recommended to prevent DoS attacks.,2026-06-18T18:24:45.619174Z
-Codebase,Static Scan,developer,200,200,No,Info,0,Hardcoded Credentials,No committed credentials or secret patterns detected in codebase.,2026-06-18T18:24:46.568953Z
+﻿endpoint,method,role,status,expected_status,finding,severity,response_time_ms,test_category,note,timestamp
+/analyze,POST,anonymous,422,401,True,High,980,AuthN Bypass,No auth header: got 422. Endpoint accepts unauthenticated file uploads — sensitive resume data processed without identity verification.,2026-06-18T19:47:38.764764Z
+/analyze,POST,anonymous,422,401,False,Info,1221,AuthN Bypass,Correctly rejected malformed token (HTTP 422).,2026-06-18T19:47:40.287904Z
+/analyze,POST,anonymous,422,401,False,Info,711,AuthN Bypass,Correctly rejected expired token (HTTP 422).,2026-06-18T19:47:41.301066Z
+/,GET,anonymous,200,200,False,Info,728,AuthN Bypass,Public home endpoint correctly accessible without auth.,2026-06-18T19:47:42.331271Z
+/docs,GET,anonymous,200,200,True,Low,1194,AuthN Bypass,Swagger UI (/docs) is publicly accessible. Consider restricting in production to prevent API surface enumeration by attackers.,2026-06-18T19:47:43.828307Z
+/openapi.json,GET,anonymous,200,200,True,Low,785,AuthN Bypass,"OpenAPI schema (/openapi.json) is publicly accessible. This reveals all endpoint paths, methods, and request models to unauthenticated users.",2026-06-18T19:47:44.914762Z
+/analyze,POST,low_priv_user,422,403,True,Medium,726,AuthZ / PrivEsc,Low-privilege token accepted on /analyze (HTTP 422). No role-based access control is applied — any authenticated or unauthenticated user can trigger sensitive resume analysis.,2026-06-18T19:47:45.942644Z
+/register,POST,anonymous,200,400,True,High,1551,AuthZ / PrivEsc,Mass assignment: registration with admin role=True returned 200. Server may store injected role claims.,2026-06-18T19:47:47.795241Z
+/,GET,anonymous,0,0,False,Info,0,IDOR,"No parameterized user-resource endpoints found (no /users/{id}, /resumes/{id}, etc.). IDOR not applicable to current API shape — recommend adding user-scoped endpoints with proper ownership checks when implemented.",2026-06-18T19:47:47.795275Z
+/,GET,anonymous,200,200,False,Info,754,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:47:48.850649Z
+/,GET,user_token,200,200,False,Info,791,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:47:49.943370Z
+/login,POST,anonymous,422,400,False,Info,832,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:51.078268Z
+/login,POST,user_token,422,400,False,Info,1375,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:52.755764Z
+/register,POST,anonymous,422,400,False,Info,746,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:53.803624Z
+/register,POST,user_token,422,400,False,Info,849,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:54.955153Z
+/google-login,POST,anonymous,422,400,False,Info,725,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:55.983589Z
+/google-login,POST,user_token,422,400,False,Info,849,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:57.135054Z
+/analyze,POST,anonymous,422,401,False,Info,775,RBAC Matrix,RBAC OK: anonymous → 422 on requires-auth endpoint.,2026-06-18T19:47:58.211560Z
+/analyze,POST,user_token,422,401,False,Info,839,RBAC Matrix,RBAC OK: user_token → 422 on requires-auth endpoint.,2026-06-18T19:47:59.352509Z
+/docs,GET,anonymous,200,200,False,Info,740,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:48:00.393893Z
+/docs,GET,user_token,200,200,False,Info,802,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:48:01.498234Z
+/openapi.json,GET,anonymous,200,200,False,Info,678,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:48:02.477856Z
+/openapi.json,GET,user_token,200,200,False,Info,752,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:48:03.531554Z
+/analyze,POST,tampered_admin_jwt,422,401,False,Info,895,Token Tampering,Tampered JWT correctly rejected (HTTP 422). Server validates JWT signatures.,2026-06-18T19:48:04.729582Z
+/,GET,tampered_admin_jwt,200,200,False,Info,800,Token Tampering,Public endpoint returned 200 regardless of token (expected). No privilege from tampered JWT observed.,2026-06-18T19:48:05.831555Z
+/analyze,POST,none_alg_jwt,422,401,False,Info,819,Token Tampering,'alg:none' attack correctly rejected (HTTP 422).,2026-06-18T19:48:06.953143Z
+/login,POST,anonymous,400,400,False,Info,1371,Injection Probe,"Injection payload 'Classic SQLi tautology' correctly rejected (HTTP 400, 1371ms).",2026-06-18T19:48:08.624497Z
+/login,POST,anonymous,400,400,False,Info,1621,Injection Probe,"Injection payload 'Comment-based SQLi' correctly rejected (HTTP 400, 1621ms).",2026-06-18T19:48:10.546584Z
+/login,POST,anonymous,400,400,False,Info,1174,Injection Probe,"Injection payload 'UNION-based SQLi' correctly rejected (HTTP 400, 1174ms).",2026-06-18T19:48:12.021501Z
+/login,POST,anonymous,403,400,False,Info,997,Injection Probe,"Injection payload 'Stacked query SQLi' correctly rejected (HTTP 403, 997ms).",2026-06-18T19:48:13.318590Z
+/login,POST,anonymous,400,400,False,Info,1099,Injection Probe,"Injection payload 'NoSQLi MongoDB operator' correctly rejected (HTTP 400, 1099ms).",2026-06-18T19:48:14.718610Z
+/login,POST,anonymous,400,400,False,Info,1410,Injection Probe,"Injection payload 'Time-based blind SQLi' correctly rejected (HTTP 400, 1410ms).",2026-06-18T19:48:16.429402Z
+/register,POST,anonymous,400,400,False,Info,1167,Injection Probe,Register injection probe: 400 — payload handled correctly.,2026-06-18T19:48:17.898740Z
+/,GET,anonymous,200,429,True,Low,819,Rate Limiting,"No rate limiting observed after 30 rapid requests. Final status={last_status}. Server is susceptible to DoS/brute-force. Recommend implementing rate limiting (e.g. slowapi, nginx limit_req).",2026-06-18T19:48:42.503140Z
+/login,POST,anonymous,400,429,True,Medium,1137,Rate Limiting,No rate limiting on /login after 30 rapid attempts. Brute-force password attacks are possible without account lockout or throttling.,2026-06-18T19:49:19.950234Z
+Codebase,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,Supabase service key hardcoded found in backend\.env: SUPABASE_KEY=eyJhbGc...,2026-06-18T19:49:20.110664Z
+Codebase,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,JWT token literal in code found in backend\.env: eyJhbGciOiJIUzI1NiIs...,2026-06-18T19:49:20.110680Z
+backend/.env,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,WARNING: .env file is NOT in .gitignore — Supabase keys may be committed to version control!,2026-06-18T19:49:20.110808Z
