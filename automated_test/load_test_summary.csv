@@ -1,0 +1,12 @@
+﻿Metric,Value
+Target URL,https://skillsyncai-backend-jhwd.onrender.com/
+Concurrent Virtual Users,100
+Configured Duration (s),60
+Actual Duration (s),61.81
+Total Requests Sent,4870
+Successful Requests,4834
+Failed Requests,36
+Requests Per Second (RPS),78.79
+Average Response Time (ms),1233.26
+Minimum Response Time (ms),329
+Maximum Response Time (ms),10989
