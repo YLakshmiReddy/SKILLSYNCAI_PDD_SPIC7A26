@@ -1,4 +1,6 @@
 const { remote } = require('webdriverio');
+const path = require('path');
+const apkPath = path.resolve(__dirname, '../../app/build/outputs/apk/debug/app-debug.apk');
 
 describe('SkillSync AI Mobile UI Login Test', function () {
   let client;
@@ -12,7 +14,7 @@ describe('SkillSync AI Mobile UI Login Test', function () {
         platformName: 'Android',
         'appium:automationName': 'UiAutomator2',
         'appium:deviceName': 'Android Device',
-        'appium:app': '../../app/build/outputs/apk/debug/app-debug.apk',
+        'appium:app': apkPath,
         'appium:appPackage': 'com.simats.SkillSyncAI',
         'appium:appActivity': 'com.simats.SkillSyncAI.MainActivity',
         'appium:ensureWebviewsHavePages': true,
@@ -41,16 +43,16 @@ describe('SkillSync AI Mobile UI Login Test', function () {
       console.log('Already on Sign In Screen or Welcome Screen button not found.');
     }
 
-    // 2. Locate Email and Password fields using Jetpack Compose texts
-    const emailField = await client.$('//android.widget.EditText[@text="Enter your email"]');
+    // 2. Locate Email and Password fields by element type index (first and second EditTexts)
+    const emailField = await client.$('(//android.widget.EditText)[1]');
     await emailField.waitForDisplayed({ timeout: 15000 });
     await emailField.setValue('test_mobile_appium@skillsync.ai');
 
-    const passwordField = await client.$('//android.widget.EditText[@text="Enter your password"]');
+    const passwordField = await client.$('(//android.widget.EditText)[2]');
     await passwordField.setValue('AppiumPassword123!');
 
     // 3. Click the Sign In button
-    const signInBtn = await client.$('//android.widget.Button[@text="Sign In"]');
+    const signInBtn = await client.$('//*[@text="Sign In" or @content-desc="Sign In"]');
     await signInBtn.click();
     console.log('Clicked Sign In button on Login screen.');
 
