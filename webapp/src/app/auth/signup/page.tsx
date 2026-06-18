@@ -80,10 +80,14 @@ export default function SignUpScreen() {
   const handleOAuth = async (provider: "google") => {
     setError(null);
     try {
+      const isProduction = process.env.NODE_ENV === "production";
+      const redirectTo = isProduction
+        ? `${window.location.origin}/SKILLSYNCAI_PDD_SPIC7A26/auth/callback`
+        : `${window.location.origin}/auth/callback`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo,
         },
       });
       if (error) {

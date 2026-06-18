@@ -1,0 +1,67 @@
+[
+  {
+    "path": "/openapi.json",
+    "method": "HEAD",
+    "access_rule": "public"
+  },
+  {
+    "path": "/openapi.json",
+    "method": "GET",
+    "access_rule": "public"
+  },
+  {
+    "path": "/docs",
+    "method": "HEAD",
+    "access_rule": "public"
+  },
+  {
+    "path": "/docs",
+    "method": "GET",
+    "access_rule": "public"
+  },
+  {
+    "path": "/docs/oauth2-redirect",
+    "method": "HEAD",
+    "access_rule": "public"
+  },
+  {
+    "path": "/docs/oauth2-redirect",
+    "method": "GET",
+    "access_rule": "public"
+  },
+  {
+    "path": "/redoc",
+    "method": "HEAD",
+    "access_rule": "public"
+  },
+  {
+    "path": "/redoc",
+    "method": "GET",
+    "access_rule": "public"
+  },
+  {
+    "path": "/",
+    "method": "GET",
+    "access_rule": "public"
+  },
+  {
+    "path": "/register",
+    "method": "POST",
+    "access_rule": "public"
+  },
+  {
+    "path": "/login",
+    "method": "POST",
+    "access_rule": "public"
+  },
+  {
+    "path": "/google-login",
+    "method": "POST",
+    "access_rule": "public"
+  },
+  {
+    "path": "/analyze",
+    "method": "POST",
+    "access_rule": "public"
+  }
+]

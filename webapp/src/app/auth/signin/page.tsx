@@ -20,10 +20,14 @@ export default function SignInScreen() {
   const handleOAuth = async (provider: "google") => {
     setError(null);
     try {
+      const isProduction = process.env.NODE_ENV === "production";
+      const redirectTo = isProduction
+        ? `${window.location.origin}/SKILLSYNCAI_PDD_SPIC7A26/auth/callback`
+        : `${window.location.origin}/auth/callback`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo,
         },
       });
       if (error) {
@@ -112,6 +116,7 @@ export default function SignInScreen() {
           <div className="flex flex-col">
             <label className="text-sm font-bold text-[#0F172A] mb-2">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
               value={email}
@@ -132,6 +137,7 @@ export default function SignInScreen() {
             </div>
             <div className="relative">
               <input
+                id="password"
                 type={passwordVisible ? "text" : "password"}
                 name="password"
                 value={password}
@@ -171,6 +177,7 @@ export default function SignInScreen() {
 
           {/* Sign In Button */}
           <button
+            id="login-button"
             type="submit"
             disabled={isLoading}
             className={`w-full h-14 rounded-xl font-bold text-white transition-all shadow-lg flex items-center justify-center ${!isLoading ? 'bg-[#1E88E5] hover:bg-[#1976D2] shadow-blue-100 cursor-pointer' : 'bg-[#B0BEC5] cursor-not-allowed'}`}

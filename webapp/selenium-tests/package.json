@@ -1,0 +1,13 @@
+{
+  "name": "skillsyncai-selenium-tests",
+  "version": "1.0.0",
+  "description": "Selenium E2E automation tests for SkillSync AI",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js --timeout 60000"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.8.2"
+  }
+}

@@ -2,11 +2,14 @@
   "name": "webapp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://YLakshmiReddy.github.io/SKILLSYNCAI_PDD_SPIC7A26",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",
@@ -21,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
