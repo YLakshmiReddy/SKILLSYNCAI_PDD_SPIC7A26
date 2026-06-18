@@ -1,0 +1,35 @@
+name: Selenium Login E2E Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'webapp/selenium-tests/package-lock.json'
+
+    - name: Install Dependencies
+      run: |
+        cd webapp/selenium-tests
+        npm ci
+
+    - name: Run E2E Test
+      env:
+        HEADLESS: 'true'
+        TEST_BASE_URL: 'https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26'
+      run: |
+        cd webapp/selenium-tests
+        npm test

@@ -7,10 +7,10 @@
     "expected_status": 200,
     "finding": false,
     "severity": "Info",
-    "response_time_ms": 717,
+    "response_time_ms": 1228,
     "test_category": "AuthN Enforcement",
     "note": "Public home route responded successfully.",
-    "timestamp": "2026-06-18T18:16:29.221854Z"
+    "timestamp": "2026-06-18T18:24:25.413844Z"
   },
   {
     "endpoint": "/analyze",
@@ -20,10 +20,10 @@
     "expected_status": 401,
     "finding": true,
     "severity": "Medium",
-    "response_time_ms": 639,
+    "response_time_ms": 720,
     "test_category": "AuthN Enforcement",
     "note": "The endpoint accepts requests without authentication headers. Sensitive operations like resume analysis should require valid JWT authentication.",
-    "timestamp": "2026-06-18T18:16:29.861434Z"
+    "timestamp": "2026-06-18T18:24:26.134743Z"
   },
   {
     "endpoint": "/login",
@@ -33,10 +33,10 @@
     "expected_status": 400,
     "finding": false,
     "severity": "Info",
-    "response_time_ms": 2166,
+    "response_time_ms": 1602,
     "test_category": "SQL Injection",
     "note": "Payload '' OR '1'='1' was correctly handled or rejected.",
-    "timestamp": "2026-06-18T18:16:32.027543Z"
+    "timestamp": "2026-06-18T18:24:27.736851Z"
   },
   {
     "endpoint": "/login",
@@ -46,10 +46,10 @@
     "expected_status": 400,
     "finding": false,
     "severity": "Info",
-    "response_time_ms": 1131,
+    "response_time_ms": 2171,
     "test_category": "SQL Injection",
     "note": "Payload 'admin' --' was correctly handled or rejected.",
-    "timestamp": "2026-06-18T18:16:33.158831Z"
+    "timestamp": "2026-06-18T18:24:29.908234Z"
   },
   {
     "endpoint": "/login",
@@ -59,10 +59,10 @@
     "expected_status": 400,
     "finding": false,
     "severity": "Info",
-    "response_time_ms": 2990,
+    "response_time_ms": 1392,
     "test_category": "SQL Injection",
     "note": "Payload '' UNION SELECT NULL--' was correctly handled or rejected.",
-    "timestamp": "2026-06-18T18:16:36.149619Z"
+    "timestamp": "2026-06-18T18:24:31.301172Z"
   },
   {
     "endpoint": "/",
@@ -72,10 +72,10 @@
     "expected_status": 429,
     "finding": true,
     "severity": "Low",
-    "response_time_ms": 21909,
+    "response_time_ms": 14317,
     "test_category": "Rate Limiting",
     "note": "Server did not enforce rate limits during rapid burst of requests. Rate limiting is recommended to prevent DoS attacks.",
-    "timestamp": "2026-06-18T18:16:58.058647Z"
+    "timestamp": "2026-06-18T18:24:45.619174Z"
   },
   {
     "endpoint": "Codebase",
@@ -88,6 +88,6 @@
     "response_time_ms": 0,
     "test_category": "Hardcoded Credentials",
     "note": "No committed credentials or secret patterns detected in codebase.",
-    "timestamp": "2026-06-18T18:16:58.842292Z"
+    "timestamp": "2026-06-18T18:24:46.568953Z"
   }
 ]

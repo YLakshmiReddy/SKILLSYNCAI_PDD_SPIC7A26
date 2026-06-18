@@ -1,0 +1,8 @@
+﻿Endpoint,Method,Role,Status,Expected Status,Finding Detected,Severity,Response Time (ms),Category,Note,Timestamp
+/,GET,anonymous,200,200,No,Info,1228,AuthN Enforcement,Public home route responded successfully.,2026-06-18T18:24:25.413844Z
+/analyze,POST,anonymous,422,401,Yes,Medium,720,AuthN Enforcement,The endpoint accepts requests without authentication headers. Sensitive operations like resume analysis should require valid JWT authentication.,2026-06-18T18:24:26.134743Z
+/login,POST,anonymous,400,400,No,Info,1602,SQL Injection,Payload '' OR '1'='1' was correctly handled or rejected.,2026-06-18T18:24:27.736851Z
+/login,POST,anonymous,400,400,No,Info,2171,SQL Injection,Payload 'admin' --' was correctly handled or rejected.,2026-06-18T18:24:29.908234Z
+/login,POST,anonymous,400,400,No,Info,1392,SQL Injection,Payload '' UNION SELECT NULL--' was correctly handled or rejected.,2026-06-18T18:24:31.301172Z
+/,GET,anonymous,200,429,Yes,Low,14317,Rate Limiting,Server did not enforce rate limits during rapid burst of requests. Rate limiting is recommended to prevent DoS attacks.,2026-06-18T18:24:45.619174Z
+Codebase,Static Scan,developer,200,200,No,Info,0,Hardcoded Credentials,No committed credentials or secret patterns detected in codebase.,2026-06-18T18:24:46.568953Z

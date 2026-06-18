@@ -282,6 +282,27 @@ report_path = os.path.join(os.path.dirname(__file__), "report.json")
 with open(report_path, "w") as f:
     json.dump(reports, f, indent=2)
 
+# Write report to report.csv (Excel readable format)
+import csv
+csv_path = os.path.join(os.path.dirname(__file__), "report.csv")
+with open(csv_path, "w", newline="", encoding="utf-8-sig") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Endpoint", "Method", "Role", "Status", "Expected Status", "Finding Detected", "Severity", "Response Time (ms)", "Category", "Note", "Timestamp"])
+    for r in reports:
+        writer.writerow([
+            r["endpoint"],
+            r["method"],
+            r["role"],
+            r["status"],
+            r["expected_status"],
+            "Yes" if r["finding"] else "No",
+            r["severity"],
+            r["response_time_ms"],
+            r["test_category"],
+            r["note"],
+            r["timestamp"]
+        ])
+
 # Print summary
 print("\n" + "=" * 60)
 print("                       SCAN SUMMARY")
@@ -306,5 +327,5 @@ for r in reports:
         print(f"\n  ⚠ [{r['severity']}] {r['test_category']} on endpoint: {r['method']} {r['endpoint']}")
         print(f"    Note: {r['note']}")
 
-print("\n✓ DAST scanning execution complete! Report written to report.json")
+print("\n✓ DAST scanning execution complete! Reports written to report.json and report.csv")
 print("=" * 60)
