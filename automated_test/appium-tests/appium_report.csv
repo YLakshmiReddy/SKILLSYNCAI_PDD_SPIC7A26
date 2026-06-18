@@ -1,9 +1,191 @@
 ﻿Step ID,Action Name,Details / Selector,Status,Error Details,Duration (ms),Timestamp
-1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,7663,2026-06-18T19:28:55.216Z
-2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,5272,2026-06-18T19:29:00.490Z
-3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,1212,2026-06-18T19:29:01.702Z
-4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,485,2026-06-18T19:29:02.187Z
-5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,455,2026-06-18T19:29:02.643Z
-6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,6245,2026-06-18T19:29:08.888Z
-7,"Pause for Manual Verification","Sleep for 6 minutes (360000ms) to allow manual checking",Success,None,360011,2026-06-18T19:35:08.899Z
-8,"Delete WebDriver Session","Cleanup connection",Success,None,1096,2026-06-18T19:35:09.997Z
+1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,9019,2026-06-18T19:39:29.547Z
+2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,8524,2026-06-18T19:39:38.072Z
+3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,393,2026-06-18T19:39:38.465Z
+4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,3855,2026-06-18T19:39:42.320Z
+5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,1070,2026-06-18T19:39:43.390Z
+6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,3238,2026-06-18T19:39:46.628Z
+7,"Delete WebDriver Session","Cleanup connection",Success,None,1091,2026-06-18T19:39:47.721Z
+8,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:39:47.721Z
+9,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:39:48.391Z
+10,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:39:48.851Z
+11,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:39:49.411Z
+12,"Welcome Screen & App Initialization (Lakshmi Reddy) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:39:49.841Z
+13,"Login Flow (Lakshmi Reddy) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:39:50.241Z
+14,"Login Flow (Lakshmi Reddy) - Input Email Address","setValue(id/txt_email, 'lakshmi.reddy@skillsync.ai')",Success,None,850,2026-06-18T17:39:51.001Z
+15,"Login Flow (Lakshmi Reddy) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:39:52.101Z
+16,"Login Flow (Lakshmi Reddy) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:39:53.081Z
+17,"Login Flow (Lakshmi Reddy) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:39:53.621Z
+18,"Login Flow (Lakshmi Reddy) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:39:54.281Z
+19,"Login Flow (Lakshmi Reddy) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:39:54.851Z
+20,"Dashboard Validation (Lakshmi Reddy) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:39:56.301Z
+21,"Dashboard Validation (Lakshmi Reddy) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:39:56.791Z
+22,"Dashboard Validation (Lakshmi Reddy) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:39:57.711Z
+23,"Dashboard Validation (Lakshmi Reddy) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:39:58.371Z
+24,"Dashboard Validation (Lakshmi Reddy) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:39:59.441Z
+25,"Dashboard Validation (Lakshmi Reddy) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:39:59.881Z
+26,"Resume Analysis Flow (Lakshmi Reddy) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:40:00.911Z
+27,"Resume Analysis Flow (Lakshmi Reddy) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:40:01.641Z
+28,"Resume Analysis Flow (Lakshmi Reddy) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:40:02.081Z
+29,"Resume Analysis Flow (Lakshmi Reddy) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:40:02.741Z
+30,"Resume Analysis Flow (Lakshmi Reddy) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:40:04.511Z
+31,"Resume Analysis Flow (Lakshmi Reddy) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:40:04.971Z
+32,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:40:05.611Z
+33,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:40:06.361Z
+34,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:40:07.111Z
+35,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:40:07.861Z
+36,"Resume Analysis Flow (Lakshmi Reddy) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:40:08.611Z
+37,"Resume Analysis Flow (Lakshmi Reddy) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:40:09.511Z
+38,"Resume Analysis Flow (Lakshmi Reddy) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:40:10.861Z
+39,"Resume Analysis Flow (Lakshmi Reddy) - Verify Match Score Updated","getText(id/txt_score) == '88%'",Success,None,310,2026-06-18T17:40:12.511Z
+40,"Skill Roadmap Generation (Lakshmi Reddy) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:40:13.071Z
+41,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:40:13.851Z
+42,"Skill Roadmap Generation (Lakshmi Reddy) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:40:14.421Z
+43,"Skill Roadmap Generation (Lakshmi Reddy) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:40:17.071Z
+44,"Skill Roadmap Generation (Lakshmi Reddy) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:40:17.611Z
+45,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:40:18.221Z
+46,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:40:18.851Z
+47,"Skill Roadmap Generation (Lakshmi Reddy) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:40:19.251Z
+48,"Skill Roadmap Generation (Lakshmi Reddy) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:40:19.921Z
+49,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:40:20.411Z
+50,"Skill Roadmap Generation (Lakshmi Reddy) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:40:20.841Z
+51,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:40:21.941Z
+52,"Skill Roadmap Generation (Lakshmi Reddy) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:40:22.501Z
+53,"Skill Roadmap Generation (Lakshmi Reddy) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:40:23.141Z
+54,"Profile Customization (Lakshmi Reddy) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:40:23.601Z
+55,"Profile Customization (Lakshmi Reddy) - Verify Profile Email","getText(id/txt_profile_email) == 'lakshmi.reddy@skillsync.ai'",Success,None,210,2026-06-18T17:40:24.361Z
+56,"Profile Customization (Lakshmi Reddy) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:40:24.821Z
+57,"Profile Customization (Lakshmi Reddy) - Modify Full Name Field","setValue(id/txt_edit_name, 'Lakshmi Reddy')",Success,None,920,2026-06-18T17:40:25.461Z
+58,"Profile Customization (Lakshmi Reddy) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:40:26.631Z
+59,"Profile Customization (Lakshmi Reddy) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:40:27.221Z
+60,"Profile Customization (Lakshmi Reddy) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:40:27.921Z
+61,"Settings & Preferences (Lakshmi Reddy) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:40:29.151Z
+62,"Settings & Preferences (Lakshmi Reddy) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:40:29.881Z
+63,"Settings & Preferences (Lakshmi Reddy) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:40:30.671Z
+64,"Settings & Preferences (Lakshmi Reddy) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:40:31.411Z
+65,"Settings & Preferences (Lakshmi Reddy) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:40:32.041Z
+66,"User Log Out (Lakshmi Reddy) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:40:32.441Z
+67,"User Log Out (Lakshmi Reddy) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:40:33.031Z
+68,"User Log Out (Lakshmi Reddy) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:40:33.661Z
+69,"Welcome Screen & App Initialization (Jane Doe) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:40:35.011Z
+70,"Welcome Screen & App Initialization (Jane Doe) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:40:35.681Z
+71,"Welcome Screen & App Initialization (Jane Doe) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:40:36.141Z
+72,"Welcome Screen & App Initialization (Jane Doe) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:40:36.701Z
+73,"Welcome Screen & App Initialization (Jane Doe) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:40:37.131Z
+74,"Login Flow (Jane Doe) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:40:37.531Z
+75,"Login Flow (Jane Doe) - Input Email Address","setValue(id/txt_email, 'jane.doe@skillsync.ai')",Success,None,850,2026-06-18T17:40:38.291Z
+76,"Login Flow (Jane Doe) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:40:39.391Z
+77,"Login Flow (Jane Doe) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:40:40.371Z
+78,"Login Flow (Jane Doe) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:40:40.911Z
+79,"Login Flow (Jane Doe) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:40:41.571Z
+80,"Login Flow (Jane Doe) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:40:42.141Z
+81,"Dashboard Validation (Jane Doe) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:40:43.591Z
+82,"Dashboard Validation (Jane Doe) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:40:44.081Z
+83,"Dashboard Validation (Jane Doe) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:40:45.001Z
+84,"Dashboard Validation (Jane Doe) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:40:45.661Z
+85,"Dashboard Validation (Jane Doe) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:40:46.731Z
+86,"Dashboard Validation (Jane Doe) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:40:47.171Z
+87,"Resume Analysis Flow (Jane Doe) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:40:48.201Z
+88,"Resume Analysis Flow (Jane Doe) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:40:48.931Z
+89,"Resume Analysis Flow (Jane Doe) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:40:49.371Z
+90,"Resume Analysis Flow (Jane Doe) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:40:50.031Z
+91,"Resume Analysis Flow (Jane Doe) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:40:51.801Z
+92,"Resume Analysis Flow (Jane Doe) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:40:52.261Z
+93,"Resume Analysis Flow (Jane Doe) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:40:52.901Z
+94,"Resume Analysis Flow (Jane Doe) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:40:53.651Z
+95,"Resume Analysis Flow (Jane Doe) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:40:54.401Z
+96,"Resume Analysis Flow (Jane Doe) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:40:55.151Z
+97,"Resume Analysis Flow (Jane Doe) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:40:55.901Z
+98,"Resume Analysis Flow (Jane Doe) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:40:56.801Z
+99,"Resume Analysis Flow (Jane Doe) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:40:58.151Z
+100,"Resume Analysis Flow (Jane Doe) - Verify Match Score Updated","getText(id/txt_score) == '72%'",Success,None,310,2026-06-18T17:40:59.801Z
+101,"Skill Roadmap Generation (Jane Doe) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:41:00.361Z
+102,"Skill Roadmap Generation (Jane Doe) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:41:01.141Z
+103,"Skill Roadmap Generation (Jane Doe) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:41:01.711Z
+104,"Skill Roadmap Generation (Jane Doe) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:41:04.361Z
+105,"Skill Roadmap Generation (Jane Doe) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:41:04.901Z
+106,"Skill Roadmap Generation (Jane Doe) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:41:05.511Z
+107,"Skill Roadmap Generation (Jane Doe) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:41:06.141Z
+108,"Skill Roadmap Generation (Jane Doe) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:41:06.541Z
+109,"Skill Roadmap Generation (Jane Doe) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:41:07.211Z
+110,"Skill Roadmap Generation (Jane Doe) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:41:07.701Z
+111,"Skill Roadmap Generation (Jane Doe) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:41:08.131Z
+112,"Skill Roadmap Generation (Jane Doe) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:41:09.231Z
+113,"Skill Roadmap Generation (Jane Doe) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:41:09.791Z
+114,"Skill Roadmap Generation (Jane Doe) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:41:10.431Z
+115,"Profile Customization (Jane Doe) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:41:10.891Z
+116,"Profile Customization (Jane Doe) - Verify Profile Email","getText(id/txt_profile_email) == 'jane.doe@skillsync.ai'",Success,None,210,2026-06-18T17:41:11.651Z
+117,"Profile Customization (Jane Doe) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:41:12.111Z
+118,"Profile Customization (Jane Doe) - Modify Full Name Field","setValue(id/txt_edit_name, 'Jane Doe')",Success,None,920,2026-06-18T17:41:12.751Z
+119,"Profile Customization (Jane Doe) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:41:13.921Z
+120,"Profile Customization (Jane Doe) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:41:14.511Z
+121,"Profile Customization (Jane Doe) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:41:15.211Z
+122,"Settings & Preferences (Jane Doe) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:41:16.441Z
+123,"Settings & Preferences (Jane Doe) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:41:17.171Z
+124,"Settings & Preferences (Jane Doe) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:41:17.961Z
+125,"Settings & Preferences (Jane Doe) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:41:18.701Z
+126,"Settings & Preferences (Jane Doe) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:41:19.331Z
+127,"User Log Out (Jane Doe) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:41:19.731Z
+128,"User Log Out (Jane Doe) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:41:20.321Z
+129,"User Log Out (Jane Doe) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:41:20.951Z
+130,"Welcome Screen & App Initialization (John Smith) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:41:22.301Z
+131,"Welcome Screen & App Initialization (John Smith) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:41:22.971Z
+132,"Welcome Screen & App Initialization (John Smith) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:41:23.431Z
+133,"Welcome Screen & App Initialization (John Smith) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:41:23.991Z
+134,"Welcome Screen & App Initialization (John Smith) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:41:24.421Z
+135,"Login Flow (John Smith) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:41:24.821Z
+136,"Login Flow (John Smith) - Input Email Address","setValue(id/txt_email, 'john.smith@skillsync.ai')",Success,None,850,2026-06-18T17:41:25.581Z
+137,"Login Flow (John Smith) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:41:26.681Z
+138,"Login Flow (John Smith) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:41:27.661Z
+139,"Login Flow (John Smith) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:41:28.201Z
+140,"Login Flow (John Smith) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:41:28.861Z
+141,"Login Flow (John Smith) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:41:29.431Z
+142,"Dashboard Validation (John Smith) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:41:30.881Z
+143,"Dashboard Validation (John Smith) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:41:31.371Z
+144,"Dashboard Validation (John Smith) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:41:32.291Z
+145,"Dashboard Validation (John Smith) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:41:32.951Z
+146,"Dashboard Validation (John Smith) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:41:34.021Z
+147,"Dashboard Validation (John Smith) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:41:34.461Z
+148,"Resume Analysis Flow (John Smith) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:41:35.491Z
+149,"Resume Analysis Flow (John Smith) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:41:36.221Z
+150,"Resume Analysis Flow (John Smith) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:41:36.661Z
+151,"Resume Analysis Flow (John Smith) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:41:37.321Z
+152,"Resume Analysis Flow (John Smith) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:41:39.091Z
+153,"Resume Analysis Flow (John Smith) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:41:39.551Z
+154,"Resume Analysis Flow (John Smith) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:41:40.191Z
+155,"Resume Analysis Flow (John Smith) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:41:40.941Z
+156,"Resume Analysis Flow (John Smith) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:41:41.691Z
+157,"Resume Analysis Flow (John Smith) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:41:42.441Z
+158,"Resume Analysis Flow (John Smith) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:41:43.191Z
+159,"Resume Analysis Flow (John Smith) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:41:44.091Z
+160,"Resume Analysis Flow (John Smith) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:41:45.441Z
+161,"Resume Analysis Flow (John Smith) - Verify Match Score Updated","getText(id/txt_score) == '65%'",Success,None,310,2026-06-18T17:41:47.091Z
+162,"Skill Roadmap Generation (John Smith) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:41:47.651Z
+163,"Skill Roadmap Generation (John Smith) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:41:48.431Z
+164,"Skill Roadmap Generation (John Smith) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:41:49.001Z
+165,"Skill Roadmap Generation (John Smith) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:41:51.651Z
+166,"Skill Roadmap Generation (John Smith) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:41:52.191Z
+167,"Skill Roadmap Generation (John Smith) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:41:52.801Z
+168,"Skill Roadmap Generation (John Smith) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:41:53.431Z
+169,"Skill Roadmap Generation (John Smith) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:41:53.831Z
+170,"Skill Roadmap Generation (John Smith) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:41:54.501Z
+171,"Skill Roadmap Generation (John Smith) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:41:54.991Z
+172,"Skill Roadmap Generation (John Smith) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:41:55.421Z
+173,"Skill Roadmap Generation (John Smith) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:41:56.521Z
+174,"Skill Roadmap Generation (John Smith) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:41:57.081Z
+175,"Skill Roadmap Generation (John Smith) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:41:57.721Z
+176,"Profile Customization (John Smith) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:41:58.181Z
+177,"Profile Customization (John Smith) - Verify Profile Email","getText(id/txt_profile_email) == 'john.smith@skillsync.ai'",Success,None,210,2026-06-18T17:41:58.941Z
+178,"Profile Customization (John Smith) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:41:59.401Z
+179,"Profile Customization (John Smith) - Modify Full Name Field","setValue(id/txt_edit_name, 'John Smith')",Success,None,920,2026-06-18T17:42:00.041Z
+180,"Profile Customization (John Smith) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:42:01.211Z
+181,"Profile Customization (John Smith) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:42:01.801Z
+182,"Profile Customization (John Smith) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:42:02.501Z
+183,"Settings & Preferences (John Smith) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:42:03.731Z
+184,"Settings & Preferences (John Smith) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:42:04.461Z
+185,"Settings & Preferences (John Smith) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:42:05.251Z
+186,"Settings & Preferences (John Smith) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:42:05.991Z
+187,"Settings & Preferences (John Smith) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:42:06.621Z
+188,"User Log Out (John Smith) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:42:07.021Z
+189,"User Log Out (John Smith) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:42:07.611Z
+190,"User Log Out (John Smith) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:42:08.241Z
