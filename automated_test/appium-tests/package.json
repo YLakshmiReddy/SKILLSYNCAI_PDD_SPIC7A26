@@ -1,0 +1,13 @@
+{
+  "name": "skillsyncai-appium-tests",
+  "version": "1.0.0",
+  "description": "Appium E2E mobile UI testing for SkillSync AI Android App",
+  "main": "appium.test.js",
+  "scripts": {
+    "test": "mocha appium.test.js --timeout 120000"
+  },
+  "dependencies": {
+    "webdriverio": "^8.32.0",
+    "mocha": "^10.2.0"
+  }
+}
