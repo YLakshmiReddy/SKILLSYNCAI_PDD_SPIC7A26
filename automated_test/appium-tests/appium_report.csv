@@ -1,2 +1,8 @@
-﻿Test Case Name,Status,Error Details,Duration (ms),Timestamp
-"should navigate, enter credentials and click sign-in",Passed,None,31546,2026-06-18T19:17:55.645Z
+﻿Step ID,Action Name,Details / Selector,Status,Error Details,Duration (ms),Timestamp
+1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,8904,2026-06-18T19:23:14.076Z
+2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,5580,2026-06-18T19:23:19.656Z
+3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,581,2026-06-18T19:23:20.237Z
+4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,836,2026-06-18T19:23:21.073Z
+5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,368,2026-06-18T19:23:21.441Z
+6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,7918,2026-06-18T19:23:29.359Z
+7,"Delete WebDriver Session","Cleanup connection",Success,None,1300,2026-06-18T19:23:30.660Z
