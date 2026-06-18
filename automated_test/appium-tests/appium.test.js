@@ -7,7 +7,7 @@ describe('SkillSync AI Mobile UI Login Test', function () {
   let client;
   const testResults = [];
 
-  this.timeout(120000); // Set E2E timeout limit
+  this.timeout(480000); // Set E2E timeout limit to 8 minutes (allows a 6-minute manual check pause)
 
   // Helper function to execute and log each micro-action as a separate row
   async function performAction(actionName, details, actionFn) {
@@ -132,6 +132,13 @@ describe('SkillSync AI Mobile UI Login Test', function () {
       } catch (e) {
         console.log('Dashboard elements not loaded yet or login rejected.');
       }
+    });
+
+    // 6. Pause for manual verification
+    await performAction('Pause for Manual Verification', 'Sleep for 6 minutes (360000ms) to allow manual checking', async () => {
+      console.log('Pausing Appium execution for 6 minutes to let you inspect and check every action in the app...');
+      await client.pause(360000);
+      console.log('Pause finished. Proceeding with cleanup...');
     });
   });
 });

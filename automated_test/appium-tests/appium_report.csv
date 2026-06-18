@@ -1,8 +1,9 @@
 ﻿Step ID,Action Name,Details / Selector,Status,Error Details,Duration (ms),Timestamp
-1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,8904,2026-06-18T19:23:14.076Z
-2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,5580,2026-06-18T19:23:19.656Z
-3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,581,2026-06-18T19:23:20.237Z
-4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,836,2026-06-18T19:23:21.073Z
-5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,368,2026-06-18T19:23:21.441Z
-6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,7918,2026-06-18T19:23:29.359Z
-7,"Delete WebDriver Session","Cleanup connection",Success,None,1300,2026-06-18T19:23:30.660Z
+1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,7663,2026-06-18T19:28:55.216Z
+2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,5272,2026-06-18T19:29:00.490Z
+3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,1212,2026-06-18T19:29:01.702Z
+4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,485,2026-06-18T19:29:02.187Z
+5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,455,2026-06-18T19:29:02.643Z
+6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,6245,2026-06-18T19:29:08.888Z
+7,"Pause for Manual Verification","Sleep for 6 minutes (360000ms) to allow manual checking",Success,None,360011,2026-06-18T19:35:08.899Z
+8,"Delete WebDriver Session","Cleanup connection",Success,None,1096,2026-06-18T19:35:09.997Z
