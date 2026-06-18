@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     // Deployed Render backend URL
-    private const val BASE_URL = "https://skillsyncai-backend-gtg3.onrender.com/"
+    private const val BASE_URL = "https://skillsyncai-backend-jhwd.onrender.com/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()
