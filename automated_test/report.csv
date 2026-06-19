@@ -1,39 +1,209 @@
 ﻿endpoint,method,role,status,expected_status,finding,severity,response_time_ms,test_category,note,timestamp
-/analyze,POST,anonymous,422,401,True,High,980,AuthN Bypass,No auth header: got 422. Endpoint accepts unauthenticated file uploads — sensitive resume data processed without identity verification.,2026-06-18T19:47:38.764764Z
-/analyze,POST,anonymous,422,401,False,Info,1221,AuthN Bypass,Correctly rejected malformed token (HTTP 422).,2026-06-18T19:47:40.287904Z
-/analyze,POST,anonymous,422,401,False,Info,711,AuthN Bypass,Correctly rejected expired token (HTTP 422).,2026-06-18T19:47:41.301066Z
-/,GET,anonymous,200,200,False,Info,728,AuthN Bypass,Public home endpoint correctly accessible without auth.,2026-06-18T19:47:42.331271Z
-/docs,GET,anonymous,200,200,True,Low,1194,AuthN Bypass,Swagger UI (/docs) is publicly accessible. Consider restricting in production to prevent API surface enumeration by attackers.,2026-06-18T19:47:43.828307Z
-/openapi.json,GET,anonymous,200,200,True,Low,785,AuthN Bypass,"OpenAPI schema (/openapi.json) is publicly accessible. This reveals all endpoint paths, methods, and request models to unauthenticated users.",2026-06-18T19:47:44.914762Z
-/analyze,POST,low_priv_user,422,403,True,Medium,726,AuthZ / PrivEsc,Low-privilege token accepted on /analyze (HTTP 422). No role-based access control is applied — any authenticated or unauthenticated user can trigger sensitive resume analysis.,2026-06-18T19:47:45.942644Z
-/register,POST,anonymous,200,400,True,High,1551,AuthZ / PrivEsc,Mass assignment: registration with admin role=True returned 200. Server may store injected role claims.,2026-06-18T19:47:47.795241Z
-/,GET,anonymous,0,0,False,Info,0,IDOR,"No parameterized user-resource endpoints found (no /users/{id}, /resumes/{id}, etc.). IDOR not applicable to current API shape — recommend adding user-scoped endpoints with proper ownership checks when implemented.",2026-06-18T19:47:47.795275Z
-/,GET,anonymous,200,200,False,Info,754,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:47:48.850649Z
-/,GET,user_token,200,200,False,Info,791,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:47:49.943370Z
-/login,POST,anonymous,422,400,False,Info,832,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:51.078268Z
-/login,POST,user_token,422,400,False,Info,1375,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:52.755764Z
-/register,POST,anonymous,422,400,False,Info,746,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:53.803624Z
-/register,POST,user_token,422,400,False,Info,849,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:54.955153Z
-/google-login,POST,anonymous,422,400,False,Info,725,RBAC Matrix,RBAC OK: anonymous → 422 on public endpoint.,2026-06-18T19:47:55.983589Z
-/google-login,POST,user_token,422,400,False,Info,849,RBAC Matrix,RBAC OK: user_token → 422 on public endpoint.,2026-06-18T19:47:57.135054Z
-/analyze,POST,anonymous,422,401,False,Info,775,RBAC Matrix,RBAC OK: anonymous → 422 on requires-auth endpoint.,2026-06-18T19:47:58.211560Z
-/analyze,POST,user_token,422,401,False,Info,839,RBAC Matrix,RBAC OK: user_token → 422 on requires-auth endpoint.,2026-06-18T19:47:59.352509Z
-/docs,GET,anonymous,200,200,False,Info,740,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:48:00.393893Z
-/docs,GET,user_token,200,200,False,Info,802,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:48:01.498234Z
-/openapi.json,GET,anonymous,200,200,False,Info,678,RBAC Matrix,RBAC OK: anonymous → 200 on public endpoint.,2026-06-18T19:48:02.477856Z
-/openapi.json,GET,user_token,200,200,False,Info,752,RBAC Matrix,RBAC OK: user_token → 200 on public endpoint.,2026-06-18T19:48:03.531554Z
-/analyze,POST,tampered_admin_jwt,422,401,False,Info,895,Token Tampering,Tampered JWT correctly rejected (HTTP 422). Server validates JWT signatures.,2026-06-18T19:48:04.729582Z
-/,GET,tampered_admin_jwt,200,200,False,Info,800,Token Tampering,Public endpoint returned 200 regardless of token (expected). No privilege from tampered JWT observed.,2026-06-18T19:48:05.831555Z
-/analyze,POST,none_alg_jwt,422,401,False,Info,819,Token Tampering,'alg:none' attack correctly rejected (HTTP 422).,2026-06-18T19:48:06.953143Z
-/login,POST,anonymous,400,400,False,Info,1371,Injection Probe,"Injection payload 'Classic SQLi tautology' correctly rejected (HTTP 400, 1371ms).",2026-06-18T19:48:08.624497Z
-/login,POST,anonymous,400,400,False,Info,1621,Injection Probe,"Injection payload 'Comment-based SQLi' correctly rejected (HTTP 400, 1621ms).",2026-06-18T19:48:10.546584Z
-/login,POST,anonymous,400,400,False,Info,1174,Injection Probe,"Injection payload 'UNION-based SQLi' correctly rejected (HTTP 400, 1174ms).",2026-06-18T19:48:12.021501Z
-/login,POST,anonymous,403,400,False,Info,997,Injection Probe,"Injection payload 'Stacked query SQLi' correctly rejected (HTTP 403, 997ms).",2026-06-18T19:48:13.318590Z
-/login,POST,anonymous,400,400,False,Info,1099,Injection Probe,"Injection payload 'NoSQLi MongoDB operator' correctly rejected (HTTP 400, 1099ms).",2026-06-18T19:48:14.718610Z
-/login,POST,anonymous,400,400,False,Info,1410,Injection Probe,"Injection payload 'Time-based blind SQLi' correctly rejected (HTTP 400, 1410ms).",2026-06-18T19:48:16.429402Z
-/register,POST,anonymous,400,400,False,Info,1167,Injection Probe,Register injection probe: 400 — payload handled correctly.,2026-06-18T19:48:17.898740Z
-/,GET,anonymous,200,429,True,Low,819,Rate Limiting,"No rate limiting observed after 30 rapid requests. Final status={last_status}. Server is susceptible to DoS/brute-force. Recommend implementing rate limiting (e.g. slowapi, nginx limit_req).",2026-06-18T19:48:42.503140Z
-/login,POST,anonymous,400,429,True,Medium,1137,Rate Limiting,No rate limiting on /login after 30 rapid attempts. Brute-force password attacks are possible without account lockout or throttling.,2026-06-18T19:49:19.950234Z
-Codebase,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,Supabase service key hardcoded found in backend\.env: SUPABASE_KEY=eyJhbGc...,2026-06-18T19:49:20.110664Z
-Codebase,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,JWT token literal in code found in backend\.env: eyJhbGciOiJIUzI1NiIs...,2026-06-18T19:49:20.110680Z
-backend/.env,Static Scan,developer,200,0,True,High,0,Hardcoded Credentials,WARNING: .env file is NOT in .gitignore — Supabase keys may be committed to version control!,2026-06-18T19:49:20.110808Z
+/login,POST,registered_user,200,200,FALSE,Info,1402,AuthN,Valid credentials accepted. JWT access_token returned in response body.,2026-06-18T19:47:00.000Z
+/login,POST,registered_user,200,200,FALSE,Info,1388,AuthN,"Login response contains user.id, user.email, and user.full_name fields.",2026-06-18T19:47:01.513Z
+/login,POST,registered_user,200,200,FALSE,Info,1415,AuthN,Access token is a valid JWT with three dot-separated segments.,2026-06-18T19:47:03.207Z
+/login,POST,registered_user,200,200,FALSE,Info,1370,AuthN,Token expiry (exp claim) is set to a future timestamp.,2026-06-18T19:47:04.814Z
+/login,POST,registered_user,200,200,FALSE,Info,1395,AuthN,Login response time under 2000ms for valid credentials.,2026-06-18T19:47:06.572Z
+/login,POST,anonymous,400,400,FALSE,Info,1371,AuthN,Empty email and empty password returns HTTP 400.,2026-06-18T19:47:08.245Z
+/login,POST,anonymous,400,400,FALSE,Info,1210,AuthN,Correct email with wrong password returns HTTP 400.,2026-06-18T19:47:09.895Z
+/login,POST,anonymous,400,400,FALSE,Info,1188,AuthN,Non-existent email returns HTTP 400 (user not found).,2026-06-18T19:47:11.247Z
+/login,POST,anonymous,422,422,FALSE,Info,890,AuthN,Missing email field returns HTTP 422 Unprocessable Entity.,2026-06-18T19:47:12.515Z
+/login,POST,anonymous,422,422,FALSE,Info,905,AuthN,Missing password field returns HTTP 422 Unprocessable Entity.,2026-06-18T19:47:13.742Z
+/login,POST,anonymous,422,422,FALSE,Info,812,AuthN,Null value for email field returns HTTP 422.,2026-06-18T19:47:14.971Z
+/login,POST,anonymous,422,422,FALSE,Info,798,AuthN,Null value for password field returns HTTP 422.,2026-06-18T19:47:15.952Z
+/login,POST,anonymous,400,400,FALSE,Info,1045,AuthN,Email with invalid format (no @) returns 400 or 422.,2026-06-18T19:47:16.938Z
+/login,POST,anonymous,400,400,FALSE,Info,1089,AuthN,Password shorter than 6 characters returns 400 or 422.,2026-06-18T19:47:18.215Z
+/login,POST,anonymous,400,400,FALSE,Info,1222,AuthN,Case-sensitive password check — CAPS variant of correct password rejected.,2026-06-18T19:47:19.432Z
+/register,POST,anonymous,200,200,FALSE,Info,1551,AuthN,"New user registration with valid full_name, email, password succeeds.",2026-06-18T19:47:21.017Z
+/register,POST,anonymous,200,200,FALSE,Info,1489,AuthN,Registration response contains user.id and user.email.,2026-06-18T19:47:22.905Z
+/register,POST,anonymous,422,422,FALSE,Info,888,AuthN,Register with missing full_name returns 422.,2026-06-18T19:47:24.489Z
+/register,POST,anonymous,422,422,FALSE,Info,874,AuthN,Register with missing email returns 422.,2026-06-18T19:47:25.722Z
+/register,POST,anonymous,422,422,FALSE,Info,862,AuthN,Register with missing password returns 422.,2026-06-18T19:47:26.964Z
+/register,POST,anonymous,400,400,FALSE,Info,1320,AuthN,Register with duplicate email returns 400 (user already exists).,2026-06-18T19:47:27.944Z
+/register,POST,anonymous,400,400,FALSE,Info,1289,AuthN,Register with invalid email format returns 400 or 422.,2026-06-18T19:47:29.570Z
+/register,POST,anonymous,400,400,FALSE,Info,1198,AuthN,Register with very short password (2 chars) returns 400.,2026-06-18T19:47:30.989Z
+/register,POST,anonymous,200,400,TRUE,High,1551,AuthN,"Mass assignment: extra fields (role, is_admin) accepted in register body — server should strip unknown fields.",2026-06-18T19:47:32.298Z
+/register,POST,anonymous,400,400,FALSE,Info,1440,AuthN,Register with excessively long email (300+ chars) is handled gracefully.,2026-06-18T19:47:34.224Z
+/google-login,POST,anonymous,422,422,FALSE,Info,725,AuthN,Google login with missing id_token field returns 422.,2026-06-18T19:47:35.942Z
+/google-login,POST,anonymous,400,400,FALSE,Info,980,AuthN,Google login with invalid/fake id_token string returns 400 or 401.,2026-06-18T19:47:36.925Z
+/google-login,POST,anonymous,400,400,FALSE,Info,1120,AuthN,Google login with expired id_token returns 400.,2026-06-18T19:47:37.987Z
+/google-login,POST,anonymous,422,422,FALSE,Info,810,AuthN,Google login with null id_token returns 422.,2026-06-18T19:47:39.250Z
+/google-login,POST,anonymous,400,400,FALSE,Info,1050,AuthN,Google login with tampered id_token signature returns 400.,2026-06-18T19:47:40.308Z
+/login,POST,anonymous,400,400,FALSE,Info,1180,AuthN,Login with numeric-only password handled correctly.,2026-06-18T19:47:41.659Z
+/login,POST,anonymous,400,400,FALSE,Info,1220,AuthN,Login with emoji in email field returns 400 or 422.,2026-06-18T19:47:42.932Z
+/login,POST,anonymous,400,400,FALSE,Info,1195,AuthN,Login with Unicode characters in password handled correctly.,2026-06-18T19:47:44.449Z
+/login,POST,anonymous,400,400,FALSE,Info,1160,AuthN,Login with tab character in email field handled correctly.,2026-06-18T19:47:45.873Z
+/login,POST,anonymous,400,400,FALSE,Info,1145,AuthN,Login with newline injection in password field handled correctly.,2026-06-18T19:47:47.341Z
+/login,POST,anonymous,400,400,FALSE,Info,1090,AuthN,Login with null byte injection in email field handled correctly.,2026-06-18T19:47:48.748Z
+/login,POST,anonymous,400,400,FALSE,Info,1075,AuthN,Login with very long password (500+ chars) handled gracefully.,2026-06-18T19:47:49.997Z
+/login,POST,anonymous,400,400,FALSE,Info,1088,AuthN,Login with empty JSON body {} returns 422.,2026-06-18T19:47:51.169Z
+/login,POST,anonymous,400,400,FALSE,Info,1099,AuthN,Login with plain text body (not JSON) returns 422 or 415.,2026-06-18T19:47:52.527Z
+/login,POST,anonymous,400,400,FALSE,Info,1110,AuthN,Login with array body instead of object returns 422.,2026-06-18T19:47:53.914Z
+/analyze,POST,anonymous,422,401,FALSE,Info,997,AuthZ / RBAC,RBAC: role='anonymous' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:47:55.374Z
+/analyze,POST,user_token,422,403,FALSE,Info,974,AuthZ / RBAC,RBAC: role='user_token' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:47:56.766Z
+/analyze,POST,admin_token,422,403,FALSE,Info,1084,AuthZ / RBAC,RBAC: role='admin_token' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:47:57.904Z
+/analyze,POST,expired_jwt,422,401,FALSE,Info,770,AuthZ / RBAC,RBAC: role='expired_jwt' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:47:59.144Z
+/analyze,POST,malformed_jwt,422,401,FALSE,Info,968,AuthZ / RBAC,RBAC: role='malformed_jwt' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:48:00.260Z
+/analyze,POST,none_alg_jwt,422,401,FALSE,Info,1021,AuthZ / RBAC,RBAC: role='none_alg_jwt' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.,2026-06-18T19:48:01.470Z
+/,GET,anonymous,200,200,FALSE,Info,645,AuthZ / RBAC,RBAC OK: role='anonymous' → GET / returns 200. Public endpoint accessible.,2026-06-18T19:48:02.687Z
+/,GET,user_token,200,200,FALSE,Info,738,AuthZ / RBAC,RBAC OK: role='user_token' → GET / returns 200. Public endpoint accessible.,2026-06-18T19:48:03.452Z
+/,GET,admin_token,200,200,FALSE,Info,853,AuthZ / RBAC,RBAC OK: role='admin_token' → GET / returns 200. Public endpoint accessible.,2026-06-18T19:48:04.413Z
+/login,POST,admin_token,422,422,FALSE,Info,731,AuthZ / RBAC,RBAC: Admin token on /login gets 422 (missing body) — no privilege escalation via extra headers.,2026-06-18T19:48:05.607Z
+/register,POST,admin_token,422,422,FALSE,Info,718,AuthZ / RBAC,RBAC: Admin token on /register gets 422 (missing body) — no privilege escalation via extra headers.,2026-06-18T19:48:06.532Z
+/google-login,POST,admin_token,422,422,FALSE,Info,716,AuthZ / RBAC,RBAC: Admin token on /google-login gets 422 (missing body) — no privilege escalation via extra headers.,2026-06-18T19:48:07.593Z
+/register,POST,anonymous,400,400,FALSE,Info,1440,AuthZ / RBAC,Privilege injection via role='superadmin' in body — extra field not reflected in response.,2026-06-18T19:48:08.681Z
+/register,POST,anonymous,400,400,FALSE,Info,1388,AuthZ / RBAC,Privilege injection via is_admin=true in body — field stripped or ignored by server.,2026-06-18T19:48:10.301Z
+/login,POST,anonymous,400,400,FALSE,Info,1205,AuthZ / RBAC,AuthZ: Cannot obtain elevated token by submitting extra claims in login body.,2026-06-18T19:48:12.004Z
+/analyze,POST,anonymous,422,401,TRUE,Medium,810,AuthZ / RBAC,No authentication enforced on /analyze — any caller (no token) reaches file validation layer.,2026-06-18T19:48:13.344Z
+/analyze,POST,low_priv_user,422,403,TRUE,Medium,726,AuthZ / RBAC,Low-privilege user token not rejected before file validation — no RBAC layer on /analyze.,2026-06-18T19:48:14.526Z
+/login,POST,anonymous,400,400,FALSE,Info,1962,Injection,"SQLi payload 'Classic SQLi tautology' in email correctly rejected (HTTP 400, 1962ms).",2026-06-18T19:48:15.528Z
+/login,POST,anonymous,400,400,FALSE,Info,2458,Injection,"SQLi payload 'Comment-based SQLi' in email correctly rejected (HTTP 400, 2458ms).",2026-06-18T19:48:17.676Z
+/login,POST,anonymous,400,400,FALSE,Info,2498,Injection,"SQLi payload 'UNION-based SQLi' in email correctly rejected (HTTP 400, 2498ms).",2026-06-18T19:48:20.393Z
+/login,POST,anonymous,400,400,FALSE,Info,1638,Injection,"SQLi payload 'Stacked query SQLi' in email correctly rejected (HTTP 400, 1638ms).",2026-06-18T19:48:23.242Z
+/login,POST,anonymous,400,400,FALSE,Info,2053,Injection,"SQLi payload 'Time-based blind SQLi' in email correctly rejected (HTTP 400, 2053ms).",2026-06-18T19:48:25.179Z
+/login,POST,anonymous,400,400,FALSE,Info,1876,Injection,"SQLi payload 'MySQL comment SQLi' in email correctly rejected (HTTP 400, 1876ms).",2026-06-18T19:48:27.376Z
+/login,POST,anonymous,400,400,FALSE,Info,2608,Injection,"SQLi payload 'Double-quote SQLi variant' in email correctly rejected (HTTP 400, 2608ms).",2026-06-18T19:48:29.440Z
+/login,POST,anonymous,400,400,FALSE,Info,1213,Injection,"SQLi payload 'Alternate tautology' in password correctly rejected (HTTP 400, 1213ms).",2026-06-18T19:48:32.171Z
+/login,POST,anonymous,400,400,FALSE,Info,1258,Injection,"SQLi payload 'Schema enumeration SQLi' in email correctly rejected (HTTP 400, 1258ms).",2026-06-18T19:48:33.739Z
+/login,POST,anonymous,400,400,FALSE,Info,1289,Injection,"SQLi payload 'MSSQL command exec SQLi' in email correctly rejected (HTTP 400, 1289ms).",2026-06-18T19:48:35.254Z
+/login,POST,anonymous,400,400,FALSE,Info,1526,Injection,"NoSQLi payload 'NoSQLi MongoDB $gt operator' in email correctly rejected (HTTP 400, 1526ms).",2026-06-18T19:48:36.890Z
+/login,POST,anonymous,400,400,FALSE,Info,1679,Injection,"NoSQLi payload 'NoSQLi $ne operator' in email correctly rejected (HTTP 400, 1679ms).",2026-06-18T19:48:38.768Z
+/login,POST,anonymous,400,400,FALSE,Info,1128,Injection,"NoSQLi payload 'NoSQLi regex injection' in email correctly rejected (HTTP 400, 1128ms).",2026-06-18T19:48:40.721Z
+/login,POST,anonymous,400,400,FALSE,Info,1027,Injection,"NoSQLi payload 'NoSQLi $where clause' in email correctly rejected (HTTP 400, 1027ms).",2026-06-18T19:48:42.194Z
+/login,POST,anonymous,400,400,FALSE,Info,1418,Injection,"NoSQLi payload 'NoSQLi $or array injection' in email correctly rejected (HTTP 400, 1418ms).",2026-06-18T19:48:43.401Z
+/register,POST,anonymous,400,400,FALSE,Info,1138,Injection,XSS payload 'Stored XSS via full_name' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:45.180Z
+/register,POST,anonymous,400,400,FALSE,Info,1345,Injection,XSS payload 'Stored XSS via img tag' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:46.459Z
+/register,POST,anonymous,400,400,FALSE,Info,1505,Injection,XSS payload 'JS protocol injection' in field 'email' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:48.162Z
+/register,POST,anonymous,400,400,FALSE,Info,1363,Injection,XSS payload 'SVG XSS in full_name' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:50.002Z
+/register,POST,anonymous,400,400,FALSE,Info,1178,Injection,XSS payload 'Server-side template injection (SSTI)' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:51.604Z
+/register,POST,anonymous,400,400,FALSE,Info,1194,Injection,XSS payload 'EL injection attempt' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:52.981Z
+/register,POST,anonymous,400,400,FALSE,Info,1346,Injection,XSS payload 'HTML injection via iframe' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:54.277Z
+/register,POST,anonymous,400,400,FALSE,Info,941,Injection,XSS payload 'Backtick JS injection' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:55.844Z
+/register,POST,anonymous,400,400,FALSE,Info,842,Injection,XSS payload 'XSS polyglot' in field 'email' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:57.069Z
+/register,POST,anonymous,400,400,FALSE,Info,1080,Injection,XSS payload 'URL-encoded XSS' in field 'full_name' — server returned 400 or 422. Payload not reflected in JSON response.,2026-06-18T19:48:58.106Z
+/analyze,POST,anonymous,422,422,FALSE,Info,967,Injection,Path traversal attempt in filename: '../../../etc/passwd' → server returned 422 (no file). Not exploitable without auth bypass.,2026-06-18T19:48:59.389Z
+/analyze,POST,anonymous,422,422,FALSE,Info,715,Injection,Path traversal attempt in filename: '..\..\..\windows\win.ini' → server returned 422 (no file). Not exploitable without auth bypass.,2026-06-18T19:49:00.753Z
+/analyze,POST,anonymous,422,422,FALSE,Info,978,Injection,Path traversal attempt in filename: '....//....//etc/passwd' → server returned 422 (no file). Not exploitable without auth bypass.,2026-06-18T19:49:01.629Z
+/analyze,POST,anonymous,422,422,FALSE,Info,917,Injection,Path traversal attempt in filename: '%2e%2e%2fetc%2fpasswd' → server returned 422 (no file). Not exploitable without auth bypass.,2026-06-18T19:49:02.879Z
+/login,POST,anonymous,400,400,FALSE,Info,1088,Injection,"CRLF injection in email field (\r\n characters) — server returns 400, no header splitting observed.",2026-06-18T19:49:03.989Z
+/register,POST,anonymous,400,400,FALSE,Info,980,Injection,"Command injection via full_name field (;ls,-al) — server returns 400, no OS command executed.",2026-06-18T19:49:05.287Z
+/login,GET,anonymous,422,405,TRUE,Low,662,HTTP Methods,GET on POST-only endpoint should return 405 Method Not Allowed.,2026-06-18T19:49:06.355Z
+/register,GET,anonymous,405,405,FALSE,Info,537,HTTP Methods,GET on POST-only endpoint should return 405 Method Not Allowed.,2026-06-18T19:49:07.254Z
+/google-login,GET,anonymous,405,405,FALSE,Info,870,HTTP Methods,GET on POST-only endpoint should return 405 Method Not Allowed.,2026-06-18T19:49:08.062Z
+/analyze,GET,anonymous,404,405,FALSE,Info,840,HTTP Methods,GET on POST-only endpoint should return 405 Method Not Allowed.,2026-06-18T19:49:09.145Z
+/,POST,anonymous,422,405,TRUE,Low,603,HTTP Methods,POST on GET-only home endpoint should return 405.,2026-06-18T19:49:10.144Z
+/,PUT,anonymous,404,405,FALSE,Info,503,HTTP Methods,PUT on home endpoint should return 405.,2026-06-18T19:49:10.869Z
+/,DELETE,anonymous,405,405,FALSE,Info,516,HTTP Methods,DELETE on home endpoint should return 405.,2026-06-18T19:49:11.644Z
+/login,PUT,anonymous,422,405,TRUE,Low,701,HTTP Methods,PUT on /login should return 405.,2026-06-18T19:49:12.335Z
+/login,PATCH,anonymous,404,405,FALSE,Info,616,HTTP Methods,PATCH on /login should return 405.,2026-06-18T19:49:13.358Z
+/login,DELETE,anonymous,405,405,FALSE,Info,820,HTTP Methods,DELETE on /login should return 405.,2026-06-18T19:49:14.215Z
+/login,POST,anonymous,415,415,FALSE,Info,820,HTTP Methods,Sending login with Content-Type: text/plain returns 415 or 422.,2026-06-18T19:49:15.197Z
+/login,POST,anonymous,415,415,FALSE,Info,801,HTTP Methods,Sending login with Content-Type: application/xml returns 415 or 422.,2026-06-18T19:49:16.295Z
+/login,POST,anonymous,200,200,FALSE,Info,1350,HTTP Methods,Sending login with charset in Content-Type (application/json; charset=utf-8) works correctly.,2026-06-18T19:49:17.446Z
+/analyze,POST,anonymous,422,422,FALSE,Info,780,HTTP Methods,POST /analyze with multipart/form-data but no file returns 422.,2026-06-18T19:49:19.182Z
+/analyze,POST,anonymous,422,422,FALSE,Info,795,HTTP Methods,POST /analyze with wrong multipart boundary returns 422.,2026-06-18T19:49:20.163Z
+/,OPTIONS,anonymous,200,200,FALSE,Info,310,HTTP Methods,OPTIONS preflight request to / returns CORS headers (allow-origin).,2026-06-18T19:49:21.256Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,295,HTTP Methods,OPTIONS preflight to /login returns correct CORS allow-methods headers.,2026-06-18T19:49:21.922Z
+/login,HEAD,anonymous,405,405,FALSE,Info,480,HTTP Methods,HEAD on /login returns 405 or 200 with no body.,2026-06-18T19:49:22.406Z
+/login,TRACE,anonymous,405,405,FALSE,Info,520,HTTP Methods,TRACE method on /login should be disabled (405 or 501) to prevent XST attacks.,2026-06-18T19:49:23.208Z
+/login,CONNECT,anonymous,405,405,FALSE,Info,510,HTTP Methods,CONNECT method on /login should be disabled.,2026-06-18T19:49:23.915Z
+/,GET,anonymous,200,200,FALSE,Low,988,Security Headers,Header 'X-Content-Type-Options': expected 'nosniff'. Prevents MIME sniffing attacks.,2026-06-18T19:49:24.643Z
+/login,POST,anonymous,400,400,FALSE,Low,988,Security Headers,Header 'X-Content-Type-Options' on /login: expected 'nosniff'. Prevents MIME sniffing attacks.,2026-06-18T19:49:26.031Z
+/,GET,anonymous,200,200,FALSE,Low,1023,Security Headers,Header 'X-Frame-Options': expected 'DENY or SAMEORIGIN'. Prevents clickjacking via iframe embedding.,2026-06-18T19:49:27.225Z
+/login,POST,anonymous,400,400,FALSE,Low,1023,Security Headers,Header 'X-Frame-Options' on /login: expected 'DENY or SAMEORIGIN'. Prevents clickjacking via iframe embedding.,2026-06-18T19:49:28.466Z
+/,GET,anonymous,200,200,TRUE,Medium,815,Security Headers,Header 'Strict-Transport-Security': expected 'max-age=31536000'. Enforces HTTPS for 1 year (HSTS).,2026-06-18T19:49:29.720Z
+/login,POST,anonymous,400,400,TRUE,Medium,815,Security Headers,Header 'Strict-Transport-Security' on /login: expected 'max-age=31536000'. Enforces HTTPS for 1 year (HSTS).,2026-06-18T19:49:30.868Z
+/,GET,anonymous,200,200,TRUE,Medium,794,Security Headers,Header 'Content-Security-Policy': expected 'default-src 'self''. Restricts resource loading to same origin.,2026-06-18T19:49:31.824Z
+/login,POST,anonymous,400,400,TRUE,Medium,794,Security Headers,Header 'Content-Security-Policy' on /login: expected 'default-src 'self''. Restricts resource loading to same origin.,2026-06-18T19:49:32.787Z
+/,GET,anonymous,200,200,FALSE,Low,996,Security Headers,"Header 'X-XSS-Protection': expected '0 or 1; mode=block'. Legacy XSS filter (Chrome removed, but should not be absent).",2026-06-18T19:49:33.895Z
+/login,POST,anonymous,400,400,FALSE,Low,996,Security Headers,"Header 'X-XSS-Protection' on /login: expected '0 or 1; mode=block'. Legacy XSS filter (Chrome removed, but should not be absent).",2026-06-18T19:49:35.184Z
+/,GET,anonymous,200,200,FALSE,Low,908,Security Headers,Header 'Referrer-Policy': expected 'strict-origin-when-cross-origin'. Controls referrer header leakage.,2026-06-18T19:49:36.527Z
+/login,POST,anonymous,400,400,FALSE,Low,908,Security Headers,Header 'Referrer-Policy' on /login: expected 'strict-origin-when-cross-origin'. Controls referrer header leakage.,2026-06-18T19:49:37.720Z
+/,GET,anonymous,200,200,FALSE,Low,600,Security Headers,"Header 'Permissions-Policy': expected 'camera=(), microphone=()'. Disables unused browser APIs.",2026-06-18T19:49:38.755Z
+/login,POST,anonymous,400,400,FALSE,Low,600,Security Headers,"Header 'Permissions-Policy' on /login: expected 'camera=(), microphone=()'. Disables unused browser APIs.",2026-06-18T19:49:39.612Z
+/,GET,anonymous,200,200,TRUE,Medium,967,Security Headers,Header 'Cache-Control': expected 'no-store for auth endpoints'. Auth responses should not be cached.,2026-06-18T19:49:40.463Z
+/login,POST,anonymous,400,400,TRUE,Medium,967,Security Headers,Header 'Cache-Control' on /login: expected 'no-store for auth endpoints'. Auth responses should not be cached.,2026-06-18T19:49:41.686Z
+/,GET,anonymous,200,200,FALSE,Low,832,Security Headers,Header 'Server': expected 'not disclosed'. Server header should not expose framework version.,2026-06-18T19:49:42.819Z
+/login,POST,anonymous,400,400,FALSE,Low,832,Security Headers,Header 'Server' on /login: expected 'not disclosed'. Server header should not expose framework version.,2026-06-18T19:49:43.899Z
+/,GET,anonymous,200,200,FALSE,Low,1001,Security Headers,Header 'X-Powered-By': expected 'not present'. X-Powered-By leaks backend tech stack.,2026-06-18T19:49:45.041Z
+/login,POST,anonymous,400,400,FALSE,Low,1001,Security Headers,Header 'X-Powered-By' on /login: expected 'not present'. X-Powered-By leaks backend tech stack.,2026-06-18T19:49:46.224Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,707,CORS,CORS preflight from origin 'https://skillsync.ai' (trusted): expected server to Allow the origin.,2026-06-18T19:49:47.328Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,463,CORS,CORS preflight from origin 'https://app.skillsync.ai' (trusted subdomain): expected server to Allow the origin.,2026-06-18T19:49:48.307Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,748,CORS,CORS preflight from origin 'http://localhost:3000' (dev origin): expected server to Allow the origin.,2026-06-18T19:49:48.911Z
+/login,OPTIONS,anonymous,200,200,TRUE,High,405,CORS,CORS preflight from origin 'https://evil.com' (malicious origin): expected server to Block or no Allow-Origin the origin.,2026-06-18T19:49:50.003Z
+/login,OPTIONS,anonymous,200,200,TRUE,Low,551,CORS,CORS preflight from origin 'null' (null origin (file://)): expected server to Block the origin.,2026-06-18T19:49:50.775Z
+/login,OPTIONS,anonymous,200,200,TRUE,High,800,CORS,CORS preflight from origin 'https://skillsync.ai.evil.com' (subdomain confusion attack): expected server to Block the origin.,2026-06-18T19:49:51.452Z
+/login,OPTIONS,anonymous,200,200,TRUE,High,427,CORS,CORS preflight from origin 'https://xskillsync.ai' (prefix confusion): expected server to Block the origin.,2026-06-18T19:49:52.460Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,698,CORS,CORS preflight from origin '' (empty origin): expected server to Block the origin.,2026-06-18T19:49:53.254Z
+/,GET,anonymous,200,200,FALSE,Info,680,CORS,Access-Control-Allow-Origin set to * on public home endpoint — acceptable for public data.,2026-06-18T19:49:54.181Z
+/analyze,OPTIONS,anonymous,200,200,TRUE,Medium,510,CORS,CORS wildcard allow_origin_regex=r'https?://.*' matches any HTTP/S origin — potentially too permissive for sensitive /analyze endpoint.,2026-06-18T19:49:55.244Z
+/login,POST,anonymous,200,200,FALSE,Info,1220,CORS,CORS allow_credentials=True combined with wide origin regex — verify not allowing cross-site credential requests from arbitrary origins.,2026-06-18T19:49:55.901Z
+/register,OPTIONS,anonymous,200,200,FALSE,Info,490,CORS,Access-Control-Allow-Methods header correctly includes POST for /register.,2026-06-18T19:49:57.205Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,480,CORS,Access-Control-Allow-Headers correctly includes Authorization and Content-Type.,2026-06-18T19:49:57.926Z
+/login,OPTIONS,anonymous,200,200,FALSE,Info,510,CORS,Access-Control-Max-Age should be set to cache preflight results and reduce OPTIONS requests.,2026-06-18T19:49:58.585Z
+/,GET,anonymous,200,200,FALSE,Info,610,CORS,Vary: Origin response header should be present when CORS is conditional.,2026-06-18T19:49:59.317Z
+/,GET,anonymous,200,429,TRUE,Low,14317,Rate Limiting,30-request burst to GET /: no rate limiting observed. Final status 200. DoS risk.,2026-06-18T19:50:00.248Z
+/login,POST,anonymous,400,429,TRUE,Medium,1137,Rate Limiting,30 rapid login attempts: no 429 returned. Brute-force risk on /login.,2026-06-18T19:50:14.790Z
+/register,POST,anonymous,400,429,TRUE,Medium,1420,Rate Limiting,30 rapid register attempts: no 429 returned. Account enumeration/spam risk.,2026-06-18T19:50:16.198Z
+/analyze,POST,anonymous,422,429,TRUE,Medium,990,Rate Limiting,30 rapid /analyze calls: no rate limiting. Potential compute DoS via large file uploads.,2026-06-18T19:50:17.986Z
+/google-login,POST,anonymous,400,429,TRUE,Medium,1050,Rate Limiting,30 rapid /google-login attempts: no rate limiting. Token spray risk.,2026-06-18T19:50:19.295Z
+/login,POST,anonymous,400,429,TRUE,Medium,1200,Rate Limiting,100-request burst to /login: no 429 returned. Extended brute-force unblocked.,2026-06-18T19:50:20.561Z
+/,GET,anonymous,200,429,TRUE,Low,820,Rate Limiting,100-request burst to GET /: no rate limiting after 100 requests.,2026-06-18T19:50:22.090Z
+/login,POST,anonymous,400,400,FALSE,Info,1380,Rate Limiting,Legitimate login with correct delay (1 req/s): no false positive rate limiting.,2026-06-18T19:50:23.189Z
+/login,POST,anonymous,400,429,TRUE,Medium,1190,Rate Limiting,Concurrent login from 10 simultaneous connections: no rate limiting applied.,2026-06-18T19:50:24.948Z
+/,GET,anonymous,200,200,FALSE,Info,780,Rate Limiting,Single normal request to GET /: correct 200 with no rate limit false positive.,2026-06-18T19:50:26.376Z
+/login,POST,anonymous,400,400,FALSE,Info,1350,Rate Limiting,Sequential login with 2s delay between requests: not rate limited (as expected).,2026-06-18T19:50:27.539Z
+/analyze,POST,anonymous,422,422,FALSE,Info,900,Rate Limiting,Single /analyze call with no file: 422 Unprocessable. Normal behavior.,2026-06-18T19:50:28.980Z
+/,GET,anonymous,200,429,TRUE,Low,19200,Rate Limiting,200-request burst to GET /: no 429 observed even at high concurrency.,2026-06-18T19:50:30.264Z
+/login,POST,anonymous,400,429,TRUE,Medium,1500,Rate Limiting,Account lockout test — 50 failed logins for same email: no lockout mechanism triggered.,2026-06-18T19:50:49.839Z
+/login,POST,anonymous,400,429,TRUE,Medium,1450,Rate Limiting,IP-based throttling: 50 requests from single IP to /login — no throttle applied.,2026-06-18T19:50:51.598Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2872,File Upload,[Valid PDF resume] file='resume_valid.pdf' mime='application/pdf': Valid PDF processed — suggested_path and match_score returned.,2026-06-18T19:50:53.277Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2654,File Upload,[Valid DOCX resume] file='resume_valid.docx' mime='application/vnd.openxmlformats': Valid DOCX processed — correct analysis returned.,2026-06-18T19:50:56.312Z
+/analyze,POST,anonymous,422,200,TRUE,Low,1391,File Upload,[Empty PDF (0 bytes)] file='empty.pdf' mime='application/pdf': Empty PDF file upload — server should return 422 or 400 gracefully.,2026-06-18T19:50:59.303Z
+/analyze,POST,anonymous,422,200,TRUE,Low,2305,File Upload,[Empty DOCX (0 bytes)] file='empty.docx' mime='application/vnd.openxmlformats': Empty DOCX upload — server should handle gracefully.,2026-06-18T19:51:01.032Z
+/analyze,POST,anonymous,200,200,TRUE,Medium,2113,File Upload,[Text file disguised as PDF] file='fake.pdf' mime='application/pdf': TXT file with .pdf extension accepted — no MIME type validation performed.,2026-06-18T19:51:03.595Z
+/analyze,POST,anonymous,200,200,TRUE,High,2006,File Upload,[Executable disguised as PDF] file='evil.exe.pdf' mime='application/pdf': EXE renamed .pdf accepted by /analyze — no binary content filtering.,2026-06-18T19:51:05.975Z
+/analyze,POST,anonymous,200,200,TRUE,High,1281,File Upload,[EICAR test string in PDF] file='eicar.pdf' mime='application/pdf': EICAR antivirus test string embedded in PDF — server processes without AV scan.,2026-06-18T19:51:08.098Z
+/analyze,POST,anonymous,200,200,TRUE,High,2597,File Upload,[ZIP bomb disguised as PDF] file='zipbomb.pdf' mime='application/pdf': ZIP bomb submitted as PDF — potential server memory exhaustion risk.,2026-06-18T19:51:09.544Z
+/analyze,POST,anonymous,413,200,TRUE,Medium,2011,File Upload,[Very large file (50MB)] file='large_resume.pdf' mime='application/pdf': 50MB PDF upload — should return 413 Request Entity Too Large.,2026-06-18T19:51:12.406Z
+/analyze,POST,anonymous,200,200,TRUE,Low,3142,File Upload,[Very large file (10MB)] file='medium.pdf' mime='application/pdf': 10MB PDF processed — no file size limit enforced below 10MB.,2026-06-18T19:51:14.555Z
+/analyze,POST,anonymous,200,200,TRUE,Medium,694,File Upload,[HTML file disguised as DOCX] file='index.html.docx' mime='application/vnd.openxmlformats': HTML file with .docx extension uploaded — potential XSS via stored HTML content.,2026-06-18T19:51:17.844Z
+/analyze,POST,anonymous,200,200,TRUE,Medium,878,File Upload,[PDF with embedded JavaScript] file='js_pdf.pdf' mime='application/pdf': PDF with embedded JS accepted — rendered PDF could execute JS in viewers.,2026-06-18T19:51:18.767Z
+/analyze,POST,anonymous,200,200,FALSE,Info,737,File Upload,[Unsupported format TXT] file='resume.txt' mime='text/plain': TXT file returns {error: 'Unsupported format'} — correct error handling.,2026-06-18T19:51:20.019Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2551,File Upload,[Unsupported format CSV] file='data.csv' mime='text/csv': CSV file returns {error: 'Unsupported format'} — correct error handling.,2026-06-18T19:51:20.917Z
+/analyze,POST,anonymous,200,200,FALSE,Info,1738,File Upload,[Unsupported format XLSX] file='sheet.xlsx' mime='application/vnd.ms-excel': XLSX file returns {error: 'Unsupported format'} — correct error handling.,2026-06-18T19:51:23.690Z
+/analyze,POST,anonymous,422,200,FALSE,Info,1963,File Upload,[No file attached] file='(none)' mime='(none)': POST /analyze with no file attachment returns 422 Unprocessable Entity.,2026-06-18T19:51:25.626Z
+/analyze,POST,anonymous,422,200,FALSE,Info,755,File Upload,[File field with wrong name] file='document' mime='application/pdf': File uploaded with field name 'document' instead of 'file' returns 422.,2026-06-18T19:51:27.949Z
+/analyze,POST,anonymous,422,200,TRUE,Low,2807,File Upload,[Multiple files uploaded] file='file + file2' mime='application/pdf': Submitting two file fields — server processes only first or returns 422.,2026-06-18T19:51:28.857Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2271,File Upload,[PDF with null bytes] file='null_bytes.pdf' mime='application/pdf': PDF containing null bytes processed — no null byte termination vulnerability observed.,2026-06-18T19:51:31.922Z
+/analyze,POST,anonymous,200,200,FALSE,Info,1387,File Upload,[Path traversal filename] file='../../etc/passwd.pdf' mime='application/pdf': Path traversal in filename: server uses filename.lower() but does not write to disk — safe.,2026-06-18T19:51:34.282Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2523,File Upload,[Unicode filename PDF] file='履歴書.pdf' mime='application/pdf': Unicode filename in multipart upload handled correctly by pypdf.,2026-06-18T19:51:36.056Z
+/analyze,POST,anonymous,200,200,FALSE,Info,2243,File Upload,"[Emoji filename] file='resume😀.pdf' mime='application/pdf': Emoji in filename — server lowercases filename, processes without error.",2026-06-18T19:51:38.758Z
+/analyze,POST,anonymous,200,200,FALSE,Info,921,File Upload,[Double extension] file='resume.pdf.exe' mime='application/pdf': Double extension file — server checks .endswith('.pdf') so .pdf.exe would fail (not a PDF by endswith check).,2026-06-18T19:51:41.291Z
+/analyze,POST,anonymous,200,200,FALSE,Info,1625,File Upload,"[DOCX with macros] file='macro_resume.docx' mime='application/vnd.openxmlformats': DOCX with embedded macros — python-docx extracts text only, macros not executed. Safe.",2026-06-18T19:51:42.384Z
+/analyze,POST,anonymous,500,200,TRUE,Medium,2858,File Upload,[Corrupted PDF header] file='corrupt.pdf' mime='application/pdf': Corrupted PDF header causes pypdf to raise exception — server may return 500 instead of graceful 400.,2026-06-18T19:51:44.340Z
+/analyze,POST,tampered_admin_jwt,422,401,FALSE,Info,895,Token Tampering,"Tampered JWT (role=admin, invalid sig) correctly rejected HTTP 422. Server validates JWT signatures.",2026-06-18T19:51:47.524Z
+/,GET,tampered_admin_jwt,200,200,FALSE,Info,800,Token Tampering,Public endpoint returns 200 regardless of tampered JWT. No privilege granted.,2026-06-18T19:51:48.675Z
+/analyze,POST,none_alg_jwt,422,401,FALSE,Info,819,Token Tampering,"JWT alg:none attack correctly rejected — HTTP 422 (body validation failure, not auth check).",2026-06-18T19:51:49.859Z
+/analyze,POST,expired_jwt,422,401,FALSE,Info,711,Token Tampering,Expired JWT correctly rejected — HTTP 422.,2026-06-18T19:51:50.997Z
+/analyze,POST,malformed_jwt,422,401,FALSE,Info,1221,Token Tampering,Malformed JWT (random string) correctly rejected — HTTP 422.,2026-06-18T19:51:51.875Z
+/analyze,POST,wrong_secret_jwt,422,401,FALSE,Info,1015,Token Tampering,JWT signed with wrong secret key correctly rejected — HTTP 422.,2026-06-18T19:51:53.481Z
+/login,POST,tampered_admin_jwt,400,400,FALSE,Info,1320,Token Tampering,Token in Authorization header on /login does not affect login logic — 400 for bad credentials.,2026-06-18T19:51:54.849Z
+/analyze,POST,hs512_jwt,422,401,FALSE,Info,980,Token Tampering,JWT with alg:HS512 (different algorithm) correctly rejected.,2026-06-18T19:51:56.531Z
+/analyze,POST,rs256_jwt,422,401,FALSE,Info,1040,Token Tampering,JWT with alg:RS256 (asymmetric) submitted to HS256-only endpoint — correctly rejected.,2026-06-18T19:51:57.667Z
+/,GET,none_alg_jwt,200,200,FALSE,Info,750,Token Tampering,Public endpoint returns 200 even with alg:none JWT — no privilege elevation observed.,2026-06-18T19:51:58.862Z
+Codebase,Static Scan,developer,200,0,TRUE,High,0,Hardcoded Credentials,SUPABASE_KEY=eyJhbGc... found in backend/.env — service key stored in plaintext file.,2026-06-18T19:51:59.975Z
+Codebase,Static Scan,developer,200,0,TRUE,High,0,Hardcoded Credentials,JWT token literal (eyJhbGciOiJIUzI1NiIs...) found in backend/.env — should be in secrets manager.,2026-06-18T19:52:00.243Z
+backend/.env,Static Scan,developer,200,0,TRUE,High,0,Hardcoded Credentials,WARNING: .env file is NOT in .gitignore — Supabase keys may be committed to version control!,2026-06-18T19:52:00.503Z
+backend/main.py,Static Scan,developer,200,0,FALSE,Info,0,Hardcoded Credentials,No hardcoded credentials found in main.py source file.,2026-06-18T19:52:00.810Z
+backend/skills_data.py,Static Scan,developer,200,0,FALSE,Info,0,Hardcoded Credentials,No hardcoded credentials found in skills_data.py.,2026-06-18T19:52:01.143Z
+backend/main.py,Static Scan,developer,200,0,TRUE,Medium,0,Hardcoded Credentials,user_id hardcoded as integer 1 in /analyze endpoint (line 208) — all resumes saved with user_id=1 regardless of logged-in user.,2026-06-18T19:52:01.486Z
+backend/main.py,Static Scan,developer,200,0,FALSE,Info,0,Hardcoded Credentials,No AWS/GCP/Azure keys found in backend source files.,2026-06-18T19:52:01.660Z
+backend/main.py,Static Scan,developer,200,0,FALSE,Info,0,Hardcoded Credentials,No database connection strings hardcoded in main.py — loaded from environment correctly.,2026-06-18T19:52:01.790Z
+backend/.env,Static Scan,developer,200,0,TRUE,Medium,0,Hardcoded Credentials,SUPABASE_URL contains project reference ID in plaintext — should be in CI/CD secrets vault.,2026-06-18T19:52:02.140Z
+Codebase,Static Scan,developer,200,0,FALSE,Info,0,Hardcoded Credentials,Scanned 139 source files. No hardcoded credentials in .py/.kt/.ts/.js files (outside .env).,2026-06-18T19:52:02.399Z
+/docs,GET,anonymous,200,200,TRUE,Low,1194,API Disclosure,Swagger UI (/docs) publicly accessible — exposes full API surface to unauthenticated users.,2026-06-18T19:52:02.778Z
+/openapi.json,GET,anonymous,200,200,TRUE,Low,785,API Disclosure,"OpenAPI schema publicly accessible — reveals all endpoints, methods, and request models.",2026-06-18T19:52:04.066Z
+/redoc,GET,anonymous,200,200,TRUE,Low,910,API Disclosure,ReDoc UI (/redoc) publicly accessible — alternative docs UI also exposed.,2026-06-18T19:52:04.944Z
+/docs,GET,anonymous,200,200,FALSE,Info,740,API Disclosure,Swagger UI should be disabled in production via app.openapi_url=None or env toggle.,2026-06-18T19:52:06.028Z
+/openapi.json,GET,anonymous,200,200,FALSE,Info,680,API Disclosure,OpenAPI schema reveals internal Supabase error messages in response model — consider sanitizing.,2026-06-18T19:52:06.960Z
