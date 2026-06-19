@@ -4,6 +4,7 @@ import json
 import csv
 import os
 import sys
+# pyrefly: ignore [missing-import]
 import aiohttp
 
 # Configure output to use utf-8
