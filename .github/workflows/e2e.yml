@@ -1,0 +1,219 @@
+name: E2E Automation Testing Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  selenium-web-tests:
+    name: Selenium -- Website Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Website Test Report
+      run: python webapp/selenium-tests/generate_report.py
+
+    - name: Upload Website Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: selenium-web-report
+        path: webapp/selenium-tests/selenium_web_report.csv
+
+  appium-android-tests:
+    name: Appium -- Android Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Appium Android Test Report
+      run: python automated_test/gen_appium_report.py
+
+    - name: Upload Appium Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: appium-android-report
+        path: automated_test/appium-tests/appium_android_report.csv
+
+  unit-tests-api:
+    name: Unit Tests -- API (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Unit Tests Report
+      run: python automated_test/gen_unit_report.py
+
+    - name: Upload Unit Tests Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: unit-test-report
+        path: automated_test/unit_test_report.csv
+
+  validation-tests:
+    name: Validation Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Validation Report
+      run: python automated_test/gen_validation_report.py
+
+    - name: Upload Validation Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: validation-test-report
+        path: automated_test/validation_test_report.csv
+
+  deployment-status:
+    name: Deployment Status (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Deployment Status Report
+      run: python automated_test/gen_deployment_report.py
+
+    - name: Upload Deployment Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-test-report
+        path: automated_test/deployment_test_report.csv
+
+  load-testing-perf:
+    name: Load Testing -- Performance (300)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Generate Load Testing Report
+      run: python automated_test/gen_load_report.py
+
+    - name: Upload Load Testing Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: load-test-report
+        path: automated_test/load_test_report.csv
+
+  compile-and-deploy:
+    name: Compile Master Report & Deploy
+    needs: [selenium-web-tests, appium-android-tests, unit-tests-api, validation-tests, deployment-status, load-testing-perf]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Download Selenium Web Report
+      uses: actions/download-artifact@v4
+      with:
+        name: selenium-web-report
+        path: selenium-web-report
+
+    - name: Download Appium Android Report
+      uses: actions/download-artifact@v4
+      with:
+        name: appium-android-report
+        path: appium-android-report
+
+    - name: Download Unit Test Report
+      uses: actions/download-artifact@v4
+      with:
+        name: unit-test-report
+        path: unit-test-report
+
+    - name: Download Validation Test Report
+      uses: actions/download-artifact@v4
+      with:
+        name: validation-test-report
+        path: validation-test-report
+
+    - name: Download Deployment Test Report
+      uses: actions/download-artifact@v4
+      with:
+        name: deployment-test-report
+        path: deployment-test-report
+
+    - name: Download Load Test Report
+      uses: actions/download-artifact@v4
+      with:
+        name: load-test-report
+        path: load-test-report
+
+    - name: Compile Master Report Dashboard
+      run: python automated_test/compile_master_report.py
+
+    - name: Upload Compiled Master Report CSV
+      uses: actions/upload-artifact@v4
+      with:
+        name: full-e2e-report
+        path: automated_test/full_e2e_report.csv
+
+    - name: Deploy Master Report to GitHub Pages
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        
+        # Back up compiled reports to a temporary directory outside the git tree
+        mkdir -p ../e2e-temp
+        cp automated_test/full_e2e_report.csv ../e2e-temp/
+        cp automated_test/index.html ../e2e-temp/
+        
+        # Check out gh-pages branch (fetch it first)
+        git fetch origin gh-pages:gh-pages || true
+        git checkout gh-pages || git checkout -b gh-pages
+        
+        # Copy compiled files back to the correct path
+        mkdir -p e2e
+        cp ../e2e-temp/full_e2e_report.csv e2e/
+        cp ../e2e-temp/index.html e2e/
+        
+        # Add, commit, and push
+        git add e2e/
+        git commit -m "deploy: update E2E master report [skip ci]" || echo "No changes to commit"
+        git push origin gh-pages

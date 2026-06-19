@@ -13,9 +13,6 @@ if ($LastExitCode -eq 0) {
     }
     New-Item -ItemType Directory -Path $TempDeployDir | Out-Null
     
-    # Copy files from Next.js static output (out) to temp folder
-    Copy-Item -Path "out\*" -Destination $TempDeployDir -Recurse -Force
-    
     # Switch directory and initialize Git
     Push-Location $TempDeployDir
     git init | Out-Null
@@ -23,7 +20,22 @@ if ($LastExitCode -eq 0) {
     # Retrieve dynamic remote URL (including authentication tokens) from main repo
     $RemoteUrl = git -C $PSScriptRoot remote get-url origin
     git remote add origin $RemoteUrl
-    git checkout -b gh-pages | Out-Null
+    
+    # Fetch existing gh-pages branch if it exists to preserve subfolders like e2e
+    Write-Host "Fetching existing gh-pages branch..."
+    git fetch origin gh-pages --depth=1 2>$null
+    if ($LastExitCode -eq 0) {
+        git checkout FETCH_HEAD | Out-Null
+        git checkout -b gh-pages | Out-Null
+        Write-Host "Preserving existing subdirectories (like e2e)..."
+        # Clean up everything except the e2e folder
+        Get-ChildItem -Path * -Exclude "e2e" | Remove-Item -Recurse -Force
+    } else {
+        git checkout -b gh-pages | Out-Null
+    }
+    
+    # Copy files from Next.js static output (out) to temp folder
+    Copy-Item -Path "$PSScriptRoot\out\*" -Destination . -Recurse -Force
     
     # Configure local git user if not present (to ensure commit succeeds in non-interactive environment)
     git config user.name "YLakshmiReddy"
