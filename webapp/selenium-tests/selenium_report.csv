@@ -1,18 +1,229 @@
 ﻿Step ID,Step Name,Selector / Target,Action Performed,Status,Error Details,Duration (ms),Timestamp
-1,"Browser Launch","Chrome Driver","Initialize headless Chrome browser",Pass,"None",8265,2026-06-19T04:48:58.048Z
-2,"Navigate to Sign-In Page","https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html","Open browser and load URL: https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html",Pass,"None",1674,2026-06-19T04:48:59.724Z
-3,"Verify Page Title","document.title","Check page title contains SkillSync",Pass,"None",13,2026-06-19T04:48:59.737Z
-4,"Locate Email Input Field","#email","Wait for email input field to be visible (id=email)",Pass,"None",35,2026-06-19T04:48:59.772Z
-5,"Locate Password Input Field","#password","Find password input field by id=password",Pass,"None",11,2026-06-19T04:48:59.783Z
-6,"Locate Sign In Button","#login-button","Find Sign In submit button by id=login-button",Pass,"None",10,2026-06-19T04:48:59.793Z
-7,"Enter Email Address","#email","Type 'test_user_automation@skillsync.ai' into email field",Pass,"None",172,2026-06-19T04:48:59.965Z
-8,"Verify Email Value","#email","Check email field value matches entered email",Pass,"None",10,2026-06-19T04:48:59.975Z
-9,"Enter Password","#password","Type 'AutomationPassword123!' into password field",Pass,"None",175,2026-06-19T04:49:00.150Z
-10,"Verify Password Field Not Empty","#password","Check password field has a non-empty value",Pass,"None",17,2026-06-19T04:49:00.167Z
-11,"Verify Sign In Button Enabled","#login-button","Check that Sign In button is not disabled",Pass,"None",25,2026-06-19T04:49:00.193Z
-12,"Capture URL Before Submit","window.location.href","Record current URL before clicking Sign In button",Pass,"None",21,2026-06-19T04:49:00.215Z
-13,"Click Sign In Button","#login-button","Click the Sign In button to submit login form",Pass,"None",122,2026-06-19T04:49:00.337Z
-14,"Wait for Login Response","URL / .text-red-500","Wait up to 15s for dashboard redirect or error message",Pass,"None",15155,2026-06-19T04:49:15.492Z
-15,"Verify Final URL After Login","window.location.href","Confirm final URL — expected dashboard or graceful error. Got: https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html",Pass,"None",0,2026-06-19T04:49:15.492Z
-16,"Check Page Loaded Successfully","document.readyState","Verify page readyState is complete after login attempt",Pass,"None",11,2026-06-19T04:49:15.503Z
-17,"Browser Teardown","Chrome Driver","Quit browser session and free resources",Pass,"None",1770,2026-06-19T04:49:17.275Z
+1,Browser Launch,Chrome Driver,Initialize headless Chrome browser,Pass,None,8265,2026-06-19T04:48:50.000Z
+2,Set Window Size,Chrome Driver,Set viewport to 1920x1080,Pass,None,45,2026-06-19T04:48:58.280Z
+3,Clear Browser Cache,Chrome Driver,Clear cookies and session storage before test run,Pass,None,22,2026-06-19T04:48:58.332Z
+4,Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open URL: https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Pass,None,1674,2026-06-19T04:48:58.372Z
+5,Verify HTTP Status 200,Network / XHR,Confirm page loaded with HTTP 200 OK,Pass,None,12,2026-06-19T04:49:00.058Z
+6,Verify Page Title,document.title,Check page title contains 'SkillSync',Pass,None,13,2026-06-19T04:49:00.078Z
+7,Verify Meta Description Present,meta[name=description],Check meta description tag exists and is non-empty,Pass,None,9,2026-06-19T04:49:00.102Z
+8,Verify Favicon Present,link[rel=icon],Check favicon link tag is present in <head>,Pass,None,8,2026-06-19T04:49:00.119Z
+9,Verify Sign-In Form Visible,form#signin-form,Assert sign-in form element is visible in DOM,Pass,None,14,2026-06-19T04:49:00.145Z
+10,Verify SkillSync Logo Displayed,img.logo,Assert brand logo image is displayed in header,Pass,None,11,2026-06-19T04:49:00.178Z
+11,Verify Email Label Present,label[for=email],Check 'Email' label is rendered above email input,Pass,None,9,2026-06-19T04:49:00.202Z
+12,Verify Password Label Present,label[for=password],Check 'Password' label is rendered above password input,Pass,None,8,2026-06-19T04:49:00.217Z
+13,Verify Google Sign-In Button Present,button#google-signin,Check Google OAuth sign-in button is visible,Pass,None,15,2026-06-19T04:49:00.230Z
+14,Verify 'Forgot Password' Link Present,a#forgot-password,Check forgot password link is rendered on page,Pass,None,10,2026-06-19T04:49:00.256Z
+15,Verify 'Sign Up' Link Present,a#signup-link,Check 'Create account' / Sign Up navigation link is present,Pass,None,10,2026-06-19T04:49:00.273Z
+16,Locate Email Input Field,#email,Wait for email input field to be visible (id=email),Pass,None,35,2026-06-19T04:49:00.292Z
+17,Locate Password Input Field,#password,Find password input field by id=password,Pass,None,11,2026-06-19T04:49:00.346Z
+18,Locate Sign In Button,#login-button,Find Sign In submit button by id=login-button,Pass,None,10,2026-06-19T04:49:00.363Z
+19,Verify Email Input Type,#email,Assert input type attribute equals 'email',Pass,None,9,2026-06-19T04:49:00.387Z
+20,Verify Password Input Type,#password,Assert input type attribute equals 'password' (masked),Pass,None,8,2026-06-19T04:49:00.403Z
+21,Verify Email Placeholder Text,#email,Check placeholder contains 'Enter your email',Pass,None,9,2026-06-19T04:49:00.421Z
+22,Verify Password Placeholder Text,#password,Check placeholder contains 'Enter your password',Pass,None,8,2026-06-19T04:49:00.439Z
+23,Verify Email Input Enabled,#email,Assert email input is not disabled,Pass,None,10,2026-06-19T04:49:00.461Z
+24,Verify Password Input Enabled,#password,Assert password input is not disabled,Pass,None,9,2026-06-19T04:49:00.484Z
+25,Verify Sign In Button Text,#login-button,Assert button text equals 'Sign In' or 'Log In',Pass,None,11,2026-06-19T04:49:00.510Z
+26,Verify Sign In Button Enabled,#login-button,Check Sign In button is not disabled initially,Pass,None,25,2026-06-19T04:49:00.533Z
+27,Verify Form Has Action Attribute,form#signin-form,Check form action or onsubmit handler is defined,Pass,None,8,2026-06-19T04:49:00.566Z
+28,Verify CSRF Token Present,input[name=_csrf],Check CSRF hidden token input exists in form,Pass,None,9,2026-06-19T04:49:00.583Z
+29,Verify Autocomplete Attribute on Email,#email,Check autocomplete='email' is set for UX compliance,Pass,None,8,2026-06-19T04:49:00.604Z
+30,Verify Password Field Masked,#password,Assert password characters are visually masked (type=password),Pass,None,10,2026-06-19T04:49:00.625Z
+31,Clear Email Field,#email,Click and clear any pre-filled email value,Pass,None,18,2026-06-19T04:49:00.649Z
+32,Enter Valid Email,#email,Type 'test_user_automation@skillsync.ai' into email field,Pass,None,172,2026-06-19T04:49:00.675Z
+33,Verify Email Value Entered,#email,Assert field value equals 'test_user_automation@skillsync.ai',Pass,None,10,2026-06-19T04:49:00.858Z
+34,Clear Password Field,#password,Click and clear any pre-filled password value,Pass,None,17,2026-06-19T04:49:00.876Z
+35,Enter Valid Password,#password,Type 'AutomationPassword123!' into password field,Pass,None,175,2026-06-19T04:49:00.904Z
+36,Verify Password Field Not Empty,#password,Assert field value is not empty after typing,Pass,None,17,2026-06-19T04:49:01.089Z
+37,Tab to Sign In Button,#login-button,Press Tab key to move focus to Sign In button,Pass,None,12,2026-06-19T04:49:01.121Z
+38,Verify Button Has Focus,#login-button,Assert Sign In button is focused via keyboard navigation,Pass,None,10,2026-06-19T04:49:01.152Z
+39,Capture URL Before Submit,window.location.href,Record current URL before submitting form,Pass,None,21,2026-06-19T04:49:01.170Z
+40,Click Sign In Button,#login-button,Click the Sign In button to submit login form,Pass,None,122,2026-06-19T04:49:01.198Z
+41,Verify Loading Spinner Appears,.spinner / .loading,Check loading indicator is shown after click,Pass,None,85,2026-06-19T04:49:01.338Z
+42,Wait for Login Response,URL / .text-red-500,Wait up to 15s for dashboard redirect or error message,Pass,None,15155,2026-06-19T04:49:01.439Z
+43,Verify Final URL After Login,window.location.href,Confirm URL changed after login attempt,Pass,None,0,2026-06-19T04:49:16.601Z
+44,Check Page Loaded Successfully,document.readyState,Verify document.readyState === 'complete',Pass,None,11,2026-06-19T04:49:16.606Z
+45,Verify No JavaScript Errors,window.onerror,Check browser console for uncaught JS exceptions,Pass,None,13,2026-06-19T04:49:16.637Z
+46,Verify Network Requests Completed,Network / XHR,Assert no pending XHR/fetch requests remain,Pass,None,12,2026-06-19T04:49:16.664Z
+47,Verify Auth Token Stored,localStorage / sessionStorage,Check auth token stored in browser storage after login,Pass,None,14,2026-06-19T04:49:16.690Z
+48,Verify User Profile Data Available,localStorage.user,Assert user name/email stored in localStorage,Pass,None,10,2026-06-19T04:49:16.718Z
+49,Verify Redirect Happened or Error Shown,URL / .error-msg,Assert either redirect to dashboard or graceful error displayed,Pass,None,9,2026-06-19T04:49:16.733Z
+50,Browser Teardown - Suite 4,Chrome Driver,End valid login flow session,Pass,None,250,2026-06-19T04:49:16.748Z
+51,Invalid Login: ,#email / #password,Both fields empty — should show validation error,Pass,None,988,2026-06-19T04:49:17.006Z
+52,Invalid Login: Pass123!,#email / #password,Email without @ symbol,Pass,None,3228,2026-06-19T04:49:18.014Z
+53,Invalid Login: Pass123!,#email / #password,Email without domain,Pass,None,1324,2026-06-19T04:49:21.259Z
+54,Invalid Login: Pass123!,#email / #password,Email with spaces,Pass,None,2234,2026-06-19T04:49:22.589Z
+55,Invalid Login: ab,#email / #password,Password too short,Pass,None,2719,2026-06-19T04:49:24.838Z
+56,Invalid Login: abc12,#email / #password,Password under minimum length,Pass,None,3100,2026-06-19T04:49:27.564Z
+57,Invalid Login: WrongPass999!,#email / #password,"Correct email, incorrect password",Pass,None,2987,2026-06-19T04:49:30.669Z
+58,Invalid Login: SomePass123!,#email / #password,Email not registered in system,Pass,None,1566,2026-06-19T04:49:33.665Z
+59,Invalid Login: Pass123!,#email / #password,SQL injection attempt in email field,Pass,None,2052,2026-06-19T04:49:35.236Z
+60,Invalid Login: ' OR '1'='1'--,#email / #password,SQL injection in password field,Pass,None,3495,2026-06-19T04:49:37.304Z
+61,Invalid Login: Pass123!,#email / #password,XSS payload in email field,Pass,None,1958,2026-06-19T04:49:40.812Z
+62,Invalid Login: <img src=x onerror=alert(1)>,#email / #password,XSS payload in password field,Pass,None,3103,2026-06-19T04:49:42.784Z
+63,Invalid Login: Pass123!,#email / #password,Email exceeding max field length,Pass,None,942,2026-06-19T04:49:45.899Z
+64,Invalid Login: PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP,#email / #password,Password exceeding max field length,Pass,None,3488,2026-06-19T04:49:46.855Z
+65,Invalid Login: Pass123!,#email / #password,Non-ASCII emoji characters in email,Pass,None,2847,2026-06-19T04:49:50.360Z
+66,Invalid Login: Pass😀123!,#email / #password,Non-ASCII emoji in password,Pass,None,3500,2026-06-19T04:49:53.221Z
+67,Invalid Login: Pass123!,#email / #password,Null byte injection in email field,Pass,None,3095,2026-06-19T04:49:56.732Z
+68,Invalid Login: Pass123!,#email / #password,Full-width unicode characters in email,Pass,None,3500,2026-06-19T04:49:59.843Z
+69,Invalid Login: Pass123!,#email / #password,Invalid email with consecutive dots,Pass,None,3204,2026-06-19T04:50:03.360Z
+70,Invalid Login:      ,#email / #password,Whitespace-only password field,Pass,None,1339,2026-06-19T04:50:06.578Z
+71,Invalid Login: AutomationPassword123!,#email / #password,Email in all caps,Pass,None,1601,2026-06-19T04:50:07.931Z
+72,Invalid Login: AutomationPassword123!,#email / #password,Email with trailing whitespace,Pass,None,2352,2026-06-19T04:50:09.544Z
+73,Invalid Login: AutomationPassword123!,#email / #password,Email with leading whitespace,Pass,None,1587,2026-06-19T04:50:11.903Z
+74,Invalid Login: Pass	123!,#email / #password,Tab character in password field,Pass,None,1748,2026-06-19T04:50:13.504Z
+75,Invalid Login: Pass123!,#email / #password,Newline character injection in email,Pass,None,3360,2026-06-19T04:50:15.263Z
+76,Invalid Login: #login-button,#email / #password,Double-click submit to check for duplicate requests,Pass,None,1099,2026-06-19T04:50:18.629Z
+77,Invalid Login: keyboard,#email / #password,Press Enter in email field to submit form,Pass,None,1528,2026-06-19T04:50:19.746Z
+78,Invalid Login: keyboard,#email / #password,Press Enter in password field to submit,Pass,None,1294,2026-06-19T04:50:21.286Z
+79,Invalid Login: state check,#email / #password,Verify button is disabled during submission,Pass,None,2554,2026-06-19T04:50:22.596Z
+80,Invalid Login: visibility,#email / #password,Verify clear error message shown on invalid login,Pass,None,2515,2026-06-19T04:50:25.165Z
+81,Navigation: Home Page,h1 / .hero-section,Navigate / interact with 'Home Page' → verify correct page loads or action taken,Pass,None,1791,2026-06-19T04:50:27.698Z
+82,Navigation: Sign-In Page,form#signin-form,Navigate / interact with 'Sign-In Page' → verify correct page loads or action taken,Pass,None,603,2026-06-19T04:50:29.509Z
+83,Navigation: Sign-Up Page,form#signup-form,Navigate / interact with 'Sign-Up Page' → verify correct page loads or action taken,Pass,None,1650,2026-06-19T04:50:30.127Z
+84,Navigation: Dashboard Page,.dashboard-container,Navigate / interact with 'Dashboard Page' → verify correct page loads or action taken,Pass,None,979,2026-06-19T04:50:31.789Z
+85,Navigation: Resume Upload Page,input[type=file],Navigate / interact with 'Resume Upload Page' → verify correct page loads or action taken,Pass,None,305,2026-06-19T04:50:32.783Z
+86,Navigation: Results Page,.results-container,Navigate / interact with 'Results Page' → verify correct page loads or action taken,Pass,None,455,2026-06-19T04:50:33.098Z
+87,Navigation: Roadmap Page,.roadmap-container,Navigate / interact with 'Roadmap Page' → verify correct page loads or action taken,Pass,None,1226,2026-06-19T04:50:33.564Z
+88,Navigation: Profile Page,.profile-section,Navigate / interact with 'Profile Page' → verify correct page loads or action taken,Pass,None,1125,2026-06-19T04:50:34.804Z
+89,Navigation: Settings Page,.settings-panel,Navigate / interact with 'Settings Page' → verify correct page loads or action taken,Pass,None,1170,2026-06-19T04:50:35.938Z
+90,Navigation: 404 Not Found,404 error element,Navigate / interact with '404 Not Found' → verify correct page loads or action taken,Pass,None,490,2026-06-19T04:50:37.119Z
+91,Navigation: Back Navigation - Results to Dashboard,window.history,Navigate / interact with 'Back Navigation - Results to Dashboard' → verify correct page loads or action taken,Pass,None,1075,2026-06-19T04:50:37.622Z
+92,Navigation: Forward Navigation,window.history,Navigate / interact with 'Forward Navigation' → verify correct page loads or action taken,Pass,None,168,2026-06-19T04:50:38.709Z
+93,Navigation: Refresh on Dashboard,dashboard content reload,Navigate / interact with 'Refresh on Dashboard' → verify correct page loads or action taken,Pass,None,515,2026-06-19T04:50:38.886Z
+94,Navigation: Direct URL Navigation,URL bar,Navigate / interact with 'Direct URL Navigation' → verify correct page loads or action taken,Pass,None,1523,2026-06-19T04:50:39.411Z
+95,Navigation: Breadcrumb Navigation - Dashboard,breadcrumb link,Navigate / interact with 'Breadcrumb Navigation - Dashboard' → verify correct page loads or action taken,Pass,None,1248,2026-06-19T04:50:40.949Z
+96,Navigation: Breadcrumb Navigation - Results,breadcrumb link,Navigate / interact with 'Breadcrumb Navigation - Results' → verify correct page loads or action taken,Pass,None,1620,2026-06-19T04:50:42.208Z
+97,Navigation: Sidebar Navigation - Home,sidebar link,Navigate / interact with 'Sidebar Navigation - Home' → verify correct page loads or action taken,Pass,None,1498,2026-06-19T04:50:43.839Z
+98,Navigation: Sidebar Navigation - Upload,sidebar link,Navigate / interact with 'Sidebar Navigation - Upload' → verify correct page loads or action taken,Pass,None,647,2026-06-19T04:50:45.357Z
+99,Navigation: Sidebar Navigation - Roadmap,sidebar link,Navigate / interact with 'Sidebar Navigation - Roadmap' → verify correct page loads or action taken,Pass,None,1010,2026-06-19T04:50:46.011Z
+100,Navigation: Sidebar Navigation - Profile,sidebar link,Navigate / interact with 'Sidebar Navigation - Profile' → verify correct page loads or action taken,Pass,None,1553,2026-06-19T04:50:47.040Z
+101,Navigation: Footer Link - About,footer link,Navigate / interact with 'Footer Link - About' → verify correct page loads or action taken,Pass,None,182,2026-06-19T04:50:48.600Z
+102,Navigation: Footer Link - Privacy Policy,footer link,Navigate / interact with 'Footer Link - Privacy Policy' → verify correct page loads or action taken,Pass,None,188,2026-06-19T04:50:48.790Z
+103,Navigation: Footer Link - Terms,footer link,Navigate / interact with 'Footer Link - Terms' → verify correct page loads or action taken,Pass,None,1022,2026-06-19T04:50:48.992Z
+104,Navigation: Logo Click - Navigate to Home,logo anchor,Navigate / interact with 'Logo Click - Navigate to Home' → verify correct page loads or action taken,Pass,None,608,2026-06-19T04:50:50.022Z
+105,Navigation: Sign Out - Logout Button,logout action,Navigate / interact with 'Sign Out - Logout Button' → verify correct page loads or action taken,Pass,None,1167,2026-06-19T04:50:50.646Z
+106,Navigation: Redirect after Logout,post-logout URL,Navigate / interact with 'Redirect after Logout' → verify correct page loads or action taken,Pass,None,1526,2026-06-19T04:50:51.831Z
+107,Navigation: Protected Route Redirect - No Auth,auth guard,Navigate / interact with 'Protected Route Redirect - No Auth' → verify correct page loads or action taken,Pass,None,1666,2026-06-19T04:50:53.371Z
+108,Navigation: Sign-Up Link from Sign-In,anchor link,Navigate / interact with 'Sign-Up Link from Sign-In' → verify correct page loads or action taken,Pass,None,1622,2026-06-19T04:50:55.056Z
+109,Navigation: Sign-In Link from Sign-Up,anchor link,Navigate / interact with 'Sign-In Link from Sign-Up' → verify correct page loads or action taken,Pass,None,595,2026-06-19T04:50:56.692Z
+110,Navigation: Google OAuth Button Click,OAuth redirect,Navigate / interact with 'Google OAuth Button Click' → verify correct page loads or action taken,Pass,None,1038,2026-06-19T04:50:57.293Z
+111,Responsive: Desktop 1920x1080,viewport 1920x1080,Resize browser to 1920x1080 — verify Sign-In page renders correctly and no overflow,Pass,None,166,2026-06-19T04:50:58.339Z
+112,Responsive: Desktop 1440x900,viewport 1440x900,Resize browser to 1440x900 — verify Sign-In page renders correctly and no overflow,Pass,None,151,2026-06-19T04:50:58.523Z
+113,Responsive: Desktop 1280x800,viewport 1280x800,Resize browser to 1280x800 — verify Sign-In page renders correctly and no overflow,Pass,None,143,2026-06-19T04:50:58.683Z
+114,Responsive: Laptop 1366x768,viewport 1366x768,Resize browser to 1366x768 — verify Sign-In page renders correctly and no overflow,Pass,None,329,2026-06-19T04:50:58.839Z
+115,Responsive: Tablet Landscape 1024x768,viewport 1024x768,Resize browser to 1024x768 — verify Sign-In page renders correctly and no overflow,Pass,None,443,2026-06-19T04:50:59.184Z
+116,Responsive: Tablet Portrait 768x1024,viewport 768x1024,Resize browser to 768x1024 — verify Sign-In page renders correctly and no overflow,Pass,None,240,2026-06-19T04:50:59.632Z
+117,Responsive: Mobile Large 425x812,viewport 425x812,Resize browser to 425x812 — verify Sign-In page renders correctly and no overflow,Pass,None,364,2026-06-19T04:50:59.891Z
+118,Responsive: Mobile Medium 375x667,viewport 375x667,Resize browser to 375x667 — verify Sign-In page renders correctly and no overflow,Pass,None,400,2026-06-19T04:51:00.269Z
+119,Responsive: Mobile Small 320x568,viewport 320x568,Resize browser to 320x568 — verify Sign-In page renders correctly and no overflow,Pass,None,301,2026-06-19T04:51:00.678Z
+120,Responsive: 4K 3840x2160,viewport 3840x2160,Resize browser to 3840x2160 — verify Sign-In page renders correctly and no overflow,Pass,None,252,2026-06-19T04:51:00.986Z
+121,Responsive: Wide 2560x1440,viewport 2560x1440,Resize browser to 2560x1440 — verify Sign-In page renders correctly and no overflow,Pass,None,372,2026-06-19T04:51:01.244Z
+122,Responsive: Ultrawide 3440x1440,viewport 3440x1440,Resize browser to 3440x1440 — verify Sign-In page renders correctly and no overflow,Pass,None,178,2026-06-19T04:51:01.631Z
+123,Responsive: Mobile Landscape 812x375,viewport 812x375,Resize browser to 812x375 — verify Sign-In page renders correctly and no overflow,Pass,None,204,2026-06-19T04:51:01.828Z
+124,Responsive: iPad Pro 1024x1366,viewport 1024x1366,Resize browser to 1024x1366 — verify Sign-In page renders correctly and no overflow,Pass,None,390,2026-06-19T04:51:02.051Z
+125,Responsive: Surface Pro 912x1368,viewport 912x1368,Resize browser to 912x1368 — verify Sign-In page renders correctly and no overflow,Pass,None,397,2026-06-19T04:51:02.450Z
+126,A11y: Tab Order - Email First,#email,Tab key starts focus on email input first,Pass,None,15,2026-06-19T04:51:02.856Z
+127,A11y: Tab Order - Password Second,#password,Tab moves focus to password input,Pass,None,18,2026-06-19T04:51:02.878Z
+128,A11y: Tab Order - Sign In Third,#login-button,Tab moves focus to Sign In button,Pass,None,54,2026-06-19T04:51:02.901Z
+129,A11y: Enter Key Submits Form,form,Pressing Enter while focused on button submits form,Pass,None,65,2026-06-19T04:51:02.966Z
+130,A11y: Email Field has aria-label,#email,Assert aria-label or aria-labelledby is set,Pass,None,76,2026-06-19T04:51:03.043Z
+131,A11y: Password Field has aria-label,#password,Assert aria-label or aria-labelledby is set,Pass,None,65,2026-06-19T04:51:03.133Z
+132,A11y: Button has role=button,#login-button,Assert button element or role='button' is correct,Pass,None,41,2026-06-19T04:51:03.203Z
+133,A11y: Error Message aria-live,.error-msg,Assert error message has aria-live='polite' or 'assertive',Pass,None,57,2026-06-19T04:51:03.258Z
+134,A11y: Color Contrast - Sign In Button,#login-button,Check button text has >= 4.5:1 contrast ratio,Pass,None,52,2026-06-19T04:51:03.331Z
+135,A11y: Color Contrast - Error Text,.text-red-500,Check error text color contrast meets WCAG AA,Pass,None,40,2026-06-19T04:51:03.393Z
+136,A11y: Image Alt Text - Logo,img.logo,Assert logo image has meaningful alt attribute,Pass,None,55,2026-06-19T04:51:03.447Z
+137,A11y: Form Has fieldset/legend,form,Check fieldset or heading groups form fields semantically,Pass,None,27,2026-06-19T04:51:03.521Z
+138,A11y: Skip Navigation Link,a.skip-nav,Check skip-to-content link for screen reader users,Pass,None,26,2026-06-19T04:51:03.563Z
+139,A11y: Page Has Single H1,h1,Assert exactly one H1 heading on sign-in page,Pass,None,80,2026-06-19T04:51:03.595Z
+140,A11y: Language Attribute on HTML,html[lang],Assert lang='en' or equivalent on <html> element,Pass,None,59,2026-06-19T04:51:03.683Z
+141,A11y: Focus Visible on All Inputs,"#email, #password, #login-button",Assert CSS focus ring visible on all interactive elements,Pass,None,50,2026-06-19T04:51:03.754Z
+142,A11y: Error Message Role Alert,.error-msg,Assert role='alert' on error message container,Pass,None,60,2026-06-19T04:51:03.816Z
+143,A11y: Password Toggle Accessible,#password-toggle,Verify show/hide password toggle has aria-label,Pass,None,19,2026-06-19T04:51:03.885Z
+144,A11y: Form Submit on Enter,#email,Pressing Enter in email field should submit (or move to password),Pass,None,58,2026-06-19T04:51:03.915Z
+145,A11y: Loading State Announced,.spinner,Assert aria-busy='true' on loading spinner,Pass,None,71,2026-06-19T04:51:03.986Z
+146,Perf: Page Load Time < 3s,window.performance.timing,Assert page fully loads in under 3000ms,Pass,None,295,2026-06-19T04:51:04.065Z
+147,Perf: First Contentful Paint < 1.5s,performance.getEntriesByType,FCP should be under 1500ms,Pass,None,63,2026-06-19T04:51:04.367Z
+148,Perf: Time to Interactive < 3.5s,window.performance,TTI should be under 3500ms,Pass,None,79,2026-06-19T04:51:04.447Z
+149,Perf: No Render Blocking Resources,document.styleSheets / scripts,Check for render-blocking CSS/JS in <head>,Pass,None,326,2026-06-19T04:51:04.538Z
+150,Perf: Images are Optimized,img tags,Assert all images use WebP or compressed format,Pass,None,323,2026-06-19T04:51:04.873Z
+151,Perf: JavaScript Bundle Size < 500KB,Network panel,Assert main JS bundle is under 500KB,Pass,None,207,2026-06-19T04:51:05.204Z
+152,Perf: CSS Size < 100KB,Network panel,Assert main CSS file is under 100KB,Pass,None,162,2026-06-19T04:51:05.421Z
+153,Perf: HTTP/2 Protocol Used,Network panel,Assert API calls use HTTP/2 protocol,Pass,None,84,2026-06-19T04:51:05.589Z
+154,Perf: Gzip Compression Enabled,Response headers Content-Encoding,Assert server responds with gzip or br encoding,Pass,None,191,2026-06-19T04:51:05.683Z
+155,Perf: Browser Cache Headers Set,Cache-Control headers,Assert static assets have cache-control headers,Pass,None,217,2026-06-19T04:51:05.893Z
+156,Perf: No Mixed Content Warnings,window.location.protocol,Assert page uses HTTPS with no HTTP sub-resources,Pass,None,307,2026-06-19T04:51:06.121Z
+157,Perf: Total HTTP Requests < 30,Network panel,Assert sign-in page makes fewer than 30 HTTP requests,Pass,None,178,2026-06-19T04:51:06.438Z
+158,Perf: DOM Nodes < 1500,document.querySelectorAll('*').length,Assert DOM has fewer than 1500 elements,Pass,None,95,2026-06-19T04:51:06.631Z
+159,Perf: No Memory Leaks - Initial,window.performance.memory,Assert JS heap size is within expected range,Pass,None,30,2026-06-19T04:51:06.737Z
+160,Perf: Service Worker Not Blocking Load,navigator.serviceWorker,Assert SW doesn't delay first paint,Pass,None,197,2026-06-19T04:51:06.781Z
+161,Browser: Chrome 124 Windows,userAgent: Chrome 124 Windows,Load sign-in page on Chrome 124 Windows — verify layout and login flow work correctly,Pass,None,2862,2026-06-19T04:51:06.996Z
+162,Browser: Chrome 124 macOS,userAgent: Chrome 124 macOS,Load sign-in page on Chrome 124 macOS — verify layout and login flow work correctly,Pass,None,4120,2026-06-19T04:51:09.878Z
+163,Browser: Firefox 125 Windows,userAgent: Firefox 125 Windows,Load sign-in page on Firefox 125 Windows — verify layout and login flow work correctly,Pass,None,1671,2026-06-19T04:51:14.005Z
+164,Browser: Firefox 125 macOS,userAgent: Firefox 125 macOS,Load sign-in page on Firefox 125 macOS — verify layout and login flow work correctly,Pass,None,2995,2026-06-19T04:51:15.695Z
+165,Browser: Edge 124 Windows,userAgent: Edge 124 Windows,Load sign-in page on Edge 124 Windows — verify layout and login flow work correctly,Pass,None,2422,2026-06-19T04:51:18.708Z
+166,Browser: Safari 17 macOS (simulated),userAgent: Safari 17 macOS (simulated),Load sign-in page on Safari 17 macOS (simulated) — verify layout and login flow work correctly,Pass,None,2368,2026-06-19T04:51:21.149Z
+167,Browser: Chrome Mobile Android,userAgent: Chrome Mobile Android,Load sign-in page on Chrome Mobile Android — verify layout and login flow work correctly,Pass,None,3177,2026-06-19T04:51:23.530Z
+168,Browser: Safari Mobile iOS (simulated),userAgent: Safari Mobile iOS (simulated),Load sign-in page on Safari Mobile iOS (simulated) — verify layout and login flow work correctly,Pass,None,2355,2026-06-19T04:51:26.719Z
+169,Browser: Chrome 120 (older version),userAgent: Chrome 120 (older version),Load sign-in page on Chrome 120 (older version) — verify layout and login flow work correctly,Pass,None,3137,2026-06-19T04:51:29.086Z
+170,Browser: Firefox 119 (older version),userAgent: Firefox 119 (older version),Load sign-in page on Firefox 119 (older version) — verify layout and login flow work correctly,Pass,None,2298,2026-06-19T04:51:32.230Z
+171,Browser: Edge 123 (older version),userAgent: Edge 123 (older version),Load sign-in page on Edge 123 (older version) — verify layout and login flow work correctly,Pass,None,1699,2026-06-19T04:51:34.547Z
+172,Browser: Chrome Incognito Mode,userAgent: Chrome Incognito Mode,Load sign-in page on Chrome Incognito Mode — verify layout and login flow work correctly,Pass,None,1695,2026-06-19T04:51:36.251Z
+173,Browser: Firefox Private Mode,userAgent: Firefox Private Mode,Load sign-in page on Firefox Private Mode — verify layout and login flow work correctly,Pass,None,3834,2026-06-19T04:51:37.962Z
+174,Browser: Edge InPrivate Mode,userAgent: Edge InPrivate Mode,Load sign-in page on Edge InPrivate Mode — verify layout and login flow work correctly,Pass,None,3229,2026-06-19T04:51:41.813Z
+175,Browser: Chrome with Extensions Disabled,userAgent: Chrome with Extensions Disabled,Load sign-in page on Chrome with Extensions Disabled — verify layout and login flow work correctly,Pass,None,1683,2026-06-19T04:51:45.057Z
+176,[Admin User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Admin User test,Pass,None,1462,2026-06-19T04:51:46.759Z
+177,[Admin User] Enter Email,#email,Type email: admin@skillsync.ai,Pass,None,114,2026-06-19T04:51:48.229Z
+178,[Admin User] Enter Password,#password,Type password for Admin User,Pass,None,187,2026-06-19T04:51:48.351Z
+179,[Admin User] Submit Login,#login-button,Click Sign In as Admin User,Pass,None,158,2026-06-19T04:51:48.552Z
+180,[Admin User] Verify Login Response,URL / localStorage,Assert Admin User gets correct response (redirect or error),Pass,None,14499,2026-06-19T04:51:48.725Z
+181,[Developer User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Developer User test,Pass,None,1390,2026-06-19T04:52:03.236Z
+182,[Developer User] Enter Email,#email,Type email: dev01@skillsync.ai,Pass,None,134,2026-06-19T04:52:04.635Z
+183,[Developer User] Enter Password,#password,Type password for Developer User,Pass,None,121,2026-06-19T04:52:04.781Z
+184,[Developer User] Submit Login,#login-button,Click Sign In as Developer User,Pass,None,142,2026-06-19T04:52:04.920Z
+185,[Developer User] Verify Login Response,URL / localStorage,Assert Developer User gets correct response (redirect or error),Pass,None,14427,2026-06-19T04:52:05.072Z
+186,[Guest User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Guest User test,Pass,None,1477,2026-06-19T04:52:19.507Z
+187,[Guest User] Enter Email,#email,Type email: guest99@skillsync.ai,Pass,None,200,2026-06-19T04:52:20.997Z
+188,[Guest User] Enter Password,#password,Type password for Guest User,Pass,None,124,2026-06-19T04:52:21.204Z
+189,[Guest User] Submit Login,#login-button,Click Sign In as Guest User,Pass,None,110,2026-06-19T04:52:21.337Z
+190,[Guest User] Verify Login Response,URL / localStorage,Assert Guest User gets correct response (redirect or error),Pass,None,9755,2026-06-19T04:52:21.466Z
+191,[New Registered User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for New Registered User test,Pass,None,1621,2026-06-19T04:52:31.236Z
+192,[New Registered User] Enter Email,#email,Type email: newuser2026@test.com,Pass,None,120,2026-06-19T04:52:32.862Z
+193,[New Registered User] Enter Password,#password,Type password for New Registered User,Pass,None,83,2026-06-19T04:52:32.997Z
+194,[New Registered User] Submit Login,#login-button,Click Sign In as New Registered User,Pass,None,186,2026-06-19T04:52:33.096Z
+195,[New Registered User] Verify Login Response,URL / localStorage,Assert New Registered User gets correct response (redirect or error),Pass,None,4824,2026-06-19T04:52:33.287Z
+196,[Returning User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Returning User test,Pass,None,1047,2026-06-19T04:52:38.128Z
+197,[Returning User] Enter Email,#email,Type email: returning@skillsync.ai,Pass,None,192,2026-06-19T04:52:39.185Z
+198,[Returning User] Enter Password,#password,Type password for Returning User,Pass,None,104,2026-06-19T04:52:39.392Z
+199,[Returning User] Submit Login,#login-button,Click Sign In as Returning User,Pass,None,188,2026-06-19T04:52:39.502Z
+200,[Returning User] Verify Login Response,URL / localStorage,Assert Returning User gets correct response (redirect or error),Pass,None,13641,2026-06-19T04:52:39.705Z
+201,[Premium User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Premium User test,Pass,None,1901,2026-06-19T04:52:53.351Z
+202,[Premium User] Enter Email,#email,Type email: premium@skillsync.ai,Pass,None,135,2026-06-19T04:52:55.259Z
+203,[Premium User] Enter Password,#password,Type password for Premium User,Pass,None,102,2026-06-19T04:52:55.411Z
+204,[Premium User] Submit Login,#login-button,Click Sign In as Premium User,Pass,None,161,2026-06-19T04:52:55.529Z
+205,[Premium User] Verify Login Response,URL / localStorage,Assert Premium User gets correct response (redirect or error),Pass,None,6024,2026-06-19T04:52:55.709Z
+206,[Free Tier User] Navigate to Sign-In Page,https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html,Open sign-in page for Free Tier User test,Pass,None,1161,2026-06-19T04:53:01.751Z
+207,[Free Tier User] Enter Email,#email,Type email: free@skillsync.ai,Pass,None,148,2026-06-19T04:53:02.920Z
+208,[Free Tier User] Enter Password,#password,Type password for Free Tier User,Pass,None,118,2026-06-19T04:53:03.085Z
+209,[Free Tier User] Submit Login,#login-button,Click Sign In as Free Tier User,Pass,None,145,2026-06-19T04:53:03.218Z
+210,[Free Tier User] Verify Login Response,URL / localStorage,Assert Free Tier User gets correct response (redirect or error),Pass,None,15249,2026-06-19T04:53:03.380Z
+211,Session: Session Persists After Refresh,sessionStorage / localStorage,Reload page and verify auth token still present,Pass,None,297,2026-06-19T04:53:18.645Z
+212,Session: Session Cleared on Logout,localStorage / cookies,Logout and verify all auth data removed from storage,Pass,None,1012,2026-06-19T04:53:18.953Z
+213,Session: Cookie HttpOnly Flag Set,Set-Cookie response header,Assert auth cookie has HttpOnly flag,Pass,None,1101,2026-06-19T04:53:19.983Z
+214,Session: Cookie Secure Flag Set,Set-Cookie response header,Assert auth cookie has Secure flag (HTTPS only),Pass,None,260,2026-06-19T04:53:21.101Z
+215,Session: Cookie SameSite=Strict/Lax,Set-Cookie response header,Assert SameSite attribute is set to prevent CSRF,Pass,None,1699,2026-06-19T04:53:21.374Z
+216,Session: Session Expiry Enforcement,token exp claim,Wait for token to expire and verify auto-logout,Pass,None,477,2026-06-19T04:53:23.091Z
+217,Session: Multiple Tabs - Single Session,window / BroadcastChannel,"Login in Tab1, verify Tab2 reflects authenticated state",Pass,None,733,2026-06-19T04:53:23.580Z
+218,Session: Concurrent Login Prevention,localStorage,Login from two sessions — verify old session invalidated,Pass,None,1661,2026-06-19T04:53:24.328Z
+219,Session: Token Refresh on Expiry,XHR /refresh-token,Assert app silently refreshes token before expiry,Pass,None,552,2026-06-19T04:53:25.994Z
+220,Session: Local Storage Not Exposed to XSS,Content-Security-Policy,Assert CSP header prevents inline script access to storage,Pass,None,1409,2026-06-19T04:53:26.562Z
+221,Session: Session Cleared on Browser Close,sessionStorage,Close and reopen browser — verify session not persisted,Pass,None,1231,2026-06-19T04:53:27.977Z
+222,Session: Remember Me Checkbox Functionality,#remember-me,"With Remember Me checked, verify longer session duration",Pass,None,1913,2026-06-19T04:53:29.228Z
+223,Session: Logout From All Devices Option,#logout-all,Assert logout-all-devices feature available in profile,Pass,None,1720,2026-06-19T04:53:31.161Z
+224,Session: PKCE Flow for OAuth,Authorization URL,Verify PKCE code_challenge included in OAuth redirect,Pass,None,363,2026-06-19T04:53:32.887Z
+225,Session: OAuth State Parameter Validated,state param,Assert OAuth state parameter prevents CSRF on OAuth flow,Pass,None,244,2026-06-19T04:53:33.260Z
+226,Clear All Cookies,browser.manage().deleteAllCookies(),Clear cookies at end of all test suites,Pass,None,18,2026-06-19T04:53:33.510Z
+227,Clear Local/Session Storage,driver.executeScript('localStorage.clear()'),Clear browser storage after test run,Pass,None,12,2026-06-19T04:53:33.540Z
+228,Browser Teardown,Chrome Driver,Quit browser and release WebDriver resources,Pass,None,1770,2026-06-19T04:53:33.572Z
