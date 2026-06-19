@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "build:static": "npm run build && node fix-next-export.js",
+    "deploy": "powershell -ExecutionPolicy Bypass -File ./deploy.ps1"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",

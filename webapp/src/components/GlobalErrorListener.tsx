@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 export default function GlobalErrorListener() {
   useEffect(() => {
+
     const handleError = (event: ErrorEvent) => {
       alert(`Runtime Error: ${event.message}\nAt: ${event.filename}:${event.lineno}\nStack: ${event.error?.stack || "No stack"}`);
     };

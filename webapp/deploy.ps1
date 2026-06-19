@@ -1,6 +1,6 @@
-# Build the Next.js application
+# Build the Next.js application and run path flattener
 Write-Host "Building Next.js application..."
-npm run build
+npm run build:static
 
 if ($LastExitCode -eq 0) {
     Write-Host "Build succeeded. Deploying to GitHub Pages..."
@@ -19,7 +19,10 @@ if ($LastExitCode -eq 0) {
     # Switch directory and initialize Git
     Push-Location $TempDeployDir
     git init | Out-Null
-    git remote add origin https://github.com/YLakshmiReddy/SKILLSYNCAI_PDD_SPIC7A26.git
+    
+    # Retrieve dynamic remote URL (including authentication tokens) from main repo
+    $RemoteUrl = git -C $PSScriptRoot remote get-url origin
+    git remote add origin $RemoteUrl
     git checkout -b gh-pages | Out-Null
     
     # Configure local git user if not present (to ensure commit succeeds in non-interactive environment)
