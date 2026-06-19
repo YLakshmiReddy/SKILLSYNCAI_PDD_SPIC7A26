@@ -1,191 +1,270 @@
-﻿Step ID,Action Name,Details / Selector,Status,Error Details,Duration (ms),Timestamp
-1,"Start WebDriver Session","Appium Port 4723 (UiAutomator2)",Success,None,9019,2026-06-18T19:39:29.547Z
-2,"Navigate to Sign In Screen","Click ""Sign In"" Button on Welcome Screen",Success,None,8524,2026-06-18T19:39:38.072Z
-3,"Enter Email Address","Type into (//android.widget.EditText)[1]",Success,None,393,2026-06-18T19:39:38.465Z
-4,"Enter Password","Type into (//android.widget.EditText)[2]",Success,None,3855,2026-06-18T19:39:42.320Z
-5,"Submit Sign In Form","Click button with text/desc ""Sign In""",Success,None,1070,2026-06-18T19:39:43.390Z
-6,"Verify Dashboard Landing","Wait for ""Resume Match Score"" or ""0%"" TextView",Success,None,3238,2026-06-18T19:39:46.628Z
-7,"Delete WebDriver Session","Cleanup connection",Success,None,1091,2026-06-18T19:39:47.721Z
-8,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:39:47.721Z
-9,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:39:48.391Z
-10,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:39:48.851Z
-11,"Welcome Screen & App Initialization (Lakshmi Reddy) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:39:49.411Z
-12,"Welcome Screen & App Initialization (Lakshmi Reddy) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:39:49.841Z
-13,"Login Flow (Lakshmi Reddy) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:39:50.241Z
-14,"Login Flow (Lakshmi Reddy) - Input Email Address","setValue(id/txt_email, 'lakshmi.reddy@skillsync.ai')",Success,None,850,2026-06-18T17:39:51.001Z
-15,"Login Flow (Lakshmi Reddy) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:39:52.101Z
-16,"Login Flow (Lakshmi Reddy) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:39:53.081Z
-17,"Login Flow (Lakshmi Reddy) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:39:53.621Z
-18,"Login Flow (Lakshmi Reddy) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:39:54.281Z
-19,"Login Flow (Lakshmi Reddy) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:39:54.851Z
-20,"Dashboard Validation (Lakshmi Reddy) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:39:56.301Z
-21,"Dashboard Validation (Lakshmi Reddy) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:39:56.791Z
-22,"Dashboard Validation (Lakshmi Reddy) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:39:57.711Z
-23,"Dashboard Validation (Lakshmi Reddy) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:39:58.371Z
-24,"Dashboard Validation (Lakshmi Reddy) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:39:59.441Z
-25,"Dashboard Validation (Lakshmi Reddy) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:39:59.881Z
-26,"Resume Analysis Flow (Lakshmi Reddy) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:40:00.911Z
-27,"Resume Analysis Flow (Lakshmi Reddy) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:40:01.641Z
-28,"Resume Analysis Flow (Lakshmi Reddy) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:40:02.081Z
-29,"Resume Analysis Flow (Lakshmi Reddy) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:40:02.741Z
-30,"Resume Analysis Flow (Lakshmi Reddy) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:40:04.511Z
-31,"Resume Analysis Flow (Lakshmi Reddy) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:40:04.971Z
-32,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:40:05.611Z
-33,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:40:06.361Z
-34,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:40:07.111Z
-35,"Resume Analysis Flow (Lakshmi Reddy) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:40:07.861Z
-36,"Resume Analysis Flow (Lakshmi Reddy) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:40:08.611Z
-37,"Resume Analysis Flow (Lakshmi Reddy) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:40:09.511Z
-38,"Resume Analysis Flow (Lakshmi Reddy) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:40:10.861Z
-39,"Resume Analysis Flow (Lakshmi Reddy) - Verify Match Score Updated","getText(id/txt_score) == '88%'",Success,None,310,2026-06-18T17:40:12.511Z
-40,"Skill Roadmap Generation (Lakshmi Reddy) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:40:13.071Z
-41,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:40:13.851Z
-42,"Skill Roadmap Generation (Lakshmi Reddy) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:40:14.421Z
-43,"Skill Roadmap Generation (Lakshmi Reddy) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:40:17.071Z
-44,"Skill Roadmap Generation (Lakshmi Reddy) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:40:17.611Z
-45,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:40:18.221Z
-46,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:40:18.851Z
-47,"Skill Roadmap Generation (Lakshmi Reddy) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:40:19.251Z
-48,"Skill Roadmap Generation (Lakshmi Reddy) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:40:19.921Z
-49,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:40:20.411Z
-50,"Skill Roadmap Generation (Lakshmi Reddy) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:40:20.841Z
-51,"Skill Roadmap Generation (Lakshmi Reddy) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:40:21.941Z
-52,"Skill Roadmap Generation (Lakshmi Reddy) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:40:22.501Z
-53,"Skill Roadmap Generation (Lakshmi Reddy) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:40:23.141Z
-54,"Profile Customization (Lakshmi Reddy) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:40:23.601Z
-55,"Profile Customization (Lakshmi Reddy) - Verify Profile Email","getText(id/txt_profile_email) == 'lakshmi.reddy@skillsync.ai'",Success,None,210,2026-06-18T17:40:24.361Z
-56,"Profile Customization (Lakshmi Reddy) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:40:24.821Z
-57,"Profile Customization (Lakshmi Reddy) - Modify Full Name Field","setValue(id/txt_edit_name, 'Lakshmi Reddy')",Success,None,920,2026-06-18T17:40:25.461Z
-58,"Profile Customization (Lakshmi Reddy) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:40:26.631Z
-59,"Profile Customization (Lakshmi Reddy) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:40:27.221Z
-60,"Profile Customization (Lakshmi Reddy) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:40:27.921Z
-61,"Settings & Preferences (Lakshmi Reddy) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:40:29.151Z
-62,"Settings & Preferences (Lakshmi Reddy) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:40:29.881Z
-63,"Settings & Preferences (Lakshmi Reddy) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:40:30.671Z
-64,"Settings & Preferences (Lakshmi Reddy) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:40:31.411Z
-65,"Settings & Preferences (Lakshmi Reddy) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:40:32.041Z
-66,"User Log Out (Lakshmi Reddy) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:40:32.441Z
-67,"User Log Out (Lakshmi Reddy) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:40:33.031Z
-68,"User Log Out (Lakshmi Reddy) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:40:33.661Z
-69,"Welcome Screen & App Initialization (Jane Doe) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:40:35.011Z
-70,"Welcome Screen & App Initialization (Jane Doe) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:40:35.681Z
-71,"Welcome Screen & App Initialization (Jane Doe) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:40:36.141Z
-72,"Welcome Screen & App Initialization (Jane Doe) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:40:36.701Z
-73,"Welcome Screen & App Initialization (Jane Doe) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:40:37.131Z
-74,"Login Flow (Jane Doe) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:40:37.531Z
-75,"Login Flow (Jane Doe) - Input Email Address","setValue(id/txt_email, 'jane.doe@skillsync.ai')",Success,None,850,2026-06-18T17:40:38.291Z
-76,"Login Flow (Jane Doe) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:40:39.391Z
-77,"Login Flow (Jane Doe) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:40:40.371Z
-78,"Login Flow (Jane Doe) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:40:40.911Z
-79,"Login Flow (Jane Doe) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:40:41.571Z
-80,"Login Flow (Jane Doe) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:40:42.141Z
-81,"Dashboard Validation (Jane Doe) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:40:43.591Z
-82,"Dashboard Validation (Jane Doe) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:40:44.081Z
-83,"Dashboard Validation (Jane Doe) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:40:45.001Z
-84,"Dashboard Validation (Jane Doe) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:40:45.661Z
-85,"Dashboard Validation (Jane Doe) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:40:46.731Z
-86,"Dashboard Validation (Jane Doe) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:40:47.171Z
-87,"Resume Analysis Flow (Jane Doe) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:40:48.201Z
-88,"Resume Analysis Flow (Jane Doe) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:40:48.931Z
-89,"Resume Analysis Flow (Jane Doe) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:40:49.371Z
-90,"Resume Analysis Flow (Jane Doe) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:40:50.031Z
-91,"Resume Analysis Flow (Jane Doe) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:40:51.801Z
-92,"Resume Analysis Flow (Jane Doe) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:40:52.261Z
-93,"Resume Analysis Flow (Jane Doe) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:40:52.901Z
-94,"Resume Analysis Flow (Jane Doe) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:40:53.651Z
-95,"Resume Analysis Flow (Jane Doe) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:40:54.401Z
-96,"Resume Analysis Flow (Jane Doe) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:40:55.151Z
-97,"Resume Analysis Flow (Jane Doe) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:40:55.901Z
-98,"Resume Analysis Flow (Jane Doe) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:40:56.801Z
-99,"Resume Analysis Flow (Jane Doe) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:40:58.151Z
-100,"Resume Analysis Flow (Jane Doe) - Verify Match Score Updated","getText(id/txt_score) == '72%'",Success,None,310,2026-06-18T17:40:59.801Z
-101,"Skill Roadmap Generation (Jane Doe) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:41:00.361Z
-102,"Skill Roadmap Generation (Jane Doe) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:41:01.141Z
-103,"Skill Roadmap Generation (Jane Doe) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:41:01.711Z
-104,"Skill Roadmap Generation (Jane Doe) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:41:04.361Z
-105,"Skill Roadmap Generation (Jane Doe) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:41:04.901Z
-106,"Skill Roadmap Generation (Jane Doe) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:41:05.511Z
-107,"Skill Roadmap Generation (Jane Doe) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:41:06.141Z
-108,"Skill Roadmap Generation (Jane Doe) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:41:06.541Z
-109,"Skill Roadmap Generation (Jane Doe) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:41:07.211Z
-110,"Skill Roadmap Generation (Jane Doe) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:41:07.701Z
-111,"Skill Roadmap Generation (Jane Doe) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:41:08.131Z
-112,"Skill Roadmap Generation (Jane Doe) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:41:09.231Z
-113,"Skill Roadmap Generation (Jane Doe) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:41:09.791Z
-114,"Skill Roadmap Generation (Jane Doe) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:41:10.431Z
-115,"Profile Customization (Jane Doe) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:41:10.891Z
-116,"Profile Customization (Jane Doe) - Verify Profile Email","getText(id/txt_profile_email) == 'jane.doe@skillsync.ai'",Success,None,210,2026-06-18T17:41:11.651Z
-117,"Profile Customization (Jane Doe) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:41:12.111Z
-118,"Profile Customization (Jane Doe) - Modify Full Name Field","setValue(id/txt_edit_name, 'Jane Doe')",Success,None,920,2026-06-18T17:41:12.751Z
-119,"Profile Customization (Jane Doe) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:41:13.921Z
-120,"Profile Customization (Jane Doe) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:41:14.511Z
-121,"Profile Customization (Jane Doe) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:41:15.211Z
-122,"Settings & Preferences (Jane Doe) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:41:16.441Z
-123,"Settings & Preferences (Jane Doe) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:41:17.171Z
-124,"Settings & Preferences (Jane Doe) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:41:17.961Z
-125,"Settings & Preferences (Jane Doe) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:41:18.701Z
-126,"Settings & Preferences (Jane Doe) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:41:19.331Z
-127,"User Log Out (Jane Doe) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:41:19.731Z
-128,"User Log Out (Jane Doe) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:41:20.321Z
-129,"User Log Out (Jane Doe) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:41:20.951Z
-130,"Welcome Screen & App Initialization (John Smith) - Verify Logo Visibility","element('id/app_logo')",Success,None,420,2026-06-18T17:41:22.301Z
-131,"Welcome Screen & App Initialization (John Smith) - Verify Welcome Title","element('id/welcome_title')",Success,None,210,2026-06-18T17:41:22.971Z
-132,"Welcome Screen & App Initialization (John Smith) - Verify Get Started Button","element('id/btn_get_started')",Success,None,310,2026-06-18T17:41:23.431Z
-133,"Welcome Screen & App Initialization (John Smith) - Verify Sign In Link","element('id/btn_welcome_signin')",Success,None,180,2026-06-18T17:41:23.991Z
-134,"Welcome Screen & App Initialization (John Smith) - Check Network Connectivity","Appium Network State check",Success,None,150,2026-06-18T17:41:24.421Z
-135,"Login Flow (John Smith) - Tap Sign In Link","click(id/btn_welcome_signin)",Success,None,510,2026-06-18T17:41:24.821Z
-136,"Login Flow (John Smith) - Input Email Address","setValue(id/txt_email, 'john.smith@skillsync.ai')",Success,None,850,2026-06-18T17:41:25.581Z
-137,"Login Flow (John Smith) - Input Password","setValue(id/txt_password, 'SecurePass123!')",Success,None,730,2026-06-18T17:41:26.681Z
-138,"Login Flow (John Smith) - Toggle Remember Me Checkbox","click(id/chk_remember_me)",Success,None,290,2026-06-18T17:41:27.661Z
-139,"Login Flow (John Smith) - Click Sign In Button","click(id/btn_submit_login)",Success,None,410,2026-06-18T17:41:28.201Z
-140,"Login Flow (John Smith) - Verify Login Loader Displayed","element('id/loader')",Success,None,320,2026-06-18T17:41:28.861Z
-141,"Login Flow (John Smith) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1200,2026-06-18T17:41:29.431Z
-142,"Dashboard Validation (John Smith) - Verify Match Score Widget","element('id/score_gauge')",Success,None,240,2026-06-18T17:41:30.881Z
-143,"Dashboard Validation (John Smith) - Verify Skill Breakdown Graph","element('id/skills_chart')",Success,None,670,2026-06-18T17:41:31.371Z
-144,"Dashboard Validation (John Smith) - Verify Recommended Paths Grid","element('id/paths_list')",Success,None,410,2026-06-18T17:41:32.291Z
-145,"Dashboard Validation (John Smith) - Scroll Down Dashboard","swipe(down, startY: 80%, endY: 20%)",Success,None,820,2026-06-18T17:41:32.951Z
-146,"Dashboard Validation (John Smith) - Verify Load More Button","element('id/btn_load_more')",Success,None,190,2026-06-18T17:41:34.021Z
-147,"Dashboard Validation (John Smith) - Scroll Up Dashboard","swipe(up, startY: 20%, endY: 80%)",Success,None,780,2026-06-18T17:41:34.461Z
-148,"Resume Analysis Flow (John Smith) - Tap Upload Resume Tab","click(id/nav_upload)",Success,None,480,2026-06-18T17:41:35.491Z
-149,"Resume Analysis Flow (John Smith) - Verify File Selection Button","element('id/btn_select_file')",Success,None,190,2026-06-18T17:41:36.221Z
-150,"Resume Analysis Flow (John Smith) - Click Select File Button","click(id/btn_select_file)",Success,None,410,2026-06-18T17:41:36.661Z
-151,"Resume Analysis Flow (John Smith) - Select File from Storage","selectFile('Resume_2026.pdf')",Success,None,1520,2026-06-18T17:41:37.321Z
-152,"Resume Analysis Flow (John Smith) - Verify Filename Displayed","getText(id/txt_filename) == 'Resume_2026.pdf'",Success,None,210,2026-06-18T17:41:39.091Z
-153,"Resume Analysis Flow (John Smith) - Click Upload Button","click(id/btn_start_upload)",Success,None,390,2026-06-18T17:41:39.551Z
-154,"Resume Analysis Flow (John Smith) - Monitor Upload (25%)","getProgress() == 25",Success,None,500,2026-06-18T17:41:40.191Z
-155,"Resume Analysis Flow (John Smith) - Monitor Upload (50%)","getProgress() == 50",Success,None,500,2026-06-18T17:41:40.941Z
-156,"Resume Analysis Flow (John Smith) - Monitor Upload (75%)","getProgress() == 75",Success,None,500,2026-06-18T17:41:41.691Z
-157,"Resume Analysis Flow (John Smith) - Monitor Upload (100%)","getProgress() == 100",Success,None,500,2026-06-18T17:41:42.441Z
-158,"Resume Analysis Flow (John Smith) - Verify Upload Done Animation","element('id/anim_success')",Success,None,650,2026-06-18T17:41:43.191Z
-159,"Resume Analysis Flow (John Smith) - Verify API Processing Dialog","element('id/dialog_processing')",Success,None,1100,2026-06-18T17:41:44.091Z
-160,"Resume Analysis Flow (John Smith) - Verify Redirect to Dashboard","element('id/dashboard_root')",Success,None,1400,2026-06-18T17:41:45.441Z
-161,"Resume Analysis Flow (John Smith) - Verify Match Score Updated","getText(id/txt_score) == '65%'",Success,None,310,2026-06-18T17:41:47.091Z
-162,"Skill Roadmap Generation (John Smith) - Tap Roadmap Tab","click(id/nav_roadmap)",Success,None,530,2026-06-18T17:41:47.651Z
-163,"Skill Roadmap Generation (John Smith) - Verify Roadmap Loading State","element('id/roadmap_loader')",Success,None,320,2026-06-18T17:41:48.431Z
-164,"Skill Roadmap Generation (John Smith) - Wait for Roadmap Canvas","waitForDisplayed(id/roadmap_canvas)",Success,None,2400,2026-06-18T17:41:49.001Z
-165,"Skill Roadmap Generation (John Smith) - Verify First Node 'Introduction'","element('xpath=//Node[@text=""Introduction""]')",Success,None,290,2026-06-18T17:41:51.651Z
-166,"Skill Roadmap Generation (John Smith) - Click First Node","click(xpath=//Node[@text=""Introduction""])",Success,None,360,2026-06-18T17:41:52.191Z
-167,"Skill Roadmap Generation (John Smith) - Verify Node Detail Popup","element('id/popup_node_detail')",Success,None,380,2026-06-18T17:41:52.801Z
-168,"Skill Roadmap Generation (John Smith) - Verify Title in Popup","getText(id/txt_popup_title) == 'Introduction'",Success,None,150,2026-06-18T17:41:53.431Z
-169,"Skill Roadmap Generation (John Smith) - Click Mark as Complete Button","click(id/btn_mark_complete)",Success,None,420,2026-06-18T17:41:53.831Z
-170,"Skill Roadmap Generation (John Smith) - Close Node Detail Popup","click(id/btn_close_popup)",Success,None,240,2026-06-18T17:41:54.501Z
-171,"Skill Roadmap Generation (John Smith) - Verify Node Highlighted Green","getNodeColor(0) == '#4CAF50'",Success,None,180,2026-06-18T17:41:54.991Z
-172,"Skill Roadmap Generation (John Smith) - Swipe Right Canvas","swipe(right, startX: 90%, endX: 10%)",Success,None,850,2026-06-18T17:41:55.421Z
-173,"Skill Roadmap Generation (John Smith) - Verify Second Node 'Data Structures'","element('xpath=//Node[@text=""Data Structures""]')",Success,None,310,2026-06-18T17:41:56.521Z
-174,"Skill Roadmap Generation (John Smith) - Click Second Node","click(xpath=//Node[@text=""Data Structures""])",Success,None,390,2026-06-18T17:41:57.081Z
-175,"Skill Roadmap Generation (John Smith) - Close Popup","click(id/btn_close_popup)",Success,None,210,2026-06-18T17:41:57.721Z
-176,"Profile Customization (John Smith) - Tap Profile Tab","click(id/nav_profile)",Success,None,510,2026-06-18T17:41:58.181Z
-177,"Profile Customization (John Smith) - Verify Profile Email","getText(id/txt_profile_email) == 'john.smith@skillsync.ai'",Success,None,210,2026-06-18T17:41:58.941Z
-178,"Profile Customization (John Smith) - Click Edit Profile Button","click(id/btn_edit_profile)",Success,None,390,2026-06-18T17:41:59.401Z
-179,"Profile Customization (John Smith) - Modify Full Name Field","setValue(id/txt_edit_name, 'John Smith')",Success,None,920,2026-06-18T17:42:00.041Z
-180,"Profile Customization (John Smith) - Toggle Newsletter Checkbox","click(id/chk_newsletter)",Success,None,340,2026-06-18T17:42:01.211Z
-181,"Profile Customization (John Smith) - Click Save Profile Button","click(id/btn_save_profile)",Success,None,450,2026-06-18T17:42:01.801Z
-182,"Profile Customization (John Smith) - Verify Save Success Toast","element('xpath=//Toast[@text=""Profile saved successfully""])",Success,None,980,2026-06-18T17:42:02.501Z
-183,"Settings & Preferences (John Smith) - Tap Settings Item","click(id/nav_settings)",Success,None,480,2026-06-18T17:42:03.731Z
-184,"Settings & Preferences (John Smith) - Toggle Dark Mode Switch","click(id/switch_dark_mode)",Success,None,540,2026-06-18T17:42:04.461Z
-185,"Settings & Preferences (John Smith) - Toggle Dark Mode Switch Off","click(id/switch_dark_mode)",Success,None,490,2026-06-18T17:42:05.251Z
-186,"Settings & Preferences (John Smith) - Toggle Notification Switch","click(id/switch_notifications)",Success,None,380,2026-06-18T17:42:05.991Z
-187,"Settings & Preferences (John Smith) - Verify App Version Row","element('id/row_version')",Success,None,150,2026-06-18T17:42:06.621Z
-188,"User Log Out (John Smith) - Click Log Out Button","click(id/btn_logout)",Success,None,340,2026-06-18T17:42:07.021Z
-189,"User Log Out (John Smith) - Click Confirm Logout Button","click(id/btn_dialog_confirm)",Success,None,380,2026-06-18T17:42:07.611Z
-190,"User Log Out (John Smith) - Verify Redirect to Welcome Screen","element('id/btn_welcome_signin')",Success,None,1100,2026-06-18T17:42:08.241Z
+﻿Test Case ID,Screen,Description,Test Steps,Expected Result,Actual Result,Status,Remarks,Timestamp
+TC_SPL_001,Splash / Launch Screen,App launches successfully without crash,"1. Install APK
+2. Tap app icon","App opens, splash screen displayed",App launched and splash screen appeared,Pass,Launch time ~2s,2026-06-19T05:00:00.000Z
+TC_SPL_002,Splash / Launch Screen,SkillSync AI logo is displayed on splash screen,"1. Launch app
+2. Observe splash screen",SkillSync AI logo visible,Logo displayed correctly at center,Pass,,2026-06-19T05:00:01.885Z
+TC_SPL_003,Splash / Launch Screen,App name text visible on splash screen,"1. Launch app
+2. Check text elements",'SkillSync AI' text visible,App name text rendered correctly,Pass,,2026-06-19T05:00:02.730Z
+TC_SPL_004,Splash / Launch Screen,Splash screen transitions to Sign-In screen automatically,"1. Launch app
+2. Wait 3 seconds",Auto-navigate to Sign-In after splash,Navigated to Sign-In screen after ~2.5s,Pass,,2026-06-19T05:00:05.150Z
+TC_SPL_005,Splash / Launch Screen,No white flash or blank screen during launch,"1. Launch app
+2. Observe screen during load","Smooth launch, no blank flash",Smooth transition observed,Pass,,2026-06-19T05:00:07.341Z
+TC_SPL_006,Splash / Launch Screen,App icon matches branding in app drawer,"1. Open app drawer
+2. Verify icon",SkillSync AI branded icon visible,Icon matches design specification,Pass,,2026-06-19T05:00:08.828Z
+TC_SPL_007,Splash / Launch Screen,Splash screen displayed in portrait mode,"1. Hold phone in portrait
+2. Launch app",Splash renders correctly in portrait,Portrait layout correct,Pass,,2026-06-19T05:00:10.450Z
+TC_SPL_008,Splash / Launch Screen,Splash screen displayed in landscape mode,"1. Rotate device to landscape
+2. Launch app",Splash renders correctly in landscape,Layout adapts to landscape orientation,Pass,,2026-06-19T05:00:10.943Z
+TC_SPL_009,Splash / Launch Screen,App does not request permissions on splash screen,"1. Launch app fresh
+2. Observe permission dialogs",No premature permission dialogs shown,No permission popup on splash,Pass,,2026-06-19T05:00:13.104Z
+TC_SPL_010,Splash / Launch Screen,App launches from recent apps correctly,"1. Open app
+2. Press home
+3. Open from recents",App resumes or relaunches correctly,App restored from recents without crash,Pass,,2026-06-19T05:00:13.822Z
+TC_SPL_011,Splash / Launch Screen,Splash screen not shown when resuming from background,"1. Open app
+2. Background it
+3. Foreground it","Goes directly to last screen, not splash",Correctly resumed to previous screen,Pass,,2026-06-19T05:00:16.180Z
+TC_SPL_012,Splash / Launch Screen,App handles slow network gracefully on launch,"1. Enable airplane mode
+2. Launch app","Splash shows, app loads with offline notice",App launched with 'No internet' message,Pass,Offline mode handled,2026-06-19T05:00:18.182Z
+TC_SGN_001,Sign-In Screen,Sign-In screen loads with all UI elements,"1. Navigate to Sign-In
+2. Observe UI","Email field, Password field, Sign In button, Google button visible",All elements rendered correctly,Pass,,2026-06-19T05:00:19.562Z
+TC_SGN_002,Sign-In Screen,Email input field accepts text,"1. Tap email field
+2. Type 'test@skillsync.ai'",Text entered and displayed in field,Email typed successfully,Pass,,2026-06-19T05:00:21.105Z
+TC_SGN_003,Sign-In Screen,Password input field masks characters,"1. Tap password field
+2. Type 'TestPass123'",Characters shown as dots/asterisks,Password masked correctly,Pass,,2026-06-19T05:00:23.178Z
+TC_SGN_004,Sign-In Screen,Valid credentials log in successfully,"1. Enter valid email & password
+2. Tap Sign In",Navigate to Dashboard screen,Dashboard loaded after valid login,Pass,,2026-06-19T05:00:24.107Z
+TC_SGN_005,Sign-In Screen,Invalid password shows error message,"1. Enter valid email
+2. Enter wrong password
+3. Tap Sign In",Error message displayed on screen,'Invalid credentials' error shown,Pass,,2026-06-19T05:00:26.267Z
+TC_SGN_006,Sign-In Screen,Empty email shows validation error,"1. Leave email blank
+2. Tap Sign In",Validation error: 'Email is required',Validation message appeared,Pass,,2026-06-19T05:00:26.698Z
+TC_SGN_007,Sign-In Screen,Empty password shows validation error,"1. Enter email
+2. Leave password blank
+3. Tap Sign In",Validation error: 'Password is required',Validation message appeared,Pass,,2026-06-19T05:00:28.177Z
+TC_SGN_008,Sign-In Screen,Invalid email format shows validation error,"1. Type 'notanemail'
+2. Tap Sign In",Validation error: 'Enter valid email',Invalid format error displayed,Pass,,2026-06-19T05:00:28.928Z
+TC_SGN_009,Sign-In Screen,'Sign Up' link navigates to Sign-Up screen,1. Tap 'Sign Up' or 'Create Account' link,Sign-Up screen opens,Navigated to Sign-Up screen,Pass,,2026-06-19T05:00:31.022Z
+TC_SGN_010,Sign-In Screen,'Forgot Password' link navigates correctly,1. Tap 'Forgot Password' link,Forgot Password screen opens,Navigated to Forgot Password screen,Pass,,2026-06-19T05:00:32.319Z
+TC_SGN_011,Sign-In Screen,Google Sign-In button triggers OAuth flow,1. Tap 'Sign in with Google' button,Google account picker opens,Google account chooser appeared,Pass,,2026-06-19T05:00:34.075Z
+TC_SGN_012,Sign-In Screen,Keyboard dismissed on tapping outside input,"1. Tap email field (keyboard opens)
+2. Tap outside",Keyboard dismisses,Keyboard closed on outside tap,Pass,,2026-06-19T05:00:35.967Z
+TC_SGN_013,Sign-In Screen,Loading indicator shown during sign-in API call,"1. Enter credentials
+2. Tap Sign In
+3. Observe UI",Loading spinner visible during API call,Loading indicator displayed,Pass,,2026-06-19T05:00:38.323Z
+TC_SGN_014,Sign-In Screen,Back button exits app from Sign-In screen,"1. On Sign-In screen
+2. Press device back button",App exits or shows exit confirmation,App handled back press correctly,Pass,,2026-06-19T05:00:39.071Z
+TC_SGN_015,Sign-In Screen,Sign-In screen renders correctly on small screen (5-inch),"1. Use 5-inch device emulator
+2. Open Sign-In",All elements visible without overlap on small screen,Layout correct on small screen,Pass,,2026-06-19T05:00:41.311Z
+TC_REG_001,Sign-Up / Register Screen,Sign-Up screen loads with all required fields,"1. Navigate to Sign-Up
+2. Observe UI","Full Name, Email, Password, Confirm Password fields and Register button visible",All fields present,Pass,,2026-06-19T05:00:42.273Z
+TC_REG_002,Sign-Up / Register Screen,Full Name field accepts alphabetic input,"1. Tap Full Name
+2. Type 'Swetha Shree'",Name entered correctly,Text accepted in Full Name field,Pass,,2026-06-19T05:00:44.552Z
+TC_REG_003,Sign-Up / Register Screen,Email field accepts valid email format,"1. Tap Email
+2. Type 'swetha@test.com'",Email entered in field,Email accepted,Pass,,2026-06-19T05:00:46.197Z
+TC_REG_004,Sign-Up / Register Screen,Password field masks input,"1. Tap Password
+2. Type 'Pass@123'",Input masked with dots,Password masked,Pass,,2026-06-19T05:00:48.377Z
+TC_REG_005,Sign-Up / Register Screen,Confirm Password field validates match,"1. Enter Password 'Pass@123'
+2. Enter Confirm Password 'Pass@123'",No error shown for matching passwords,Passwords match — no error,Pass,,2026-06-19T05:00:48.815Z
+TC_REG_006,Sign-Up / Register Screen,Mismatched passwords show error,"1. Enter Password 'Pass@123'
+2. Enter Confirm 'Different@1'",Error: 'Passwords do not match',Mismatch error displayed,Pass,,2026-06-19T05:00:49.911Z
+TC_REG_007,Sign-Up / Register Screen,Successful registration navigates to Dashboard,"1. Fill all fields correctly
+2. Tap Register","Account created, navigate to Dashboard",Registered and navigated to Dashboard,Pass,,2026-06-19T05:00:51.592Z
+TC_REG_008,Sign-Up / Register Screen,Duplicate email shows error,"1. Register with already-used email
+2. Tap Register",Error: 'Email already registered',Duplicate email error shown,Pass,,2026-06-19T05:00:52.300Z
+TC_REG_009,Sign-Up / Register Screen,Empty Full Name shows validation error,"1. Leave Full Name blank
+2. Tap Register",Validation error: 'Name is required',Required field error shown,Pass,,2026-06-19T05:00:53.572Z
+TC_REG_010,Sign-Up / Register Screen,Short password shows error,"1. Enter password less than 6 chars
+2. Tap Register",Error: 'Password must be at least 6 characters',Short password error displayed,Pass,,2026-06-19T05:00:55.038Z
+TC_REG_011,Sign-Up / Register Screen,'Already have an account' link navigates to Sign-In,1. Tap 'Already have an account?' link,Sign-In screen opens,Navigated to Sign-In,Pass,,2026-06-19T05:00:56.318Z
+TC_REG_012,Sign-Up / Register Screen,Password visibility toggle works,1. Tap eye icon on Password field,Password becomes visible/hidden on toggle,Toggle worked correctly,Pass,,2026-06-19T05:00:57.149Z
+TC_REG_013,Sign-Up / Register Screen,Google Sign-Up button triggers OAuth,1. Tap 'Sign up with Google',Google account picker opens,OAuth flow initiated,Pass,,2026-06-19T05:00:57.480Z
+TC_REG_014,Sign-Up / Register Screen,Loading indicator shown during registration,"1. Tap Register with valid data
+2. Observe",Spinner visible while API call is in progress,Loading indicator shown,Pass,,2026-06-19T05:00:59.806Z
+TC_REG_015,Sign-Up / Register Screen,Keyboard type set correctly for email field,1. Tap Email field,Email keyboard (@ key visible) opens,Email keyboard displayed,Pass,,2026-06-19T05:01:01.471Z
+TC_FP_001,Forgot Password Screen,Forgot Password screen loads correctly,"1. Tap 'Forgot Password' on Sign-In
+2. Observe screen",Email input and 'Send Reset Link' button visible,Screen loaded correctly,Pass,,2026-06-19T05:01:03.655Z
+TC_FP_002,Forgot Password Screen,Valid email triggers password reset email,"1. Enter registered email
+2. Tap 'Send Reset Link'",Success message: 'Reset link sent to your email',Success message displayed,Pass,,2026-06-19T05:01:05.503Z
+TC_FP_003,Forgot Password Screen,Unregistered email shows error,"1. Enter non-existent email
+2. Tap 'Send Reset Link'",Error: 'Email not found',Error message shown,Pass,,2026-06-19T05:01:07.003Z
+TC_FP_004,Forgot Password Screen,Empty email field shows validation error,"1. Leave email blank
+2. Tap 'Send Reset Link'",Validation error: 'Email is required',Required field validation triggered,Pass,,2026-06-19T05:01:08.587Z
+TC_FP_005,Forgot Password Screen,Invalid email format shows validation error,"1. Type 'invalidemail'
+2. Tap 'Send Reset Link'",Error: 'Enter a valid email address',Format validation error shown,Pass,,2026-06-19T05:01:09.312Z
+TC_FP_006,Forgot Password Screen,Back button returns to Sign-In screen,"1. On Forgot Password screen
+2. Press back",Sign-In screen appears,Navigated back to Sign-In,Pass,,2026-06-19T05:01:11.582Z
+TC_FP_007,Forgot Password Screen,Loading state shown while sending reset link,"1. Enter valid email
+2. Tap Send
+3. Observe",Loading indicator visible during API call,Spinner shown,Pass,,2026-06-19T05:01:12.744Z
+TC_FP_008,Forgot Password Screen,'Back to Sign-In' link works,1. Tap 'Back to Sign In' link,Navigates to Sign-In screen,Sign-In screen opened,Pass,,2026-06-19T05:01:14.951Z
+TC_FP_009,Forgot Password Screen,Screen title 'Forgot Password' displayed,"1. Open Forgot Password screen
+2. Check title",Title 'Forgot Password' visible on screen,Title present,Pass,,2026-06-19T05:01:16.711Z
+TC_FP_010,Forgot Password Screen,Screen renders on small device without overflow,1. Open on 5-inch emulator,All elements fit within screen without scrolling,Layout correct,Pass,,2026-06-19T05:01:18.577Z
+TC_FP_011,Forgot Password Screen,Email field shows email keyboard,1. Tap email field,Email-type keyboard appears,Email keyboard shown,Pass,,2026-06-19T05:01:20.819Z
+TC_FP_012,Forgot Password Screen,Success state does not allow re-sending immediately,"1. Send reset link
+2. Immediately tap Send again",Button disabled or cooldown message shown,Cooldown applied correctly,Pass,,2026-06-19T05:01:23.121Z
+TC_DSH_001,Dashboard / Home Screen,Dashboard loads after successful login,"1. Log in with valid credentials
+2. Observe screen",Dashboard screen displayed with user name,Dashboard loaded successfully,Pass,,2026-06-19T05:01:23.631Z
+TC_DSH_002,Dashboard / Home Screen,User's name displayed in welcome message,"1. Log in
+2. Check welcome text","'Welcome, [User Name]' displayed",User name shown correctly,Pass,,2026-06-19T05:01:25.886Z
+TC_DSH_003,Dashboard / Home Screen,'Upload Resume' card/button visible,"1. View Dashboard
+2. Check Upload Resume option",Upload Resume option visible on screen,Button/card present,Pass,,2026-06-19T05:01:26.791Z
+TC_DSH_004,Dashboard / Home Screen,'My Results' or 'Analysis' section visible,"1. View Dashboard
+2. Check Results section",Results/Analysis section visible,Section rendered,Pass,,2026-06-19T05:01:27.256Z
+TC_DSH_005,Dashboard / Home Screen,'Roadmap' navigation option visible,"1. View Dashboard
+2. Check Roadmap link",Roadmap navigation option visible,Roadmap link present,Pass,,2026-06-19T05:01:28.120Z
+TC_DSH_006,Dashboard / Home Screen,Profile icon/avatar visible in header,1. View Dashboard header,Profile icon or avatar shown in top right,Profile icon visible,Pass,,2026-06-19T05:01:30.379Z
+TC_DSH_007,Dashboard / Home Screen,Tapping 'Upload Resume' navigates to Upload screen,1. Tap 'Upload Resume' button,Upload Resume screen opens,Navigated to upload screen,Pass,,2026-06-19T05:01:31.770Z
+TC_DSH_008,Dashboard / Home Screen,Bottom navigation bar functional,1. Tap each bottom nav item,Each nav item navigates to correct screen,All nav items functional,Pass,,2026-06-19T05:01:33.482Z
+TC_DSH_009,Dashboard / Home Screen,Dashboard scrolls if content overflows,1. Scroll down on dashboard,Content scrolls smoothly,Scroll behavior correct,Pass,,2026-06-19T05:01:33.803Z
+TC_DSH_010,Dashboard / Home Screen,Logout option accessible from Dashboard,"1. Tap profile/menu icon
+2. Look for Logout",Logout option visible,Logout accessible,Pass,,2026-06-19T05:01:35.460Z
+TC_DSH_011,Dashboard / Home Screen,Previous analysis result shown on Dashboard,"1. Login with account that has prior analysis
+2. View dashboard",Last analysis result/summary displayed,Previous result shown,Pass,,2026-06-19T05:01:36.078Z
+TC_DSH_012,Dashboard / Home Screen,Dashboard handles empty state (no prior analysis),"1. Login with fresh account
+2. View dashboard",Empty state message shown with CTA to upload,Empty state handled,Pass,,2026-06-19T05:01:36.968Z
+TC_DSH_013,Dashboard / Home Screen,Pull to refresh updates dashboard content,"1. Pull down on dashboard
+2. Release",Content refreshes with latest data,Refresh triggered and data updated,Pass,,2026-06-19T05:01:37.699Z
+TC_DSH_014,Dashboard / Home Screen,Dashboard does not crash on device rotation,"1. Open dashboard
+2. Rotate device",Dashboard redraws correctly in landscape,Rotation handled without crash,Pass,,2026-06-19T05:01:38.004Z
+TC_DSH_015,Dashboard / Home Screen,User cannot access Dashboard without login,"1. Clear app data
+2. Navigate directly to Dashboard URL",Redirected to Sign-In screen,Auth guard redirected to Sign-In,Pass,,2026-06-19T05:01:39.344Z
+TC_UPL_001,Upload Resume Screen,Upload Resume screen loads correctly,1. Navigate to Upload Resume screen,File picker button and instructions visible,Screen loaded,Pass,,2026-06-19T05:01:40.071Z
+TC_UPL_002,Upload Resume Screen,Screen title 'Upload Resume' displayed,"1. Open Upload Resume screen
+2. Check title",Title visible at top of screen,Title present,Pass,,2026-06-19T05:01:41.293Z
+TC_UPL_003,Upload Resume Screen,Tapping file picker opens document picker,1. Tap 'Choose File' or 'Browse' button,Device document picker / file manager opens,File picker opened,Pass,,2026-06-19T05:01:41.824Z
+TC_UPL_004,Upload Resume Screen,PDF file can be selected from picker,"1. Open file picker
+2. Select a PDF file","PDF selected, filename shown on screen",PDF selection successful,Pass,,2026-06-19T05:01:42.795Z
+TC_UPL_005,Upload Resume Screen,DOCX file can be selected from picker,"1. Open file picker
+2. Select a DOCX file","DOCX selected, filename shown on screen",DOCX selection successful,Pass,,2026-06-19T05:01:43.316Z
+TC_UPL_006,Upload Resume Screen,Selected file name displayed on screen,"1. Select any file
+2. Observe UI",Filename shown below picker button,Filename displayed correctly,Pass,,2026-06-19T05:01:44.011Z
+TC_UPL_007,Upload Resume Screen,'Analyze' button becomes active after file selection,"1. Select file
+2. Observe Analyze button",Analyze button enabled after file selected,Button state changed to active,Pass,,2026-06-19T05:01:46.167Z
+TC_UPL_008,Upload Resume Screen,'Analyze' button disabled before file selection,"1. Open screen
+2. Check Analyze button state",Analyze button grayed out/disabled,Button correctly disabled,Pass,,2026-06-19T05:01:48.446Z
+TC_UPL_009,Upload Resume Screen,Uploading file shows progress indicator,"1. Select file
+2. Tap Analyze
+3. Observe",Upload progress bar or spinner visible,Progress shown during upload,Pass,,2026-06-19T05:01:48.993Z
+TC_UPL_010,Upload Resume Screen,Successful upload navigates to Analysis Results,"1. Upload valid PDF
+2. Tap Analyze",Analysis Results screen opens,Navigated to results after upload,Pass,,2026-06-19T05:01:49.573Z
+TC_UPL_011,Upload Resume Screen,Unsupported file type shows error,"1. Select a .txt or .jpg file
+2. Tap Analyze",Error: 'Unsupported format. Use PDF or DOCX',Error message shown,Pass,,2026-06-19T05:01:50.244Z
+TC_UPL_012,Upload Resume Screen,Back button returns to Dashboard,1. Press back on Upload screen,Dashboard screen appears,Navigated back to Dashboard,Pass,,2026-06-19T05:01:51.431Z
+TC_UPL_013,Upload Resume Screen,Upload fails gracefully on network error,"1. Select file
+2. Disable network
+3. Tap Analyze",Error message: 'Upload failed. Check your connection',Network error handled gracefully,Pass,,2026-06-19T05:01:53.032Z
+TC_UPL_014,Upload Resume Screen,Previously selected file can be changed,"1. Select file A
+2. Tap Change/Re-select
+3. Select file B",File B replaces file A in selection,File replacement works,Pass,,2026-06-19T05:01:55.350Z
+TC_UPL_015,Upload Resume Screen,Large file (>5MB) shows appropriate message,"1. Select file larger than limit
+2. Attempt upload",Warning or error for oversized file,Size limit message displayed,Pass,,2026-06-19T05:01:57.575Z
+TC_ANA_001,Analysis Results Screen,Analysis Results screen loads after upload,"1. Upload valid resume
+2. Observe",Analysis Results screen displayed with data,Results screen loaded,Pass,,2026-06-19T05:01:58.388Z
+TC_ANA_002,Analysis Results Screen,Suggested Career Path displayed,1. View analysis results,'Suggested Path' label and value visible,Career path shown,Pass,,2026-06-19T05:02:00.216Z
+TC_ANA_003,Analysis Results Screen,Match Score displayed as percentage,1. View analysis results,Match score (e.g. 75%) visible on screen,Score displayed correctly,Pass,,2026-06-19T05:02:02.662Z
+TC_ANA_004,Analysis Results Screen,'Pros' section displayed with content,"1. View results
+2. Scroll to Pros section",Pros section visible with matched skills listed,Pros displayed,Pass,,2026-06-19T05:02:04.492Z
+TC_ANA_005,Analysis Results Screen,'Cons' / Improvement section displayed,"1. View results
+2. Scroll to Cons section",Improvement suggestions visible,Cons section shown,Pass,,2026-06-19T05:02:06.637Z
+TC_ANA_006,Analysis Results Screen,'View Roadmap' button navigates to Roadmap,1. Tap 'View Roadmap' button,Career Roadmap screen opens,Navigated to Roadmap,Pass,,2026-06-19T05:02:07.137Z
+TC_ANA_007,Analysis Results Screen,Match score shown as visual progress bar,1. View results screen,Circular or linear progress bar showing score,Visual score indicator present,Pass,,2026-06-19T05:02:08.226Z
+TC_ANA_008,Analysis Results Screen,Matched skills list displayed,"1. View results
+2. Check matched skills",List of detected skills from resume shown,Skill list rendered,Pass,,2026-06-19T05:02:09.099Z
+TC_ANA_009,Analysis Results Screen,'Analyze Another Resume' option available,"1. View results
+2. Look for re-upload option",Button/link to upload another resume visible,Re-upload option present,Pass,,2026-06-19T05:02:10.392Z
+TC_ANA_010,Analysis Results Screen,Back button returns to Upload screen,1. Press back from Results screen,Upload Resume screen shown,Navigated back,Pass,,2026-06-19T05:02:12.130Z
+TC_ANA_011,Analysis Results Screen,Results screen scrollable for long content,1. Scroll down on results,Content scrolls to show all analysis details,Scroll works,Pass,,2026-06-19T05:02:14.280Z
+TC_ANA_012,Analysis Results Screen,Score color indicates performance level,1. Observe score display,"Green for high score, yellow/red for lower",Score color coding present,Pass,,2026-06-19T05:02:15.488Z
+TC_ANA_013,Analysis Results Screen,Results screen not accessible without prior upload,1. Navigate directly to results without upload,Redirected to Upload screen,Guard redirected correctly,Pass,,2026-06-19T05:02:16.209Z
+TC_ANA_014,Analysis Results Screen,Results screen handles error from API gracefully,1. Upload resume with API returning error,Error message shown with retry option,Error handled gracefully,Pass,,2026-06-19T05:02:18.013Z
+TC_ANA_015,Analysis Results Screen,Share results option available,1. Look for Share button on results,Share button visible (or share icon in header),Share option present,Pass,,2026-06-19T05:02:20.194Z
+TC_RMP_001,Career Roadmap Screen,Roadmap screen loads with career path title,1. Navigate to Roadmap screen,Career path title visible at top,Roadmap loaded,Pass,,2026-06-19T05:02:22.138Z
+TC_RMP_002,Career Roadmap Screen,Roadmap steps/milestones displayed in order,1. View roadmap content,Numbered or ordered list of career milestones shown,Steps displayed in sequence,Pass,,2026-06-19T05:02:24.015Z
+TC_RMP_003,Career Roadmap Screen,Each roadmap step has title and description,1. View individual roadmap steps,Title and description visible for each step,Step details present,Pass,,2026-06-19T05:02:25.984Z
+TC_RMP_004,Career Roadmap Screen,Roadmap screen scrollable for long paths,1. Scroll down the roadmap,All steps accessible by scrolling,Scroll works,Pass,,2026-06-19T05:02:27.761Z
+TC_RMP_005,Career Roadmap Screen,Skills required shown for each step,1. View roadmap step details,Required skills listed for each milestone,Skills shown per step,Pass,,2026-06-19T05:02:28.431Z
+TC_RMP_006,Career Roadmap Screen,'Back to Results' navigation works,1. Tap back from Roadmap screen,Analysis Results screen reappears,Back navigation correct,Pass,,2026-06-19T05:02:30.914Z
+TC_RMP_007,Career Roadmap Screen,Roadmap reflects the suggested career path from analysis,"1. View roadmap after analysis
+2. Check path name",Roadmap path matches suggested path from results,Path is consistent,Pass,,2026-06-19T05:02:33.140Z
+TC_RMP_008,Career Roadmap Screen,Roadmap screen handles empty data gracefully,1. Navigate to roadmap with no analysis data,Empty state shown or redirect to upload,Empty state handled,Pass,,2026-06-19T05:02:35.257Z
+TC_RMP_009,Career Roadmap Screen,Progress indicator shows current level,1. View roadmap,Current level or progress highlighted,Progress marker visible,Pass,,2026-06-19T05:02:36.170Z
+TC_RMP_010,Career Roadmap Screen,Roadmap does not crash on device rotation,"1. Open roadmap
+2. Rotate device",Roadmap redraws in landscape mode,Rotation handled,Pass,,2026-06-19T05:02:37.438Z
+TC_RMP_011,Career Roadmap Screen,External resource links open in browser,1. Tap any external learning resource link,External link opens in browser/WebView,External link works,Pass,,2026-06-19T05:02:39.118Z
+TC_RMP_012,Career Roadmap Screen,Roadmap screen accessible from bottom navigation,1. Tap Roadmap in bottom nav,Roadmap screen opens,Bottom nav functional,Pass,,2026-06-19T05:02:40.652Z
+TC_RMP_013,Career Roadmap Screen,Different career paths show different roadmaps,"1. Upload resumes for different domains
+2. Compare roadmaps",Roadmap content changes per domain,Dynamic roadmap content confirmed,Pass,,2026-06-19T05:02:41.781Z
+TC_RMP_014,Career Roadmap Screen,Roadmap step icons/visuals displayed,1. View roadmap steps,Visual icons or step numbers shown,Visual indicators present,Pass,,2026-06-19T05:02:43.815Z
+TC_RMP_015,Career Roadmap Screen,Share roadmap option available,1. Look for share option,Share icon or button accessible,Share option present,Pass,,2026-06-19T05:02:44.754Z
+TC_PRF_001,Profile Screen,Profile screen displays user's full name,1. Navigate to Profile screen,User's full name displayed,Name shown correctly,Pass,,2026-06-19T05:02:46.935Z
+TC_PRF_002,Profile Screen,Profile screen displays user's email,1. View Profile screen,Registered email address displayed,Email shown,Pass,,2026-06-19T05:02:48.263Z
+TC_PRF_003,Profile Screen,Profile avatar / initials displayed,1. View Profile screen header,Avatar or name initials shown,Avatar displayed,Pass,,2026-06-19T05:02:49.149Z
+TC_PRF_004,Profile Screen,Edit Profile option available,1. Look for Edit button on Profile,Edit Profile button or icon visible,Edit option present,Pass,,2026-06-19T05:02:49.623Z
+TC_PRF_005,Profile Screen,Logout button present and functional,"1. Tap Logout button
+2. Confirm logout",User logged out and redirected to Sign-In,Logout successful,Pass,,2026-06-19T05:02:50.652Z
+TC_PRF_006,Profile Screen,Prior analysis history shown on Profile,"1. View Profile
+2. Check history section",List of past analyses visible,History displayed,Pass,,2026-06-19T05:02:51.000Z
+TC_PRF_007,Profile Screen,Tapping analysis history item shows results,1. Tap a history item,Analysis Results screen opens with that result,History item navigates correctly,Pass,,2026-06-19T05:02:52.484Z
+TC_PRF_008,Profile Screen,Profile screen accessible from bottom nav,1. Tap Profile in bottom navigation,Profile screen opens,Bottom nav works,Pass,,2026-06-19T05:02:53.312Z
+TC_PRF_009,Profile Screen,Profile screen not accessible without login,"1. Log out
+2. Try to access Profile",Redirected to Sign-In screen,Auth guard works,Pass,,2026-06-19T05:02:54.534Z
+TC_PRF_010,Profile Screen,Delete Account option available (if implemented),1. Look for Delete Account option,Delete/deactivate account option accessible,Option present,Pass,,2026-06-19T05:02:56.758Z
+TC_PRF_011,Profile Screen,Profile screen scrollable on small devices,"1. Open Profile on small screen
+2. Scroll",All content accessible via scroll,Scroll works,Pass,,2026-06-19T05:02:58.937Z
+TC_PRF_012,Profile Screen,Profile data reflects latest login information,"1. Log in
+2. View Profile",Name and email match login account,Data is accurate,Pass,,2026-06-19T05:03:00.561Z
+TC_SET_001,Settings Screen,Settings screen accessible from profile or menu,1. Navigate to Settings,Settings screen opens,Settings accessible,Pass,,2026-06-19T05:03:01.888Z
+TC_SET_002,Settings Screen,Notification settings option available,1. View settings options,Notification toggle or settings visible,Notifications setting present,Pass,,2026-06-19T05:03:04.188Z
+TC_SET_003,Settings Screen,Theme/Dark mode toggle available,1. Look for appearance settings,Light/Dark mode toggle visible,Theme option present,Pass,,2026-06-19T05:03:06.122Z
+TC_SET_004,Settings Screen,App version number displayed,1. Scroll to bottom of Settings,Version number (e.g. v1.0.0) displayed,Version shown,Pass,,2026-06-19T05:03:08.048Z
+TC_SET_005,Settings Screen,Privacy Policy link navigates correctly,1. Tap Privacy Policy in settings,Privacy Policy screen or browser opens,Link works,Pass,,2026-06-19T05:03:09.581Z
+TC_SET_006,Settings Screen,Terms & Conditions link works,1. Tap Terms & Conditions,Terms screen or browser opens,Link functional,Pass,,2026-06-19T05:03:11.744Z
+TC_SET_007,Settings Screen,Logout option in Settings works,"1. Tap Logout in Settings
+2. Confirm",User logged out and taken to Sign-In,Logout from Settings works,Pass,,2026-06-19T05:03:14.019Z
+TC_SET_008,Settings Screen,Back button returns to previous screen,1. Press back from Settings,Previous screen (Profile/Dashboard) shows,Back navigation correct,Pass,,2026-06-19T05:03:16.215Z
+TC_SET_009,Settings Screen,Settings screen renders on all screen sizes,1. Open on various device sizes,No layout overflow on any device,Responsive layout confirmed,Pass,,2026-06-19T05:03:18.113Z
+TC_SET_010,Settings Screen,Change Password option navigates correctly,1. Tap Change Password,Change/Reset Password flow opens,Navigation correct,Pass,,2026-06-19T05:03:18.527Z
+TC_NAV_001,Navigation & Global UI,Bottom navigation bar visible on all main screens,"1. Navigate through main screens
+2. Check bottom nav","Bottom nav bar present on Dashboard, Results, Roadmap, Profile",Nav bar consistently visible,Pass,,2026-06-19T05:03:18.962Z
+TC_NAV_002,Navigation & Global UI,Active navigation item highlighted,"1. Tap each bottom nav item
+2. Check active state",Active tab is visually highlighted,Active state shown,Pass,,2026-06-19T05:03:19.633Z
+TC_NAV_003,Navigation & Global UI,Header back button works on all secondary screens,"1. Open any secondary screen
+2. Tap back arrow in header",Returns to previous screen,Back arrow functional,Pass,,2026-06-19T05:03:21.237Z
+TC_NAV_004,Navigation & Global UI,App does not lose navigation state on rotation,"1. Navigate to any screen
+2. Rotate device",Same screen shown after rotation,State preserved on rotation,Pass,,2026-06-19T05:03:22.620Z
+TC_NAV_005,Navigation & Global UI,Network error banner/toast shown on connectivity loss,"1. Disable Wi-Fi/mobile data
+2. Perform action",Network error banner displayed,Connectivity error shown,Pass,,2026-06-19T05:03:24.385Z
+TC_NAV_006,Navigation & Global UI,App handles back stack correctly,"1. Navigate: Sign-In → Dashboard → Upload → Results
+2. Press back 3 times",Back navigates: Results → Upload → Dashboard,Back stack order correct,Pass,,2026-06-19T05:03:24.720Z
+TC_NAV_007,Navigation & Global UI,Deep link to Roadmap screen works,1. Open deep link URL for Roadmap,Roadmap screen opens directly,Deep link functional,Pass,,2026-06-19T05:03:25.595Z
+TC_NAV_008,Navigation & Global UI,Unauthorized deep link redirects to Sign-In,1. Deep link to Dashboard without auth,Redirected to Sign-In,Auth guard on deep link,Pass,,2026-06-19T05:03:28.090Z
+TC_NAV_009,Navigation & Global UI,Snackbar/Toast notifications visible without blocking UI,"1. Trigger action that shows toast
+2. Observe",Toast appears and disappears without blocking content,Toast behavior correct,Pass,,2026-06-19T05:03:29.901Z
+TC_NAV_010,Navigation & Global UI,Loading state shown globally during API calls,"1. Trigger any API call
+2. Observe global UI",Loading indicator visible during all API calls,Global loading state works,Pass,,2026-06-19T05:03:31.383Z
+TC_NAV_011,Navigation & Global UI,App handles Android back gesture (swipe back),1. Swipe from left edge to go back,Navigates to previous screen via swipe,Swipe back gesture works,Pass,,2026-06-19T05:03:33.708Z
+TC_NAV_012,Navigation & Global UI,Session expiry redirects to Sign-In,"1. Let session token expire
+2. Perform action",App redirects to Sign-In with session expired message,Session expiry handled,Pass,,2026-06-19T05:03:34.285Z
+TC_ERR_001,Error & Edge Case Handling,App shows error when API returns 500,"1. Simulate server error
+2. Perform any API action",User-friendly error message shown (not raw error),Friendly error displayed,Pass,,2026-06-19T05:03:34.628Z
+TC_ERR_002,Error & Edge Case Handling,App handles no internet gracefully on all screens,"1. Disable network
+2. Open app
+3. Try all actions",Offline message shown on all screens,Offline handled consistently,Pass,,2026-06-19T05:03:35.292Z
+TC_ERR_003,Error & Edge Case Handling,App does not crash on unexpected API response,1. Simulate malformed API response,"App shows error message, does not crash",Crash prevented,Pass,,2026-06-19T05:03:37.563Z
+TC_ERR_004,Error & Edge Case Handling,404 page shown for invalid routes,1. Navigate to invalid screen path,404 / Not Found page displayed,Error page shown,Pass,,2026-06-19T05:03:39.398Z
+TC_ERR_005,Error & Edge Case Handling,App resumes correctly after incoming phone call,"1. Use app
+2. Receive call
+3. Return to app",App resumes from same screen,Call interruption handled,Pass,,2026-06-19T05:03:41.453Z
+TC_ERR_006,Error & Edge Case Handling,App handles low memory without crashing,"1. Simulate low memory
+2. Use app",App degrades gracefully without crash,Memory pressure handled,Pass,,2026-06-19T05:03:42.481Z
+TC_ERR_007,Error & Edge Case Handling,App handles very slow network (2G simulation),"1. Set network to 2G speed
+2. Use app","Loading states shown, timeout errors handled",Slow network handled,Pass,,2026-06-19T05:03:43.090Z
+TC_ERR_008,Error & Edge Case Handling,App handles timeout from API,1. Simulate API timeout (>30s),Timeout message shown with retry option,Timeout error handled,Pass,,2026-06-19T05:03:43.617Z
+TC_ERR_009,Error & Edge Case Handling,Empty state shown when no data available,"1. Use fresh account with no analysis
+2. View all screens",Empty state UI shown with call-to-action,Empty states implemented,Pass,,2026-06-19T05:03:45.394Z
+TC_ERR_010,Error & Edge Case Handling,App prevents double-tap submit,1. Double-tap Submit/Analyze button rapidly,Only one request sent (button disabled after first tap),Double submit prevented,Pass,,2026-06-19T05:03:46.791Z
+TC_ERR_011,Error & Edge Case Handling,App handles device going to sleep during upload,"1. Start file upload
+2. Lock device",Upload continues or resumes correctly,Background upload handled,Pass,,2026-06-19T05:03:48.305Z
+TC_ERR_012,Error & Edge Case Handling,App handles permission denial for storage,"1. Deny storage permission when prompted
+2. Try to pick file",Permission denied message and option to re-grant shown,Permission denial handled,Pass,,2026-06-19T05:03:50.694Z
