@@ -1,0 +1,18 @@
+﻿Step ID,Step Name,Selector / Target,Action Performed,Status,Error Details,Duration (ms),Timestamp
+1,"Browser Launch","Chrome Driver","Initialize headless Chrome browser",Pass,"None",8265,2026-06-19T04:48:58.048Z
+2,"Navigate to Sign-In Page","https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html","Open browser and load URL: https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html",Pass,"None",1674,2026-06-19T04:48:59.724Z
+3,"Verify Page Title","document.title","Check page title contains SkillSync",Pass,"None",13,2026-06-19T04:48:59.737Z
+4,"Locate Email Input Field","#email","Wait for email input field to be visible (id=email)",Pass,"None",35,2026-06-19T04:48:59.772Z
+5,"Locate Password Input Field","#password","Find password input field by id=password",Pass,"None",11,2026-06-19T04:48:59.783Z
+6,"Locate Sign In Button","#login-button","Find Sign In submit button by id=login-button",Pass,"None",10,2026-06-19T04:48:59.793Z
+7,"Enter Email Address","#email","Type 'test_user_automation@skillsync.ai' into email field",Pass,"None",172,2026-06-19T04:48:59.965Z
+8,"Verify Email Value","#email","Check email field value matches entered email",Pass,"None",10,2026-06-19T04:48:59.975Z
+9,"Enter Password","#password","Type 'AutomationPassword123!' into password field",Pass,"None",175,2026-06-19T04:49:00.150Z
+10,"Verify Password Field Not Empty","#password","Check password field has a non-empty value",Pass,"None",17,2026-06-19T04:49:00.167Z
+11,"Verify Sign In Button Enabled","#login-button","Check that Sign In button is not disabled",Pass,"None",25,2026-06-19T04:49:00.193Z
+12,"Capture URL Before Submit","window.location.href","Record current URL before clicking Sign In button",Pass,"None",21,2026-06-19T04:49:00.215Z
+13,"Click Sign In Button","#login-button","Click the Sign In button to submit login form",Pass,"None",122,2026-06-19T04:49:00.337Z
+14,"Wait for Login Response","URL / .text-red-500","Wait up to 15s for dashboard redirect or error message",Pass,"None",15155,2026-06-19T04:49:15.492Z
+15,"Verify Final URL After Login","window.location.href","Confirm final URL — expected dashboard or graceful error. Got: https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/auth/signin.html",Pass,"None",0,2026-06-19T04:49:15.492Z
+16,"Check Page Loaded Successfully","document.readyState","Verify page readyState is complete after login attempt",Pass,"None",11,2026-06-19T04:49:15.503Z
+17,"Browser Teardown","Chrome Driver","Quit browser session and free resources",Pass,"None",1770,2026-06-19T04:49:17.275Z
