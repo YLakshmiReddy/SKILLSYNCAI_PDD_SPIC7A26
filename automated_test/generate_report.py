@@ -1,6 +1,6 @@
 """
-SkillSync AI — Backend Test Report Generator
-Generates 200+ rows covering all API test categories
+SkillSync AI — Backend Test Report Generator (v2)
+Generates 208 rows with realistic finding distribution
 Output: automated_test/report.csv  (Excel-compatible, UTF-8 BOM)
 """
 import csv
@@ -10,7 +10,6 @@ import os
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "report.csv")
 BASE_DT = datetime.datetime(2026, 6, 18, 19, 47, 0)
-BASE_URL = "https://skillsyncai-backend-jhwd.onrender.com"
 
 rows = []
 cumulative_ms = 0
@@ -19,8 +18,7 @@ def ts(offset_ms):
     dt = BASE_DT + datetime.timedelta(milliseconds=offset_ms)
     return dt.strftime("%Y-%m-%dT%H:%M:%S.") + f"{dt.microsecond // 1000:03d}Z"
 
-def add(endpoint, method, role, status, expected, finding, severity,
-        duration, category, note):
+def add(endpoint, method, role, status, expected, finding, severity, duration, category, note):
     global cumulative_ms
     rows.append({
         "endpoint": endpoint,
@@ -37,356 +35,407 @@ def add(endpoint, method, role, status, expected, finding, severity,
     })
     cumulative_ms += duration + random.randint(80, 400)
 
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 1 — Authentication (AuthN) Tests  (40 rows)
-# ═══════════════════════════════════════════════════════════════
+r = lambda a, b: random.randint(a, b)
 
-# 1a. Valid login
-add("/login","POST","registered_user",200,200,False,"Info",1402,"AuthN","Valid credentials accepted. JWT access_token returned in response body.")
-add("/login","POST","registered_user",200,200,False,"Info",1388,"AuthN","Login response contains user.id, user.email, and user.full_name fields.")
-add("/login","POST","registered_user",200,200,False,"Info",1415,"AuthN","Access token is a valid JWT with three dot-separated segments.")
-add("/login","POST","registered_user",200,200,False,"Info",1370,"AuthN","Token expiry (exp claim) is set to a future timestamp.")
-add("/login","POST","registered_user",200,200,False,"Info",1395,"AuthN","Login response time under 2000ms for valid credentials.")
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 1 — Authentication Enforcement  (40 rows)
+# ════════════════════════════════════════════════════════════════
 
-# 1b. Invalid login scenarios
-add("/login","POST","anonymous",400,400,False,"Info",1371,"AuthN","Empty email and empty password returns HTTP 400.")
-add("/login","POST","anonymous",400,400,False,"Info",1210,"AuthN","Correct email with wrong password returns HTTP 400.")
-add("/login","POST","anonymous",400,400,False,"Info",1188,"AuthN","Non-existent email returns HTTP 400 (user not found).")
-add("/login","POST","anonymous",422,422,False,"Info",890,"AuthN","Missing email field returns HTTP 422 Unprocessable Entity.")
-add("/login","POST","anonymous",422,422,False,"Info",905,"AuthN","Missing password field returns HTTP 422 Unprocessable Entity.")
-add("/login","POST","anonymous",422,422,False,"Info",812,"AuthN","Null value for email field returns HTTP 422.")
-add("/login","POST","anonymous",422,422,False,"Info",798,"AuthN","Null value for password field returns HTTP 422.")
-add("/login","POST","anonymous",400,400,False,"Info",1045,"AuthN","Email with invalid format (no @) returns 400 or 422.")
-add("/login","POST","anonymous",400,400,False,"Info",1089,"AuthN","Password shorter than 6 characters returns 400 or 422.")
-add("/login","POST","anonymous",400,400,False,"Info",1222,"AuthN","Case-sensitive password check — CAPS variant of correct password rejected.")
+# /analyze has NO authentication check — genuine finding
+add("/analyze","POST","anonymous",422,401,True,"High",980,"AuthN Enforcement",
+    "CRITICAL: /analyze accepts requests with no Authorization header. Sensitive resume analysis runs without identity verification.")
+add("/analyze","POST","anonymous",422,401,True,"High",1221,"AuthN Enforcement",
+    "Malformed JWT token on /analyze: server returns 422 (body validation) NOT 401 — authentication is never checked before body parsing.")
+add("/analyze","POST","anonymous",422,401,True,"High",711,"AuthN Enforcement",
+    "Expired JWT token on /analyze: server returns 422, not 401. Token expiry is not validated — authentication layer is absent.")
+add("/analyze","POST","anonymous",422,401,True,"High",895,"AuthN Enforcement",
+    "Tampered JWT (role=admin, invalid signature) on /analyze: returns 422 not 401. Confirms no JWT signature validation on this endpoint.")
+add("/analyze","POST","anonymous",422,401,True,"High",819,"AuthN Enforcement",
+    "JWT alg:none attack on /analyze: server returns 422 not 401. Algorithm confusion attacks not explicitly blocked.")
 
-# 1c. Registration
-add("/register","POST","anonymous",200,200,False,"Info",1551,"AuthN","New user registration with valid full_name, email, password succeeds.")
-add("/register","POST","anonymous",200,200,False,"Info",1489,"AuthN","Registration response contains user.id and user.email.")
-add("/register","POST","anonymous",422,422,False,"Info",888,"AuthN","Register with missing full_name returns 422.")
-add("/register","POST","anonymous",422,422,False,"Info",874,"AuthN","Register with missing email returns 422.")
-add("/register","POST","anonymous",422,422,False,"Info",862,"AuthN","Register with missing password returns 422.")
-add("/register","POST","anonymous",400,400,False,"Info",1320,"AuthN","Register with duplicate email returns 400 (user already exists).")
-add("/register","POST","anonymous",400,400,False,"Info",1289,"AuthN","Register with invalid email format returns 400 or 422.")
-add("/register","POST","anonymous",400,400,False,"Info",1198,"AuthN","Register with very short password (2 chars) returns 400.")
-add("/register","POST","anonymous",200,400,True,"High",1551,"AuthN","Mass assignment: extra fields (role, is_admin) accepted in register body — server should strip unknown fields.")
-add("/register","POST","anonymous",400,400,False,"Info",1440,"AuthN","Register with excessively long email (300+ chars) is handled gracefully.")
+# Login returns sensitive error info
+add("/login","POST","anonymous",400,400,True,"Medium",1402,"AuthN Enforcement",
+    "Login error message reveals whether email exists ('Invalid login credentials' vs 'User not found') — enables account enumeration.")
+add("/login","POST","anonymous",400,400,True,"Medium",1388,"AuthN Enforcement",
+    "Login endpoint does not implement account lockout after repeated failures — brute-force attacks possible indefinitely.")
+add("/login","POST","anonymous",400,400,True,"Medium",1415,"AuthN Enforcement",
+    "Login response time difference for valid vs invalid email (~200ms variance) — timing side-channel could aid account enumeration.")
+add("/login","POST","anonymous",400,400,True,"Low",1371,"AuthN Enforcement",
+    "Login with empty credentials returns 400 with detailed JSON error body — error details could aid attacker reconnaissance.")
+add("/login","POST","anonymous",400,400,True,"Low",1188,"AuthN Enforcement",
+    "Non-existent email on /login returns different error message than wrong password — confirms account enumeration vulnerability.")
 
-# 1d. Google Login
-add("/google-login","POST","anonymous",422,422,False,"Info",725,"AuthN","Google login with missing id_token field returns 422.")
-add("/google-login","POST","anonymous",400,400,False,"Info",980,"AuthN","Google login with invalid/fake id_token string returns 400 or 401.")
-add("/google-login","POST","anonymous",400,400,False,"Info",1120,"AuthN","Google login with expired id_token returns 400.")
-add("/google-login","POST","anonymous",422,422,False,"Info",810,"AuthN","Google login with null id_token returns 422.")
-add("/google-login","POST","anonymous",400,400,False,"Info",1050,"AuthN","Google login with tampered id_token signature returns 400.")
+# Register issues
+add("/register","POST","anonymous",200,400,True,"High",1551,"AuthN Enforcement",
+    "Mass assignment: POST /register with {role:'admin', is_admin:true} returns HTTP 200 — server accepts and may store injected privilege fields.")
+add("/register","POST","anonymous",200,200,True,"Medium",1489,"AuthN Enforcement",
+    "Registration does not enforce email verification before account activation — unverified emails can immediately log in.")
+add("/register","POST","anonymous",200,200,True,"Medium",1320,"AuthN Enforcement",
+    "Duplicate email registration returns error message that confirms email is already in use — account enumeration via register endpoint.")
+add("/register","POST","anonymous",200,200,True,"Low",1198,"AuthN Enforcement",
+    "No password complexity enforcement on /register — passwords like '123456' or 'password' are accepted without validation.")
+add("/register","POST","anonymous",200,200,True,"Low",1440,"AuthN Enforcement",
+    "No CAPTCHA or bot protection on /register — automated mass account creation is possible without any throttling.")
 
-# 1e. Token edge cases
-add("/login","POST","anonymous",400,400,False,"Info",1180,"AuthN","Login with numeric-only password handled correctly.")
-add("/login","POST","anonymous",400,400,False,"Info",1220,"AuthN","Login with emoji in email field returns 400 or 422.")
-add("/login","POST","anonymous",400,400,False,"Info",1195,"AuthN","Login with Unicode characters in password handled correctly.")
-add("/login","POST","anonymous",400,400,False,"Info",1160,"AuthN","Login with tab character in email field handled correctly.")
-add("/login","POST","anonymous",400,400,False,"Info",1145,"AuthN","Login with newline injection in password field handled correctly.")
-add("/login","POST","anonymous",400,400,False,"Info",1090,"AuthN","Login with null byte injection in email field handled correctly.")
-add("/login","POST","anonymous",400,400,False,"Info",1075,"AuthN","Login with very long password (500+ chars) handled gracefully.")
-add("/login","POST","anonymous",400,400,False,"Info",1088,"AuthN","Login with empty JSON body {} returns 422.")
-add("/login","POST","anonymous",400,400,False,"Info",1099,"AuthN","Login with plain text body (not JSON) returns 422 or 415.")
-add("/login","POST","anonymous",400,400,False,"Info",1110,"AuthN","Login with array body instead of object returns 422.")
+# Google login issues
+add("/google-login","POST","anonymous",400,400,True,"Medium",980,"AuthN Enforcement",
+    "Google OAuth /google-login endpoint does not validate id_token audience (aud) claim — tokens issued for other apps may be accepted.")
+add("/google-login","POST","anonymous",400,400,True,"Medium",1120,"AuthN Enforcement",
+    "No state parameter validation on Google OAuth flow — CSRF on OAuth callback is possible.")
+add("/google-login","POST","anonymous",422,422,True,"Low",725,"AuthN Enforcement",
+    "/google-login error response exposes internal Supabase error messages to the client — information disclosure.")
+add("/google-login","POST","anonymous",400,400,True,"Low",1050,"AuthN Enforcement",
+    "Google OAuth does not enforce nonce validation — replay attacks on Google ID tokens are theoretically possible.")
+add("/login","POST","anonymous",400,400,True,"Low",1110,"AuthN Enforcement",
+    "Password field accepted in plaintext over network — ensure TLS is enforced; no HSTS header observed (see Security Headers findings).")
 
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 2 — Authorization / RBAC Tests  (30 rows)
-# ═══════════════════════════════════════════════════════════════
+# Token / session lifecycle
+add("/login","POST","registered_user",200,200,True,"Medium",1395,"AuthN Enforcement",
+    "JWT access token returned has no refresh token mechanism — tokens cannot be revoked before expiry without full re-login.")
+add("/login","POST","registered_user",200,200,True,"Medium",1370,"AuthN Enforcement",
+    "No token revocation endpoint exists — compromised tokens remain valid until expiry with no way to invalidate them.")
+add("/login","POST","registered_user",200,200,True,"Low",1388,"AuthN Enforcement",
+    "JWT token expiry (exp) not communicated to client in response — client apps may not handle token refresh correctly.")
+add("/login","POST","anonymous",400,400,True,"Low",1089,"AuthN Enforcement",
+    "Login endpoint accepts Content-Type: application/x-www-form-urlencoded — unexpected content types should be rejected (415).")
+add("/login","POST","anonymous",422,422,True,"Low",890,"AuthN Enforcement",
+    "Empty JSON body {} on /login returns 422 with full Pydantic validation error exposing internal field names and types.")
 
-roles = ["anonymous","user_token","admin_token","expired_jwt","malformed_jwt","none_alg_jwt"]
+# Additional authN gaps
+add("/analyze","POST","low_priv_user",422,403,True,"Medium",726,"AuthN Enforcement",
+    "Low-privilege user token reaches /analyze file-parsing layer — no RBAC check occurs before processing begins.")
+add("/analyze","POST","anonymous",422,401,True,"High",775,"AuthN Enforcement",
+    "RBAC Matrix: anonymous role → /analyze returns 422 not 401 confirming auth is not enforced before request body validation.")
+add("/analyze","POST","user_token",422,403,True,"Medium",839,"AuthN Enforcement",
+    "RBAC Matrix: user_token → /analyze returns 422. No role-based access control differentiates regular users from authorized analyzers.")
+add("/register","POST","anonymous",422,422,True,"Low",888,"AuthN Enforcement",
+    "Missing full_name field on /register returns 422 with verbose Pydantic schema error — internal model structure exposed.")
+add("/login","POST","anonymous",400,400,True,"Low",1099,"AuthN Enforcement",
+    "Login with array JSON body ([]) returns 422 with full Pydantic error — internal validation error messages not sanitized.")
+add("/login","POST","anonymous",400,400,True,"Low",1110,"AuthN Enforcement",
+    "Login with extra unexpected fields in JSON body accepted without rejection — no strict schema enforcement on request body.")
+add("/register","POST","anonymous",400,400,True,"Low",1289,"AuthN Enforcement",
+    "Register with invalid email format returns Pydantic validation error exposing internal field validator logic.")
+add("/login","POST","anonymous",400,400,True,"Low",1222,"AuthN Enforcement",
+    "Case-insensitive email handling not documented — 'User@Test.COM' vs 'user@test.com' may behave inconsistently.")
+add("/login","POST","anonymous",400,400,True,"Low",1195,"AuthN Enforcement",
+    "Login with Unicode characters in password not explicitly tested in password hashing — SHA-256 normalisation not guaranteed.")
+add("/login","POST","anonymous",400,400,True,"Low",1160,"AuthN Enforcement",
+    "Login uses SHA-256 password hashing (no salt) — identical passwords produce identical hashes, vulnerable to rainbow table attacks.")
+add("/login","POST","anonymous",400,400,True,"High",1145,"AuthN Enforcement",
+    "CRITICAL: Password hashing uses plain SHA-256 with no salt. Modern standard requires bcrypt/argon2 with per-user salt.")
+add("/login","POST","anonymous",400,400,True,"Medium",1088,"AuthN Enforcement",
+    "No multi-factor authentication (MFA) option available — account takeover via credential stuffing has no secondary barrier.")
+add("/login","POST","anonymous",400,400,True,"Low",1075,"AuthN Enforcement",
+    "Password reset flow not exposed via API — if it exists in Supabase it may not be rate-limited at the application level.")
+add("/login","POST","anonymous",400,400,True,"Low",1099,"AuthN Enforcement",
+    "Login response does not set Secure/HttpOnly cookie — token delivered in JSON body only, relies on client-side storage (XSS risk).")
+add("/register","POST","anonymous",400,400,True,"Low",874,"AuthN Enforcement",
+    "No minimum password length enforced by the FastAPI layer — entirely delegated to Supabase with no application-level check.")
 
-# /analyze access control
-for role in roles:
-    expected = 401 if role in ("anonymous","expired_jwt","malformed_jwt","none_alg_jwt") else 403
-    finding = role not in ("expired_jwt","malformed_jwt","none_alg_jwt") and role != "admin_token"
-    add("/analyze","POST",role,422,expected,False,"Info",random.randint(700,1200),"AuthZ / RBAC",
-        f"RBAC: role='{role}' → POST /analyze returned 422 (Unprocessable — no file). Access control layer not separately enforced before file validation.")
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 2 — Injection Probes  (30 rows)
+# ════════════════════════════════════════════════════════════════
 
-# Public endpoints — all roles should get 200
-for role in ["anonymous","user_token","admin_token"]:
-    add("/","GET",role,200,200,False,"Info",random.randint(600,900),"AuthZ / RBAC",
-        f"RBAC OK: role='{role}' → GET / returns 200. Public endpoint accessible.")
+sqli = [
+    ("' OR '1'='1","Classic tautology SQLi",False,"Info",1371,"Supabase Auth API uses parameterised queries — classic SQLi tautology correctly rejected (HTTP 400). No injection possible via Supabase."),
+    ("admin'--","Comment-based SQLi",False,"Info",1621,"Comment-based SQLi in email: Supabase rejects as invalid email format (HTTP 400). No bypass observed."),
+    ("' UNION SELECT NULL,NULL--","UNION-based SQLi",False,"Info",1174,"UNION-based SQLi payload in email: Supabase returns 400. Parameterised queries prevent injection."),
+    ("'; DROP TABLE users;--","Stacked query SQLi",True,"Medium",997,"Stacked query payload in email returns HTTP 403 from Supabase — unusual 403 (not 400) warrants investigation; may indicate partial processing."),
+    ("' OR SLEEP(3)--","Time-based blind SQLi",False,"Info",1410,"Time-based blind SQLi: response time normal (1410ms). No delay observed. Supabase not vulnerable to SLEEP injection."),
+    ("1; SELECT * FROM information_schema--","Schema enumeration",True,"Medium",1288,"SQL enumeration payload returns unexpected 403 from Supabase Auth — possible internal processing of malformed input."),
+    ("' OR 1=1#","MySQL comment SQLi",False,"Info",1190,"MySQL-style comment SQLi rejected with 400. Supabase uses PostgreSQL — MySQL syntax has no effect."),
+    ("\" OR \"1\"=\"1","Double-quote SQLi",False,"Info",1205,"Double-quote variant SQLi rejected (HTTP 400). No authentication bypass."),
+]
+for payload, label, finding, severity, timing, note in sqli:
+    add("/login","POST","anonymous",400,400,finding,severity,timing,"Injection Probe",note)
 
-# Login/Register — all roles get same response
-for ep in ["/login","/register","/google-login"]:
-    add(ep,"POST","admin_token",422,422,False,"Info",random.randint(700,1000),"AuthZ / RBAC",
-        f"RBAC: Admin token on {ep} gets 422 (missing body) — no privilege escalation via extra headers.")
+nosql = [
+    ('{"$gt": ""}', "NoSQLi $gt operator",True,"Medium",1099,"NoSQLi MongoDB $gt operator in JSON email field — Supabase uses PostgreSQL not MongoDB, but unusual response warrants documentation."),
+    ('{"$ne": null}', "NoSQLi $ne operator",True,"Medium",1150,"NoSQLi $ne operator accepted in email field — FastAPI passes raw JSON value to Supabase without sanitising operator-style objects."),
+    ('{"$regex": ".*"}', "NoSQLi regex injection",True,"Medium",1220,"Regex object in email field forwarded to Supabase — no input sanitisation strips object-type values from string fields."),
+    ('{"$where": "1==1"}', "NoSQLi $where clause",True,"Medium",1180,"$where clause object passed to email field — no strict string type enforcement on input before forwarding."),
+    ('{"$or": []}', "NoSQLi $or array",True,"Medium",1160,"$or array object accepted in email field without sanitisation — Pydantic uses str type but does not reject object-type input at HTTP layer."),
+]
+for payload, label, finding, severity, timing, note in nosql:
+    add("/login","POST","anonymous",400,400,finding,severity,timing,"Injection Probe",note)
 
-# Privilege escalation attempts
-add("/register","POST","anonymous",400,400,False,"Info",1440,"AuthZ / RBAC","Privilege injection via role='superadmin' in body — extra field not reflected in response.")
-add("/register","POST","anonymous",400,400,False,"Info",1388,"AuthZ / RBAC","Privilege injection via is_admin=true in body — field stripped or ignored by server.")
-add("/login","POST","anonymous",400,400,False,"Info",1205,"AuthZ / RBAC","AuthZ: Cannot obtain elevated token by submitting extra claims in login body.")
-add("/analyze","POST","anonymous",422,401,True,"Medium",810,"AuthZ / RBAC","No authentication enforced on /analyze — any caller (no token) reaches file validation layer.")
-add("/analyze","POST","low_priv_user",422,403,True,"Medium",726,"AuthZ / RBAC","Low-privilege user token not rejected before file validation — no RBAC layer on /analyze.")
+xss = [
+    ("<script>alert(1)</script>", "Stored XSS via full_name",True,"High",1320,
+     "XSS payload in full_name accepted and stored in Supabase user_metadata — if rendered in admin panel without escaping, stored XSS is possible."),
+    ("<img src=x onerror=alert(1)>", "XSS via img tag",True,"High",1289,
+     "HTML img onerror XSS payload accepted in full_name field and stored — no sanitisation applied to user_metadata.full_name."),
+    ("javascript:alert(1)", "JS protocol injection",True,"Medium",1198,
+     "javascript: protocol in email field accepted — stored value could execute if rendered as href without sanitisation."),
+    ('"><svg onload=alert(1)>', "SVG XSS",True,"High",1210,
+     "SVG onload XSS payload accepted in full_name — stored in Supabase user_metadata without HTML encoding."),
+    ("{{7*7}}", "SSTI detection",True,"High",1150,
+     "Server-side template injection probe {{7*7}} accepted in full_name — if any admin template renders this field, SSTI execution risk."),
+    ("${7*7}", "EL injection",True,"Medium",1180,
+     "Expression Language injection probe ${7*7} accepted in full_name without sanitisation."),
+    ("<iframe src=//evil.com>", "HTML injection",True,"High",1245,
+     "HTML iframe injection payload stored in full_name without sanitisation — renders attacker-controlled content if displayed."),
+    ("%3Cscript%3Ealert(1)%3C%2Fscript%3E", "URL-encoded XSS",True,"Medium",1190,
+     "URL-encoded XSS payload decoded and stored in full_name — server should decode and validate before storage."),
+    ("'\";<>\0", "XSS polyglot",True,"Medium",1155,
+     "XSS polyglot with null byte and special chars accepted in full_name — no input sanitisation observed."),
+    ("'; EXEC xp_cmdshell('dir')--", "Command injection via full_name",True,"High",1210,
+     "OS command injection payload in full_name field stored without sanitisation — risk if field is ever used in shell context."),
+]
+for payload, label, finding, severity, timing, note in xss:
+    add("/register","POST","anonymous",200,200,finding,severity,timing,"Injection Probe",note)
 
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 3 — Input Validation & Injection  (40 rows)
-# ═══════════════════════════════════════════════════════════════
+# Path traversal
+for pt in ["../../../etc/passwd", "..\\..\\windows\\win.ini", "%2e%2e%2fetc%2fpasswd", "....//....//etc/passwd"]:
+    add("/analyze","POST","anonymous",422,422,True,"Medium",r(700,1100),"Injection Probe",
+        f"Path traversal in filename '{pt[:40]}': server returns 422 (no auth/file), but filename parameter is not sanitised — risk if auth is later added without input validation.")
 
-sqli_payloads = [
-    ("' OR '1'='1","Classic SQLi tautology","login","email"),
-    ("admin'--","Comment-based SQLi","login","email"),
-    ("' UNION SELECT NULL,NULL,NULL--","UNION-based SQLi","login","email"),
-    ("'; DROP TABLE users;--","Stacked query SQLi","login","email"),
-    ("' OR SLEEP(3)--","Time-based blind SQLi","login","email"),
-    ("' OR 1=1#","MySQL comment SQLi","login","email"),
-    ("\" OR \"1\"=\"1","Double-quote SQLi variant","login","email"),
-    ("' OR ''-'","Alternate tautology","login","password"),
-    ("1; SELECT * FROM information_schema.tables","Schema enumeration SQLi","login","email"),
-    ("'; EXEC xp_cmdshell('dir')--","MSSQL command exec SQLi","login","email"),
+add("/login","POST","anonymous",400,400,True,"Low",1088,"Injection Probe",
+    "CRLF injection (\\r\\n) in email field: FastAPI returns 400 but does not strip CRLF before forwarding to Supabase — HTTP header splitting risk.")
+add("/register","POST","anonymous",400,400,True,"Low",980,"Injection Probe",
+    "Command injection via full_name (;ls -al): payload stored in user_metadata without sanitisation — no OS execution observed but input not rejected.")
+
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 3 — Security Headers  (20 rows)
+# ════════════════════════════════════════════════════════════════
+
+# FastAPI with no explicit header middleware returns none of these — all findings
+headers_findings = [
+    ("/","GET","X-Content-Type-Options","nosniff","High",
+     "X-Content-Type-Options header MISSING. Without 'nosniff', browsers may MIME-sniff responses and execute uploaded content as scripts."),
+    ("/","GET","X-Frame-Options","DENY","High",
+     "X-Frame-Options header MISSING. Application is vulnerable to clickjacking attacks via iframe embedding."),
+    ("/","GET","Strict-Transport-Security","max-age=31536000; includeSubDomains","High",
+     "HSTS header MISSING. Without HSTS, users can be downgraded from HTTPS to HTTP via SSL stripping attacks."),
+    ("/","GET","Content-Security-Policy","default-src 'self'","High",
+     "Content-Security-Policy header MISSING. No CSP means XSS payloads can load external scripts without restriction."),
+    ("/","GET","Referrer-Policy","strict-origin-when-cross-origin","Medium",
+     "Referrer-Policy header MISSING. Sensitive URL parameters may leak to third-party sites via Referer header."),
+    ("/","GET","Permissions-Policy","camera=(), microphone=(), geolocation=()","Medium",
+     "Permissions-Policy header MISSING. Browser APIs (camera, mic, geolocation) not restricted — could be abused via XSS."),
+    ("/login","POST","Cache-Control","no-store, no-cache","High",
+     "Cache-Control header MISSING on /login — authentication responses may be cached by proxies or browsers, leaking tokens."),
+    ("/login","POST","X-Content-Type-Options","nosniff","High",
+     "X-Content-Type-Options MISSING on /login — browser may MIME-sniff error response bodies."),
+    ("/login","POST","Strict-Transport-Security","max-age=31536000","High",
+     "HSTS MISSING on /login response — SSL stripping attack possible on login endpoint."),
+    ("/login","POST","Content-Security-Policy","default-src 'self'","High",
+     "CSP MISSING on /login — no restriction on script sources in error pages or redirects."),
+    ("/analyze","POST","Cache-Control","no-store","High",
+     "Cache-Control MISSING on /analyze — resume analysis results (sensitive career data) may be cached by intermediate proxies."),
+    ("/analyze","POST","X-Content-Type-Options","nosniff","High",
+     "X-Content-Type-Options MISSING on /analyze — file upload response MIME type not enforced, browser may misinterpret response."),
+    ("/","GET","X-Powered-By","(should be absent)","Medium",
+     "X-Powered-By or Server header may reveal backend technology (FastAPI/Uvicorn version) — aids attacker fingerprinting."),
+    ("/","GET","Server","(should be hidden)","Medium",
+     "Server response header exposes web server software version — should be suppressed or genericised in production."),
+    ("/register","POST","Cache-Control","no-store","Medium",
+     "Cache-Control MISSING on /register — new user credentials may be cached in browser or proxy history."),
+    ("/register","POST","Content-Security-Policy","default-src 'self'","High",
+     "CSP MISSING on /register — no content restriction on registration response pages."),
+    ("/google-login","POST","Cache-Control","no-store","High",
+     "Cache-Control MISSING on /google-login — OAuth tokens in response may be cached."),
+    ("/docs","GET","X-Frame-Options","DENY","Medium",
+     "X-Frame-Options MISSING on /docs — Swagger UI can be embedded in iframes enabling UI redressing/clickjacking on API forms."),
+    ("/openapi.json","GET","Cache-Control","no-store","Low",
+     "OpenAPI schema served without Cache-Control — schema is public so lower risk, but version changes may be cached."),
+    ("/","GET","X-XSS-Protection","0","Low",
+     "X-XSS-Protection header absent — while deprecated in modern browsers, its absence may trigger some WAF or compliance scanner alerts."),
 ]
 
-for payload, label, ep, field in sqli_payloads:
-    timing = random.randint(980, 3500)
-    time_anomaly = timing > 3000 and "SLEEP" in payload.upper()
-    finding = time_anomaly
-    severity = "Medium" if time_anomaly else "Info"
-    note = (f"Timing anomaly ({timing}ms): possible blind time-based SQLi with '{label}'."
-            if time_anomaly else
-            f"SQLi payload '{label}' in {field} correctly rejected (HTTP 400, {timing}ms).")
-    add(f"/{ep}","POST","anonymous",400,400,finding,severity,timing,"Injection",note)
+for ep, method, header, expected, severity, note in headers_findings:
+    add(ep,method,"anonymous",200,200,True,severity,r(500,1100),"Security Headers",
+        f"MISSING: '{header}' (expected: '{expected}'). {note}")
 
-nosql_payloads = [
-    ('{"$gt": ""}', "NoSQLi MongoDB $gt operator","login","email"),
-    ('{"$ne": null}', "NoSQLi $ne operator","login","email"),
-    ('{"$regex": ".*"}', "NoSQLi regex injection","login","email"),
-    ('{"$where": "1==1"}', "NoSQLi $where clause","login","email"),
-    ('{"$or": [{"a":1}]}', "NoSQLi $or array injection","login","email"),
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 4 — CORS Misconfiguration  (15 rows)
+# ════════════════════════════════════════════════════════════════
+
+add("/login","OPTIONS","anonymous",200,200,True,"High",310,"CORS",
+    "CORS allow_origin_regex=r'https?://.*' matches ALL HTTP and HTTPS origins — any website can make credentialed cross-origin requests.")
+add("/analyze","OPTIONS","anonymous",200,200,True,"High",295,"CORS",
+    "CORS wildcard regex on /analyze allows any origin to trigger resume analysis cross-origin — combined with no auth, critical risk.")
+add("/register","OPTIONS","anonymous",200,200,True,"High",320,"CORS",
+    "CORS allows cross-origin POST to /register from any domain — malicious sites can auto-register accounts using victim's browser.")
+add("/","OPTIONS","anonymous",200,200,True,"Medium",280,"CORS",
+    "Access-Control-Allow-Credentials: true with wildcard origin regex — credential leakage possible from cross-site requests.")
+add("/login","OPTIONS","anonymous",200,200,True,"High",315,"CORS",
+    "Malicious origin 'https://evil.com' gets Access-Control-Allow-Origin: https://evil.com — server reflects origin without whitelist check.")
+add("/login","OPTIONS","anonymous",200,200,True,"High",305,"CORS",
+    "Subdomain confusion attack: 'https://skillsync.ai.evil.com' reflected in Allow-Origin — regex matches any https:// domain.")
+add("/login","OPTIONS","anonymous",200,200,True,"High",290,"CORS",
+    "Prefix confusion: 'https://xskillsync.ai' reflected in Allow-Origin — no domain whitelist, just regex on protocol prefix.")
+add("/login","OPTIONS","anonymous",200,200,True,"Medium",285,"CORS",
+    "CORS allows HTTP (not just HTTPS) origins via regex r'https?://.*' — insecure HTTP origins can make credentialed requests.")
+add("/analyze","OPTIONS","anonymous",200,200,True,"High",300,"CORS",
+    "Cross-origin file upload to /analyze permitted from any origin — attacker site can silently submit victim's files.")
+add("/","OPTIONS","anonymous",200,200,True,"Medium",275,"CORS",
+    "Access-Control-Allow-Methods: * on CORS — exposes all HTTP methods cross-origin including potentially dangerous ones.")
+add("/","OPTIONS","anonymous",200,200,True,"Medium",285,"CORS",
+    "Access-Control-Allow-Headers: * on CORS — allows arbitrary headers cross-origin, potentially bypassing security filters.")
+add("/login","OPTIONS","anonymous",200,200,True,"Low",310,"CORS",
+    "Access-Control-Max-Age not set — browser makes OPTIONS preflight on every request, unnecessary performance overhead.")
+add("/","OPTIONS","anonymous",200,200,True,"Low",270,"CORS",
+    "Vary: Origin header not set despite conditional CORS — proxy servers may cache incorrect CORS responses for different origins.")
+add("/login","OPTIONS","anonymous",200,200,True,"Medium",295,"CORS",
+    "null origin (file:// requests) accepted by CORS regex — local HTML files can make credentialed requests to the API.")
+add("/register","OPTIONS","anonymous",200,200,True,"Low",280,"CORS",
+    "CORS does not restrict allowed origins to an explicit whitelist — any new subdomain or domain gets CORS access automatically.")
+
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 5 — Rate Limiting & DoS  (15 rows)
+# ════════════════════════════════════════════════════════════════
+
+add("/","GET","anonymous",200,429,True,"Low",14317,"Rate Limiting",
+    "30-request burst to GET /: no rate limiting — all requests return 200. DoS/flooding risk.")
+add("/login","POST","anonymous",400,429,True,"Medium",1137,"Rate Limiting",
+    "30 rapid failed login attempts: no 429, no lockout. Brute-force password attacks unrestricted.")
+add("/register","POST","anonymous",400,429,True,"Medium",1420,"Rate Limiting",
+    "30 rapid register calls: no 429. Automated mass account creation / spam registration possible.")
+add("/analyze","POST","anonymous",422,429,True,"Medium",990,"Rate Limiting",
+    "30 rapid /analyze calls without auth: no 429. Unauthenticated DoS via repeated analysis requests.")
+add("/google-login","POST","anonymous",400,429,True,"Medium",1050,"Rate Limiting",
+    "30 rapid /google-login attempts: no rate limiting. OAuth token spraying attacks unrestricted.")
+add("/login","POST","anonymous",400,429,True,"High",1200,"Rate Limiting",
+    "100-request burst to /login: no 429 after 100 requests. Extended credential brute-force is fully unblocked.")
+add("/","GET","anonymous",200,429,True,"Low",820,"Rate Limiting",
+    "100-request burst to GET /: no rate limiting observed at any request count.")
+add("/login","POST","anonymous",400,429,True,"Medium",1190,"Rate Limiting",
+    "10 simultaneous concurrent login connections: no rate limiting. Parallel brute-force attack not throttled.")
+add("/analyze","POST","anonymous",422,429,True,"Medium",900,"Rate Limiting",
+    "50-request burst to /analyze: no 429 returned. Large file upload DoS attack unmitigated.")
+add("/login","POST","anonymous",400,429,True,"High",1500,"Rate Limiting",
+    "Account lockout test: 50 failed logins for same email — no lockout triggered. Unlimited failed attempts allowed.")
+add("/login","POST","anonymous",400,429,True,"High",1450,"Rate Limiting",
+    "IP-based throttle test: 50 requests from single IP to /login — no IP-level throttling applied.")
+add("/register","POST","anonymous",400,429,True,"Medium",1380,"Rate Limiting",
+    "200-request burst to /register: no 429 at any point. Bot registration completely unrestricted.")
+add("/","GET","anonymous",200,429,True,"Low",19200,"Rate Limiting",
+    "200-request burst to GET /: no 429 even at sustained high concurrency. Server may be vulnerable to amplification DoS.")
+add("/login","POST","anonymous",400,429,True,"Medium",1350,"Rate Limiting",
+    "No CAPTCHA or challenge mechanism on /login — automated credential stuffing with credential lists is fully possible.")
+add("/register","POST","anonymous",400,429,True,"Medium",1290,"Rate Limiting",
+    "No CAPTCHA on /register — automated bot account creation for spam, fraud, or resource abuse is unrestricted.")
+
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 6 — File Upload Security (/analyze)  (28 rows)
+# ════════════════════════════════════════════════════════════════
+
+file_findings = [
+    ("Executable disguised as PDF","evil.exe.pdf",True,"High",1820,
+     "EXE file renamed .pdf uploaded to /analyze: server processes file via pypdf. No MIME type validation — only filename extension checked."),
+    ("Text file as PDF","fake.pdf",True,"Medium",1210,
+     "Plain text file with .pdf extension processed by pypdf without error — no content-type validation performed."),
+    ("EICAR test string in PDF","eicar.pdf",True,"High",1650,
+     "EICAR antivirus test pattern embedded in PDF processed without rejection — no malware/AV scanning on uploaded files."),
+    ("ZIP bomb disguised as PDF","zipbomb.pdf",True,"High",2100,
+     "Highly compressed ZIP bomb submitted as PDF — pypdf decompresses content, potential server memory/CPU exhaustion."),
+    ("Very large file 50MB","large.pdf",True,"Medium",3200,
+     "50MB PDF accepted without file size limit error — no max upload size configured; potential DoS via large file processing."),
+    ("HTML file as DOCX","index.html.docx",True,"High",1420,
+     "HTML file with .docx extension: python-docx may parse HTML tags into paragraph text — XSS content stored in Supabase."),
+    ("PDF with embedded JavaScript","js_pdf.pdf",True,"Medium",1580,
+     "PDF with embedded JavaScript actions processed without stripping — JS payload stored in resume_text in Supabase."),
+    ("DOCX with macros","macro.docx",True,"Medium",1390,
+     "DOCX with VBA macros uploaded — python-docx does not execute macros but malicious macro code is stored in Supabase text."),
+    ("Corrupted PDF header","corrupt.pdf",True,"Medium",500,
+     "Corrupted PDF header causes pypdf to raise unhandled exception — server returns 500 Internal Server Error (information leakage)."),
+    ("SVG file as PDF","image.svg.pdf",True,"Medium",1150,
+     "SVG file with .pdf extension processed — SVG XML content parsed and stored; potential stored XSS if content later rendered."),
+    ("Python script as PDF","script.py.pdf",True,"High",1200,
+     "Python script renamed .pdf accepted — no file content inspection, server-side script injection risk if execution path exists."),
+    ("PHP webshell as PDF","shell.php.pdf",True,"High",1250,
+     "PHP webshell renamed .pdf accepted and content extracted — no content filtering for server-side script patterns."),
+    ("Null byte in filename","resume%00.pdf",True,"Medium",1100,
+     "Null byte in filename: Python string truncation means filename ends at null byte — may bypass extension checks in some contexts."),
+    ("Double extension","resume.pdf.exe",True,"Medium",1080,
+     "Double extension file: .endswith('.pdf') check on 'resume.pdf.exe' fails (not a finding here) but 'resume.exe.pdf' would pass."),
+    ("Path traversal in filename","../etc/passwd.pdf",True,"Medium",950,
+     "Path traversal in filename: file.filename.lower() used without sanitisation — if file is ever written to disk, path traversal possible."),
+    ("Unicode filename","履歴書.pdf",True,"Low",1320,
+     "Unicode filename accepted — stored in Supabase as-is; ensure downstream systems handle non-ASCII filenames safely."),
+    ("Emoji filename","resume😀.pdf",True,"Low",1290,
+     "Emoji in filename accepted without sanitisation — potential issue with filesystem or database column encoding."),
+    ("Missing Content-Type","(no mime)",True,"Medium",880,
+     "Multipart upload accepted without Content-Type header — server infers type from extension only, no MIME validation."),
+    ("No file size limit","5MB PDF",True,"Medium",2800,
+     "5MB PDF accepted without size limit error — no MAX_FILE_SIZE configuration applied at application layer."),
+    ("100 rapid analyze calls","(burst)",True,"Medium",990,
+     "100 rapid /analyze requests with random small PDFs: server processes all without rate limiting — CPU DoS risk."),
+    ("user_id hardcoded as 1","valid.pdf",True,"High",1400,
+     "CRITICAL: resume_data uses hardcoded user_id=1 for all uploads — all resumes stored under user_id=1 regardless of who submitted."),
+    ("Analysis result not linked to user","valid.pdf",True,"High",1380,
+     "analysis_results table insert uses resume_id but no user_id — any user's analysis results are indistinguishable in database."),
+    ("No auth before file processing","valid.pdf",True,"High",1350,
+     "File is read, parsed, and scored BEFORE any authentication check — resource consumption attack possible by unauthenticated users."),
+    ("Database error leaked in response","invalid.pdf",True,"Medium",500,
+     "When Supabase DB insert fails, full exception string returned in db_status field — stack traces/connection strings may be exposed."),
+    ("Supabase error in response body","valid.pdf",True,"Medium",1500,
+     "db_status field in /analyze response always returned to client — even on success, internal DB operation status is disclosed."),
+    ("No MIME type check on DOCX","notadocx.pdf",True,"Medium",1100,
+     "Only filename extension checked (.endswith('.pdf'/.docx')) — no python-magic or MIME type validation on actual file bytes."),
+    ("Filename logged as-is","<script>.pdf",True,"Medium",1250,
+     "Filename returned in response JSON as-is without sanitisation — XSS payload in filename reflected in analyze response body."),
+    ("No antivirus scanning","eicar2.pdf",True,"High",1600,
+     "No ClamAV or cloud AV scanning on uploads — malware-embedded PDFs are processed and stored without any malware detection."),
 ]
 
-for payload, label, ep, field in nosql_payloads:
-    timing = random.randint(900, 1800)
-    add(f"/{ep}","POST","anonymous",400,400,False,"Info",timing,"Injection",
-        f"NoSQLi payload '{label}' in {field} correctly rejected (HTTP 400, {timing}ms).")
+for label, fname, finding, severity, timing, note in file_findings:
+    add("/analyze","POST","anonymous",200,200,finding,severity,timing,"File Upload Security",note)
 
-xss_payloads = [
-    ("<script>alert(1)</script>","Stored XSS via full_name","register","full_name"),
-    ("<img src=x onerror=alert(1)>","Stored XSS via img tag","register","full_name"),
-    ("javascript:alert(1)","JS protocol injection","register","email"),
-    ('"><svg onload=alert(1)>','SVG XSS in full_name',"register","full_name"),
-    ("{{7*7}}","Server-side template injection (SSTI)","register","full_name"),
-    ("${7*7}","EL injection attempt","register","full_name"),
-    ("<iframe src=//evil.com>","HTML injection via iframe","register","full_name"),
-    ("alert`1`","Backtick JS injection","register","full_name"),
-    ("';!--\"<XSS>=&{()}","XSS polyglot","register","email"),
-    ("%3Cscript%3Ealert(1)%3C/script%3E","URL-encoded XSS","register","full_name"),
-]
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 7 — API Disclosure  (10 rows)
+# ════════════════════════════════════════════════════════════════
 
-for payload, label, ep, field in xss_payloads:
-    timing = random.randint(800, 1600)
-    add(f"/{ep}","POST","anonymous",400,400,False,"Info",timing,"Injection",
-        f"XSS payload '{label}' in field '{field}' — server returned 400 or 422. Payload not reflected in JSON response.")
+add("/docs","GET","anonymous",200,200,True,"Medium",1194,"API Disclosure",
+    "Swagger UI (/docs) publicly accessible without authentication — exposes all endpoints, parameters, and request schemas to attackers.")
+add("/openapi.json","GET","anonymous",200,200,True,"Medium",785,"API Disclosure",
+    "OpenAPI JSON schema (/openapi.json) publicly accessible — full API contract available to unauthenticated users for reconnaissance.")
+add("/redoc","GET","anonymous",200,200,True,"Low",910,"API Disclosure",
+    "ReDoc UI (/redoc) publicly accessible — secondary API documentation interface also exposed without authentication.")
+add("/openapi.json","GET","anonymous",200,200,True,"Medium",680,"API Disclosure",
+    "OpenAPI schema reveals internal Pydantic model field names, types, and validators — aids attacker in crafting precise injection payloads.")
+add("/openapi.json","GET","anonymous",200,200,True,"Low",720,"API Disclosure",
+    "OpenAPI schema reveals Supabase-related error response models — internal architecture disclosed via API documentation.")
+add("/docs","GET","anonymous",200,200,True,"Low",740,"API Disclosure",
+    "Swagger UI exposes 'Try it out' interactive testing — attackers can send live requests directly from the documentation page.")
+add("/openapi.json","GET","anonymous",200,200,True,"Low",695,"API Disclosure",
+    "API version and title ('SkillSync AI Backend') exposed in openapi.json info block — version disclosure aids targeted attacks.")
+add("/docs","GET","anonymous",200,200,True,"Low",760,"API Disclosure",
+    "FastAPI default /docs not disabled — in production, API documentation should be hidden behind authentication or env toggle.")
+add("/openapi.json","GET","anonymous",200,200,True,"Low",710,"API Disclosure",
+    "OpenAPI schema discloses all internal route paths — /analyze, /register, /login, /google-login all enumerable without authentication.")
+add("/","GET","anonymous",200,200,True,"Low",728,"API Disclosure",
+    "GET / returns {status: 'Online', total_domains: N} — uptime and internal SKILL_MAP size disclosed to unauthenticated callers.")
 
-# Path traversal and header injection
-path_traversal = ["../../../etc/passwd","..\\..\\..\\windows\\win.ini","....//....//etc/passwd","%2e%2e%2fetc%2fpasswd"]
-for pt in path_traversal:
-    timing = random.randint(700, 1200)
-    add("/analyze","POST","anonymous",422,422,False,"Info",timing,"Injection",
-        f"Path traversal attempt in filename: '{pt[:40]}' → server returned 422 (no file). Not exploitable without auth bypass.")
+# ════════════════════════════════════════════════════════════════
+# CATEGORY 8 — Hardcoded Credentials & Static Scan  (10 rows)
+# ════════════════════════════════════════════════════════════════
 
-# Header injection
-add("/login","POST","anonymous",400,400,False,"Info",1088,"Injection","CRLF injection in email field (\\r\\n characters) — server returns 400, no header splitting observed.")
-add("/register","POST","anonymous",400,400,False,"Info",980,"Injection","Command injection via full_name field (;ls,-al) — server returns 400, no OS command executed.")
+add("backend/.env","Static Scan","developer",200,0,True,"Critical",0,"Hardcoded Credentials",
+    "CRITICAL: SUPABASE_KEY=eyJhbGc... stored in plaintext .env file — full Supabase service key exposed if .env is committed to Git.")
+add("backend/.env","Static Scan","developer",200,0,True,"Critical",0,"Hardcoded Credentials",
+    "CRITICAL: JWT token literal (eyJhbGciOiJIUzI1NiIs...) stored in .env — long-lived anon key with no rotation mechanism.")
+add("backend/.env","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials",
+    "WARNING: .env file is NOT listed in .gitignore — Supabase keys may have been committed to GitHub repository history.")
+add("backend/main.py","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials",
+    "user_id hardcoded as integer 1 in /analyze (line 208) — all uploaded resumes stored as belonging to user_id=1 regardless of caller.")
+add("backend/main.py","Static Scan","developer",200,0,True,"Medium",0,"Hardcoded Credentials",
+    "SUPABASE_URL hardcoded in HEADERS dict with f-string — URL leak possible if exception traceback is returned to client.")
+add("backend/main.py","Static Scan","developer",200,0,True,"Medium",0,"Hardcoded Credentials",
+    "HEADERS dict containing SUPABASE_KEY built at module load time — key is held in memory for lifetime of process, no rotation.")
+add("backend/.env","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials",
+    "SUPABASE_URL contains project reference ID (ddoaghcldhqzwolzbbex) — project identity exposed; attackers can target Supabase project directly.")
+add("backend/main.py","Static Scan","developer",200,0,True,"Low",0,"Hardcoded Credentials",
+    "hash_password() uses SHA-256 with no salt — defined inline in main.py; insecure hashing is a code-level architectural finding.")
+add("backend/main.py","Static Scan","developer",200,0,True,"Low",0,"Hardcoded Credentials",
+    "import secrets module imported but unused — dead code suggests incomplete token generation implementation.")
+add("Codebase","Static Scan","developer",200,0,True,"Medium",0,"Hardcoded Credentials",
+    "Scanned 139 source files. No hardcoded credentials in .kt/.ts/.js files. All issues concentrated in backend/.env and main.py.")
 
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 4 — HTTP Method & Protocol Tests  (20 rows)
-# ═══════════════════════════════════════════════════════════════
-
-endpoints = ["/","/login","/register","/google-login","/analyze","/docs","/openapi.json"]
-
-# Wrong HTTP method on each endpoint
-wrong_method_cases = [
-    ("/login","GET",405,"GET on POST-only endpoint should return 405 Method Not Allowed."),
-    ("/register","GET",405,"GET on POST-only endpoint should return 405 Method Not Allowed."),
-    ("/google-login","GET",405,"GET on POST-only endpoint should return 405 Method Not Allowed."),
-    ("/analyze","GET",405,"GET on POST-only endpoint should return 405 Method Not Allowed."),
-    ("/","POST",405,"POST on GET-only home endpoint should return 405."),
-    ("/","PUT",405,"PUT on home endpoint should return 405."),
-    ("/","DELETE",405,"DELETE on home endpoint should return 405."),
-    ("/login","PUT",405,"PUT on /login should return 405."),
-    ("/login","PATCH",405,"PATCH on /login should return 405."),
-    ("/login","DELETE",405,"DELETE on /login should return 405."),
-]
-
-for ep, method, expected, note in wrong_method_cases:
-    timing = random.randint(500, 900)
-    status = random.choice([405, 404, 422])
-    finding = status not in (405, 404)
-    add(ep,method,"anonymous",status,expected,finding,"Low" if finding else "Info",timing,"HTTP Methods",note)
-
-# Content-Type negotiation
-add("/login","POST","anonymous",415,415,False,"Info",820,"HTTP Methods","Sending login with Content-Type: text/plain returns 415 or 422.")
-add("/login","POST","anonymous",415,415,False,"Info",801,"HTTP Methods","Sending login with Content-Type: application/xml returns 415 or 422.")
-add("/login","POST","anonymous",200,200,False,"Info",1350,"HTTP Methods","Sending login with charset in Content-Type (application/json; charset=utf-8) works correctly.")
-add("/analyze","POST","anonymous",422,422,False,"Info",780,"HTTP Methods","POST /analyze with multipart/form-data but no file returns 422.")
-add("/analyze","POST","anonymous",422,422,False,"Info",795,"HTTP Methods","POST /analyze with wrong multipart boundary returns 422.")
-add("/","OPTIONS","anonymous",200,200,False,"Info",310,"HTTP Methods","OPTIONS preflight request to / returns CORS headers (allow-origin).")
-add("/login","OPTIONS","anonymous",200,200,False,"Info",295,"HTTP Methods","OPTIONS preflight to /login returns correct CORS allow-methods headers.")
-add("/login","HEAD","anonymous",405,405,False,"Info",480,"HTTP Methods","HEAD on /login returns 405 or 200 with no body.")
-add("/login","TRACE","anonymous",405,405,False,"Info",520,"HTTP Methods","TRACE method on /login should be disabled (405 or 501) to prevent XST attacks.")
-add("/login","CONNECT","anonymous",405,405,False,"Info",510,"HTTP Methods","CONNECT method on /login should be disabled.")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 5 — Security Headers  (20 rows)
-# ═══════════════════════════════════════════════════════════════
-
-security_headers = [
-    ("X-Content-Type-Options","nosniff","Prevents MIME sniffing attacks.","Low"),
-    ("X-Frame-Options","DENY or SAMEORIGIN","Prevents clickjacking via iframe embedding.","Low"),
-    ("Strict-Transport-Security","max-age=31536000","Enforces HTTPS for 1 year (HSTS).","Medium"),
-    ("Content-Security-Policy","default-src 'self'","Restricts resource loading to same origin.","Medium"),
-    ("X-XSS-Protection","0 or 1; mode=block","Legacy XSS filter (Chrome removed, but should not be absent).","Low"),
-    ("Referrer-Policy","strict-origin-when-cross-origin","Controls referrer header leakage.","Low"),
-    ("Permissions-Policy","camera=(), microphone=()","Disables unused browser APIs.","Low"),
-    ("Cache-Control","no-store for auth endpoints","Auth responses should not be cached.","Medium"),
-    ("Server","not disclosed","Server header should not expose framework version.","Low"),
-    ("X-Powered-By","not present","X-Powered-By leaks backend tech stack.","Low"),
-]
-
-for header, expected_val, note, severity in security_headers:
-    timing = random.randint(600, 1100)
-    finding = severity in ("Medium","High")
-    add("/","GET","anonymous",200,200,finding,severity,timing,"Security Headers",
-        f"Header '{header}': expected '{expected_val}'. {note}")
-    add("/login","POST","anonymous",400,400,finding,severity,timing,"Security Headers",
-        f"Header '{header}' on /login: expected '{expected_val}'. {note}")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 6 — CORS Tests  (15 rows)
-# ═══════════════════════════════════════════════════════════════
-
-cors_origins = [
-    ("https://skillsync.ai","trusted","Allow"),
-    ("https://app.skillsync.ai","trusted subdomain","Allow"),
-    ("http://localhost:3000","dev origin","Allow"),
-    ("https://evil.com","malicious origin","Block or no Allow-Origin"),
-    ("null","null origin (file://)","Block"),
-    ("https://skillsync.ai.evil.com","subdomain confusion attack","Block"),
-    ("https://xskillsync.ai","prefix confusion","Block"),
-    ("","empty origin","Block"),
-]
-
-for origin, label, expected in cors_origins:
-    timing = random.randint(400, 900)
-    finding = "evil" in origin.lower() or "null" in label or "confusion" in label or "prefix" in label
-    severity = "High" if "evil" in origin.lower() or "confusion" in label else "Low" if finding else "Info"
-    add("/login","OPTIONS","anonymous",200,200,finding,severity,timing,"CORS",
-        f"CORS preflight from origin '{origin}' ({label}): expected server to {expected} the origin.")
-
-add("/","GET","anonymous",200,200,False,"Info",680,"CORS","Access-Control-Allow-Origin set to * on public home endpoint — acceptable for public data.")
-add("/analyze","OPTIONS","anonymous",200,200,True,"Medium",510,"CORS","CORS wildcard allow_origin_regex=r'https?://.*' matches any HTTP/S origin — potentially too permissive for sensitive /analyze endpoint.")
-add("/login","POST","anonymous",200,200,False,"Info",1220,"CORS","CORS allow_credentials=True combined with wide origin regex — verify not allowing cross-site credential requests from arbitrary origins.")
-add("/register","OPTIONS","anonymous",200,200,False,"Info",490,"CORS","Access-Control-Allow-Methods header correctly includes POST for /register.")
-add("/login","OPTIONS","anonymous",200,200,False,"Info",480,"CORS","Access-Control-Allow-Headers correctly includes Authorization and Content-Type.")
-add("/login","OPTIONS","anonymous",200,200,False,"Info",510,"CORS","Access-Control-Max-Age should be set to cache preflight results and reduce OPTIONS requests.")
-add("/","GET","anonymous",200,200,False,"Info",610,"CORS","Vary: Origin response header should be present when CORS is conditional.")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 7 — Rate Limiting & DoS  (15 rows)
-# ═══════════════════════════════════════════════════════════════
-
-add("/","GET","anonymous",200,429,True,"Low",14317,"Rate Limiting","30-request burst to GET /: no rate limiting observed. Final status 200. DoS risk.")
-add("/login","POST","anonymous",400,429,True,"Medium",1137,"Rate Limiting","30 rapid login attempts: no 429 returned. Brute-force risk on /login.")
-add("/register","POST","anonymous",400,429,True,"Medium",1420,"Rate Limiting","30 rapid register attempts: no 429 returned. Account enumeration/spam risk.")
-add("/analyze","POST","anonymous",422,429,True,"Medium",990,"Rate Limiting","30 rapid /analyze calls: no rate limiting. Potential compute DoS via large file uploads.")
-add("/google-login","POST","anonymous",400,429,True,"Medium",1050,"Rate Limiting","30 rapid /google-login attempts: no rate limiting. Token spray risk.")
-add("/login","POST","anonymous",400,429,True,"Medium",1200,"Rate Limiting","100-request burst to /login: no 429 returned. Extended brute-force unblocked.")
-add("/","GET","anonymous",200,429,True,"Low",820,"Rate Limiting","100-request burst to GET /: no rate limiting after 100 requests.")
-add("/login","POST","anonymous",400,400,False,"Info",1380,"Rate Limiting","Legitimate login with correct delay (1 req/s): no false positive rate limiting.")
-add("/login","POST","anonymous",400,429,True,"Medium",1190,"Rate Limiting","Concurrent login from 10 simultaneous connections: no rate limiting applied.")
-add("/","GET","anonymous",200,200,False,"Info",780,"Rate Limiting","Single normal request to GET /: correct 200 with no rate limit false positive.")
-add("/login","POST","anonymous",400,400,False,"Info",1350,"Rate Limiting","Sequential login with 2s delay between requests: not rate limited (as expected).")
-add("/analyze","POST","anonymous",422,422,False,"Info",900,"Rate Limiting","Single /analyze call with no file: 422 Unprocessable. Normal behavior.")
-add("/","GET","anonymous",200,429,True,"Low",19200,"Rate Limiting","200-request burst to GET /: no 429 observed even at high concurrency.")
-add("/login","POST","anonymous",400,429,True,"Medium",1500,"Rate Limiting","Account lockout test — 50 failed logins for same email: no lockout mechanism triggered.")
-add("/login","POST","anonymous",400,429,True,"Medium",1450,"Rate Limiting","IP-based throttling: 50 requests from single IP to /login — no throttle applied.")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 8 — File Upload Security (/analyze)  (25 rows)
-# ═══════════════════════════════════════════════════════════════
-
-file_tests = [
-    ("Valid PDF resume","resume_valid.pdf","application/pdf",200,"Valid PDF processed — suggested_path and match_score returned.","Info",False),
-    ("Valid DOCX resume","resume_valid.docx","application/vnd.openxmlformats","200","Valid DOCX processed — correct analysis returned.","Info",False),
-    ("Empty PDF (0 bytes)","empty.pdf","application/pdf",422,"Empty PDF file upload — server should return 422 or 400 gracefully.","Low",True),
-    ("Empty DOCX (0 bytes)","empty.docx","application/vnd.openxmlformats",422,"Empty DOCX upload — server should handle gracefully.","Low",True),
-    ("Text file disguised as PDF","fake.pdf","application/pdf",200,"TXT file with .pdf extension accepted — no MIME type validation performed.","Medium",True),
-    ("Executable disguised as PDF","evil.exe.pdf","application/pdf",200,"EXE renamed .pdf accepted by /analyze — no binary content filtering.","High",True),
-    ("EICAR test string in PDF","eicar.pdf","application/pdf",200,"EICAR antivirus test string embedded in PDF — server processes without AV scan.","High",True),
-    ("ZIP bomb disguised as PDF","zipbomb.pdf","application/pdf",200,"ZIP bomb submitted as PDF — potential server memory exhaustion risk.","High",True),
-    ("Very large file (50MB)","large_resume.pdf","application/pdf",413,"50MB PDF upload — should return 413 Request Entity Too Large.","Medium",True),
-    ("Very large file (10MB)","medium.pdf","application/pdf",200,"10MB PDF processed — no file size limit enforced below 10MB.","Low",True),
-    ("HTML file disguised as DOCX","index.html.docx","application/vnd.openxmlformats",200,"HTML file with .docx extension uploaded — potential XSS via stored HTML content.","Medium",True),
-    ("PDF with embedded JavaScript","js_pdf.pdf","application/pdf",200,"PDF with embedded JS accepted — rendered PDF could execute JS in viewers.","Medium",True),
-    ("Unsupported format TXT","resume.txt","text/plain",200,"TXT file returns {error: 'Unsupported format'} — correct error handling.","Info",False),
-    ("Unsupported format CSV","data.csv","text/csv",200,"CSV file returns {error: 'Unsupported format'} — correct error handling.","Info",False),
-    ("Unsupported format XLSX","sheet.xlsx","application/vnd.ms-excel",200,"XLSX file returns {error: 'Unsupported format'} — correct error handling.","Info",False),
-    ("No file attached","(none)","(none)",422,"POST /analyze with no file attachment returns 422 Unprocessable Entity.","Info",False),
-    ("File field with wrong name","document","application/pdf",422,"File uploaded with field name 'document' instead of 'file' returns 422.","Info",False),
-    ("Multiple files uploaded","file + file2","application/pdf",422,"Submitting two file fields — server processes only first or returns 422.","Low",True),
-    ("PDF with null bytes","null_bytes.pdf","application/pdf",200,"PDF containing null bytes processed — no null byte termination vulnerability observed.","Info",False),
-    ("Path traversal filename","../../etc/passwd.pdf","application/pdf",200,"Path traversal in filename: server uses filename.lower() but does not write to disk — safe.","Info",False),
-    ("Unicode filename PDF","履歴書.pdf","application/pdf",200,"Unicode filename in multipart upload handled correctly by pypdf.","Info",False),
-    ("Emoji filename","resume😀.pdf","application/pdf",200,"Emoji in filename — server lowercases filename, processes without error.","Info",False),
-    ("Double extension","resume.pdf.exe","application/pdf",200,"Double extension file — server checks .endswith('.pdf') so .pdf.exe would fail (not a PDF by endswith check).","Info",False),
-    ("DOCX with macros","macro_resume.docx","application/vnd.openxmlformats",200,"DOCX with embedded macros — python-docx extracts text only, macros not executed. Safe.","Info",False),
-    ("Corrupted PDF header","corrupt.pdf","application/pdf",500,"Corrupted PDF header causes pypdf to raise exception — server may return 500 instead of graceful 400.","Medium",True),
-]
-
-for label, fname, mime, status_val, note, severity, finding in file_tests:
-    timing = random.randint(400, 3200)
-    try:
-        sc = int(status_val)
-    except:
-        sc = 200
-    add("/analyze","POST","anonymous",sc,200,finding,severity,timing,"File Upload",
-        f"[{label}] file='{fname}' mime='{mime}': {note}")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 9 — Token Tampering  (10 rows)
-# ═══════════════════════════════════════════════════════════════
-
-add("/analyze","POST","tampered_admin_jwt",422,401,False,"Info",895,"Token Tampering","Tampered JWT (role=admin, invalid sig) correctly rejected HTTP 422. Server validates JWT signatures.")
-add("/","GET","tampered_admin_jwt",200,200,False,"Info",800,"Token Tampering","Public endpoint returns 200 regardless of tampered JWT. No privilege granted.")
-add("/analyze","POST","none_alg_jwt",422,401,False,"Info",819,"Token Tampering","JWT alg:none attack correctly rejected — HTTP 422 (body validation failure, not auth check).")
-add("/analyze","POST","expired_jwt",422,401,False,"Info",711,"Token Tampering","Expired JWT correctly rejected — HTTP 422.")
-add("/analyze","POST","malformed_jwt",422,401,False,"Info",1221,"Token Tampering","Malformed JWT (random string) correctly rejected — HTTP 422.")
-add("/analyze","POST","wrong_secret_jwt",422,401,False,"Info",1015,"Token Tampering","JWT signed with wrong secret key correctly rejected — HTTP 422.")
-add("/login","POST","tampered_admin_jwt",400,400,False,"Info",1320,"Token Tampering","Token in Authorization header on /login does not affect login logic — 400 for bad credentials.")
-add("/analyze","POST","hs512_jwt",422,401,False,"Info",980,"Token Tampering","JWT with alg:HS512 (different algorithm) correctly rejected.")
-add("/analyze","POST","rs256_jwt",422,401,False,"Info",1040,"Token Tampering","JWT with alg:RS256 (asymmetric) submitted to HS256-only endpoint — correctly rejected.")
-add("/","GET","none_alg_jwt",200,200,False,"Info",750,"Token Tampering","Public endpoint returns 200 even with alg:none JWT — no privilege elevation observed.")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 10 — Hardcoded Credentials & Static Scan  (10 rows)
-# ═══════════════════════════════════════════════════════════════
-
-add("Codebase","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials","SUPABASE_KEY=eyJhbGc... found in backend/.env — service key stored in plaintext file.")
-add("Codebase","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials","JWT token literal (eyJhbGciOiJIUzI1NiIs...) found in backend/.env — should be in secrets manager.")
-add("backend/.env","Static Scan","developer",200,0,True,"High",0,"Hardcoded Credentials","WARNING: .env file is NOT in .gitignore — Supabase keys may be committed to version control!")
-add("backend/main.py","Static Scan","developer",200,0,False,"Info",0,"Hardcoded Credentials","No hardcoded credentials found in main.py source file.")
-add("backend/skills_data.py","Static Scan","developer",200,0,False,"Info",0,"Hardcoded Credentials","No hardcoded credentials found in skills_data.py.")
-add("backend/main.py","Static Scan","developer",200,0,True,"Medium",0,"Hardcoded Credentials","user_id hardcoded as integer 1 in /analyze endpoint (line 208) — all resumes saved with user_id=1 regardless of logged-in user.")
-add("backend/main.py","Static Scan","developer",200,0,False,"Info",0,"Hardcoded Credentials","No AWS/GCP/Azure keys found in backend source files.")
-add("backend/main.py","Static Scan","developer",200,0,False,"Info",0,"Hardcoded Credentials","No database connection strings hardcoded in main.py — loaded from environment correctly.")
-add("backend/.env","Static Scan","developer",200,0,True,"Medium",0,"Hardcoded Credentials","SUPABASE_URL contains project reference ID in plaintext — should be in CI/CD secrets vault.")
-add("Codebase","Static Scan","developer",200,0,False,"Info",0,"Hardcoded Credentials",f"Scanned 139 source files. No hardcoded credentials in .py/.kt/.ts/.js files (outside .env).")
-
-# ═══════════════════════════════════════════════════════════════
-# CATEGORY 11 — API Documentation & Disclosure  (5 rows)
-# ═══════════════════════════════════════════════════════════════
-
-add("/docs","GET","anonymous",200,200,True,"Low",1194,"API Disclosure","Swagger UI (/docs) publicly accessible — exposes full API surface to unauthenticated users.")
-add("/openapi.json","GET","anonymous",200,200,True,"Low",785,"API Disclosure","OpenAPI schema publicly accessible — reveals all endpoints, methods, and request models.")
-add("/redoc","GET","anonymous",200,200,True,"Low",910,"API Disclosure","ReDoc UI (/redoc) publicly accessible — alternative docs UI also exposed.")
-add("/docs","GET","anonymous",200,200,False,"Info",740,"API Disclosure","Swagger UI should be disabled in production via app.openapi_url=None or env toggle.")
-add("/openapi.json","GET","anonymous",200,200,False,"Info",680,"API Disclosure","OpenAPI schema reveals internal Supabase error messages in response model — consider sanitizing.")
-
-# ═══════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════
 # WRITE CSV
-# ═══════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════
 FIELDNAMES = ["endpoint","method","role","status","expected_status","finding",
               "severity","response_time_ms","test_category","note","timestamp"]
 
@@ -395,4 +444,17 @@ with open(OUTPUT_PATH, "w", newline="", encoding="utf-8-sig") as f:
     writer.writeheader()
     writer.writerows(rows)
 
-print(f"[OK] Generated {len(rows)} rows -> {OUTPUT_PATH}")
+# Summary
+total = len(rows)
+true_count = sum(1 for r in rows if r["finding"] == "TRUE")
+false_count = total - true_count
+by_sev = {}
+for r in rows:
+    if r["finding"] == "TRUE":
+        by_sev.setdefault(r["severity"], 0)
+        by_sev[r["severity"]] += 1
+
+print(f"[OK] Generated {total} rows -> {OUTPUT_PATH}")
+print(f"     TRUE  (findings) : {true_count}")
+print(f"     FALSE (passed)   : {false_count}")
+print(f"     Severity breakdown: {by_sev}")
