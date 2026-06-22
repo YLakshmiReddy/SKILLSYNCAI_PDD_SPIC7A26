@@ -6,8 +6,10 @@ import csv
 import random
 import datetime
 
+import os
+
 BASE_URL = "https://ylakshmireddy.github.io/SKILLSYNCAI_PDD_SPIC7A26"
-OUTPUT_PATH = r"c:\Users\hp\AndroidStudioProjects\skillsyncaiapp\webapp\selenium-tests\selenium_web_report.csv"
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "selenium_web_report.csv")
 
 def ts(base_dt, offset_ms):
     """Return ISO timestamp offset by ms from base_dt."""
