@@ -1,4 +1,4 @@
-name: E2E Automation Testing Pipeline
+name: e2e.yml
 
 on:
   push:
@@ -140,6 +140,9 @@ jobs:
     name: Compile Master Report & Deploy
     needs: [selenium-web-tests, appium-android-tests, unit-tests-api, validation-tests, deployment-status, load-testing-perf]
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://YLakshmiReddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/e2e/
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
