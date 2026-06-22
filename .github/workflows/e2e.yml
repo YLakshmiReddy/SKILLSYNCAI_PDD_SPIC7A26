@@ -8,10 +8,11 @@ on:
 
 permissions:
   contents: write
+  deployments: write
 
 jobs:
   selenium-web-tests:
-    name: Selenium -- Website Tests (300)
+    name: Selenium — Website Tests (300)
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
@@ -32,7 +33,7 @@ jobs:
         path: webapp/selenium-tests/selenium_web_report.csv
 
   appium-android-tests:
-    name: Appium -- Android Tests (300)
+    name: Appium — Android Tests (300)
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
@@ -53,7 +54,7 @@ jobs:
         path: automated_test/appium-tests/appium_android_report.csv
 
   unit-tests-api:
-    name: Unit Tests -- API (300)
+    name: Unit Tests — API (300)
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
@@ -116,7 +117,7 @@ jobs:
         path: automated_test/deployment_test_report.csv
 
   load-testing-perf:
-    name: Load Testing -- Performance (300)
+    name: Load Testing — Performance (300)
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
@@ -141,7 +142,7 @@ jobs:
     needs: [selenium-web-tests, appium-android-tests, unit-tests-api, validation-tests, deployment-status, load-testing-perf]
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: github-pages-e2e
       url: https://YLakshmiReddy.github.io/SKILLSYNCAI_PDD_SPIC7A26/e2e/
     steps:
     - name: Checkout Code
